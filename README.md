@@ -135,4 +135,109 @@ SFM-Pro/
 | Budget | 🔄 Planned |
 | Loans | 🔄 Planned |
 | Investments | 🔄 Planned |
-| Settings | 🟡 Basic |
+| Settings | 🟡 Basic |---
+
+# 📸 Application Screenshots
+
+Screenshots will be updated as development progresses.
+
+| Module | Preview |
+|--------|---------|
+| Login | `assets/screenshots/login/` |
+| Dashboard | `assets/screenshots/dashboard/` |
+| Income | `assets/screenshots/income/` |
+| Expense | `assets/screenshots/expense/` |
+| Budget | `assets/screenshots/budget/` |
+| Loans | `assets/screenshots/loans/` |
+| Investments | `assets/screenshots/investments/` |
+| Reports | `assets/screenshots/reports/` |
+| Settings | `assets/screenshots/settings/` |
+| Mobile UI | `assets/screenshots/mobile/` |
+| Architecture | `assets/screenshots/architecture/` |
+
+---
+
+# 🗺️ Development Roadmap
+
+## ✅ Version 0.5.0
+- Dashboard
+- Income Management
+- Expense Management
+- Reports
+- GitHub Repository
+- Enterprise Documentation
+
+## 🚧 Version 0.6.0
+- Budget Module
+- Budget Dashboard
+- Budget Analytics
+
+## 📅 Version 0.7.0
+- Loans Module
+- EMI Tracking
+- Loan Reports
+
+## 📅 Version 0.8.0
+- Investments Module
+- Portfolio Tracking
+- ROI Reports
+
+## 🎯 Version 1.0.0
+- Enterprise UI Redesign
+- Authentication
+- Cloud Sync
+- PWA Support
+- Production Release
+
+---
+
+# 🤝 Contributing
+
+Contributions, suggestions, and issue reports are welcome.
+
+Before submitting changes:
+
+- Follow the project structure
+- Write clear commit messages
+- Test your changes
+- Update documentation when required
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
+
+**Sham Patil**
+
+Project: **SFM PRO Enterprise**
+
+Developed using HTML, CSS, JavaScript, Git, GitHub, and Visual Studio Code.
+
+---
+
+# ⭐ Future Vision
+
+SFM PRO Enterprise aims to become a complete personal finance platform featuring:
+
+- Budget Planning
+- Loan Management
+- Investment Tracking
+- AI Financial Insights
+- Advanced Reports & Analytics
+- Responsive Enterprise UI
+- Cloud Synchronization
+- Mobile Application
+- Production-ready Architecture
+
+---
+
+## 🙏 Thank You
+
+Thank you for visiting this repository.
+
+If you find this project useful, consider giving it a ⭐ on GitHub.
