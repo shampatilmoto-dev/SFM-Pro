@@ -57,4 +57,60 @@ const EventBus = (() => {
 
 })();
 
+const EventRegistry = (() => {
+    const bindings = new Map();
+    let sequence = 0;
+
+    const createToken = () => {
+        sequence += 1;
+        return `evt-${sequence}`;
+    };
+
+    return {
+        on(target, eventName, handler, options = false) {
+            if (!target || typeof target.addEventListener !== "function" || typeof handler !== "function") {
+                return null;
+            }
+
+            const token = createToken();
+
+            target.addEventListener(eventName, handler, options);
+            bindings.set(token, {
+                target,
+                eventName,
+                handler,
+                options
+            });
+
+            return token;
+        },
+
+        off(token) {
+            if (!bindings.has(token)) {
+                return false;
+            }
+
+            const binding = bindings.get(token);
+            binding.target.removeEventListener(
+                binding.eventName,
+                binding.handler,
+                binding.options
+            );
+
+            bindings.delete(token);
+            return true;
+        },
+
+        clear() {
+            Array.from(bindings.keys()).forEach(token => this.off(token));
+        },
+
+        size() {
+            return bindings.size;
+        }
+    };
+})();
+
+window.EventRegistry = EventRegistry;
+
 console.log("Event Bus Loaded");

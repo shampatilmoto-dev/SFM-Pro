@@ -32,6 +32,18 @@ function loadCharts(){
 
 }
 
+function createManagedChart(existingChart, canvas, config) {
+    if (typeof ChartManager === "object" && typeof ChartManager.createOrReplace === "function") {
+        return ChartManager.createOrReplace(existingChart, canvas, config);
+    }
+
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    return new Chart(canvas, config);
+}
+
 // ==========================================
 // Income vs Expense Chart
 // ==========================================
@@ -42,13 +54,7 @@ function createIncomeExpenseChart() {
 
     if (!canvas) return;
 
-    if (incomeExpenseChart) {
-        incomeExpenseChart.destroy();
-    }
-
-    const ctx = canvas.getContext("2d");
-
-    incomeExpenseChart = new Chart(ctx, {
+    incomeExpenseChart = createManagedChart(incomeExpenseChart, canvas, {
 
         type: "bar",
 
@@ -112,13 +118,7 @@ function createExpenseCategoryChart() {
 
     });
 
-    if (expenseCategoryChart) {
-
-        expenseCategoryChart.destroy();
-
-    }
-
-    expenseCategoryChart = new Chart(canvas, {
+    expenseCategoryChart = createManagedChart(expenseCategoryChart, canvas, {
 
         type: "pie",
 
@@ -174,13 +174,7 @@ function loadBudgetChart() {
 
     const remaining = Math.max(0, budget - spent);
 
-    if (budgetChart) {
-
-    budgetChart.destroy();
-
-}
-
-budgetChart = new Chart(canvas,{
+    budgetChart = createManagedChart(budgetChart, canvas, {
 
         type: "doughnut",
 
@@ -251,6 +245,7 @@ let savingsChart = null;
 let investmentChart = null;
 let loanChart = null;
 let netWorthChart = null;
+let chartRefreshHandler = null;
 
 /*==================================================
  Load Enterprise Charts
@@ -280,13 +275,7 @@ function createSavingsTrendChart(){
 
     if(!canvas) return;
 
-    if(savingsChart){
-
-        savingsChart.destroy();
-
-    }
-
-    savingsChart=new Chart(canvas,{
+    savingsChart = createManagedChart(savingsChart, canvas, {
 
         type:"bar",
 
@@ -334,15 +323,9 @@ function createInvestmentChart(){
 
     if(!canvas) return;
 
-    if(investmentChart){
-
-        investmentChart.destroy();
-
-    }
-
     const allocation=getPortfolioAllocation();
 
-    investmentChart=new Chart(canvas,{
+    investmentChart = createManagedChart(investmentChart, canvas, {
 
         type:"pie",
 
@@ -380,15 +363,9 @@ function createLoanChart(){
 
     if(!canvas) return;
 
-    if(loanChart){
-
-        loanChart.destroy();
-
-    }
-
     const loans=getLoanRecords();
 
-    loanChart=new Chart(canvas,{
+    loanChart = createManagedChart(loanChart, canvas, {
 
         type:"doughnut",
 
@@ -424,13 +401,7 @@ function createNetWorthChart(){
 
     if(!canvas) return;
 
-    if(netWorthChart){
-
-        netWorthChart.destroy();
-
-    }
-
-    netWorthChart=new Chart(canvas,{
+    netWorthChart = createManagedChart(netWorthChart, canvas, {
 
         type:"bar",
 
@@ -476,14 +447,22 @@ console.log("Charts Phase 2 Ready");
 ==================================================*/
 
 function refreshAllCharts(){
+    const run = () => {
+        createIncomeExpenseChart();
 
-    createIncomeExpenseChart();
+        createExpenseCategoryChart();
 
-    createExpenseCategoryChart();
+        loadBudgetChart();
 
-    loadBudgetChart();
+        loadEnterpriseCharts();
+    };
 
-    loadEnterpriseCharts();
+    if (typeof PerformanceBenchmark === "object" && typeof PerformanceBenchmark.measure === "function") {
+        PerformanceBenchmark.measure("charts.refreshAllCharts", run);
+        return;
+    }
+
+    run();
 
 }
 
@@ -493,11 +472,13 @@ function refreshAllCharts(){
 
 function enableChartAutoRefresh(){
 
-    window.addEventListener("storage",()=>{
+    if (!chartRefreshHandler) {
+        chartRefreshHandler = typeof Scheduler === "object" && typeof Scheduler.debounce === "function"
+            ? Scheduler.debounce(refreshAllCharts, 180)
+            : refreshAllCharts;
+    }
 
-        refreshAllCharts();
-
-    });
+    window.addEventListener("storage", chartRefreshHandler);
 
 }
 
@@ -517,7 +498,7 @@ function refreshDashboardCharts(){
  Resize Charts
 ==================================================*/
 
-window.addEventListener("resize",()=>{
+const resizeCharts = () => {
 
     if(incomeExpenseChart){
 
@@ -560,8 +541,13 @@ window.addEventListener("resize",()=>{
         netWorthChart.resize();
 
     }
+};
 
-});
+const resizeHandler = typeof Scheduler === "object" && typeof Scheduler.throttle === "function"
+    ? Scheduler.throttle(resizeCharts, 120)
+    : resizeCharts;
+
+window.addEventListener("resize", resizeHandler);
 
 /*==================================================
  Export Chart

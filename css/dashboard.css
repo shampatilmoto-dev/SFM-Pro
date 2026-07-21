@@ -3,6 +3,7 @@
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
     --primary-soft:#eff6ff;
+    --primary-glow:rgba(37,99,235,.28);
     --success:#16a34a;
     --success-soft:#f0fdf4;
     --warning:#d97706;
@@ -21,6 +22,8 @@
     --shadow-lg:0 20px 42px rgba(24,38,65,.14);
     --radius:16px;
     --radius-sm:10px;
+    --radius-xl:24px;
+    --font-ui:Inter,"Segoe UI",sans-serif;
     --sidebar-width:272px;
     --header-height:76px;
     --page-padding:clamp(20px,3vw,36px);
@@ -37,9 +40,30 @@ body {
     overflow-x:hidden;
     background:var(--background);
     color:var(--text);
-    font-family:Inter,sans-serif;
+    font-family:var(--font-ui);
     font-size:14px;
     line-height:1.5;
+    background-image:
+        radial-gradient(circle at 8% 0%, rgba(37,99,235,.12), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(8,145,178,.09), transparent 30%);
+}
+
+.skip-link-dashboard {
+    position:fixed;
+    top:10px;
+    left:10px;
+    z-index:2200;
+    padding:10px 12px;
+    border-radius:9px;
+    background:var(--primary);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    transform:translateY(-130%);
+}
+
+.skip-link-dashboard:focus-visible {
+    transform:translateY(0);
 }
 button,input,select { font:inherit; }
 button { cursor:pointer; }
@@ -287,6 +311,34 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible {
 .balance-card,.summary-card,.kpi-card,.summary-box,.health-card,.chart-card,.action-grid button {
     transition:border-color var(--transition),box-shadow var(--transition),transform var(--transition),background var(--transition);
 }
+
+.dashboard-container > section,
+.dashboard-container > div,
+.dashboard-container > footer {
+    animation:fadeSlideIn 420ms cubic-bezier(.18,.7,.24,1) both;
+}
+
+.dashboard-container > section:nth-of-type(1),
+.dashboard-container > div:nth-of-type(1) { animation-delay:40ms; }
+.dashboard-container > section:nth-of-type(2),
+.dashboard-container > div:nth-of-type(2) { animation-delay:80ms; }
+.dashboard-container > section:nth-of-type(3),
+.dashboard-container > div:nth-of-type(3) { animation-delay:120ms; }
+.dashboard-container > section:nth-of-type(4),
+.dashboard-container > div:nth-of-type(4) { animation-delay:160ms; }
+
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible,
+.header-btn:focus-visible,
+.menu-btn:focus-visible,
+.profile-logout:focus-visible,
+.table-tools input:focus-visible,
+.table-tools select:focus-visible,
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+#backupFileInput:focus-visible {
+    box-shadow:0 0 0 3px var(--primary-glow);
+}
 .balance-card:hover,.summary-card:hover,.kpi-card:hover,.summary-box:hover,.health-card:hover,.chart-card:hover,.action-grid button:hover {
     border-color:#d5e3fb;
     box-shadow:var(--shadow-md);
@@ -299,7 +351,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible {
     overflow:hidden;
     padding:clamp(24px,3vw,34px);
     border:1px solid rgba(255,255,255,.18);
-    border-radius:var(--radius);
+    border-radius:var(--radius-xl);
     background:linear-gradient(118deg,#173e98 0%,#2563eb 55%,#3982f6 100%);
     box-shadow:0 16px 30px rgba(37,99,235,.2);
     color:#fff;
@@ -470,6 +522,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible {
 .dashboard-footer strong { display:block; color:var(--text); font-size:13px; }
 .dashboard-footer p { margin:3px 0 0; font-size:12px; }
 .dashboard-footer > div:last-child { font-size:12px; }
+
+@keyframes fadeSlideIn {
+    from {
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 body.dark {
     --background:#101828;
     --surface:#172033;
@@ -482,6 +546,7 @@ body.dark {
     --shadow-sm:0 1px 2px rgba(0,0,0,.18);
     --shadow-md:0 16px 32px rgba(0,0,0,.24);
 }
+body.dark .skip-link-dashboard { background:#1f57cf; }
 body.dark .top-header { background:rgba(23,32,51,.92); }
 body.dark .search-box,body.dark .profile-menu,body.dark .user-card,body.dark .budget-details > div,body.dark #backupMessage { background:var(--surface-alt); }
 body.dark .balance-card { background:linear-gradient(145deg,var(--surface),#1b2941); }
@@ -550,4 +615,7 @@ body.dark #backupImportPreview { border-color:#31558e; background:#182b4d; }
 }
 @media (prefers-reduced-motion:reduce) {
     *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; }
+    .dashboard-container > section,
+    .dashboard-container > div,
+    .dashboard-container > footer { animation:none !important; }
 }

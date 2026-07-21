@@ -3,6 +3,7 @@
 const BudgetController = {
     currentBudgetId: null,
     budgets: [],
+    isInitialized: false,
 
     elements: {
         form: null,
@@ -24,9 +25,23 @@ const BudgetController = {
     },
 
     initialize() {
+        if (this.isInitialized) {
+            this.loadBudgets();
+            return;
+        }
+
         this.cacheElements();
         this.bindEvents();
         this.loadBudgets();
+        this.isInitialized = true;
+    },
+
+    registerEvent(target, eventName, handler) {
+        if (!target || typeof handler !== "function") {
+            return;
+        }
+
+        target.addEventListener(eventName, handler);
     },
 
     cacheElements() {
@@ -50,26 +65,26 @@ const BudgetController = {
 
     bindEvents() {
         if (this.elements.form) {
-            this.elements.form.addEventListener("submit", event => {
+            this.registerEvent(this.elements.form, "submit", event => {
                 event.preventDefault();
                 this.handleSave();
             });
         }
 
         if (this.elements.search) {
-            this.elements.search.addEventListener("input", () => this.render());
+            this.registerEvent(this.elements.search, "input", () => this.render());
         }
 
         if (this.elements.filterCategory) {
-            this.elements.filterCategory.addEventListener("change", () => this.render());
+            this.registerEvent(this.elements.filterCategory, "change", () => this.render());
         }
 
         if (this.elements.sort) {
-            this.elements.sort.addEventListener("change", () => this.render());
+            this.registerEvent(this.elements.sort, "change", () => this.render());
         }
 
         if (this.elements.tableBody) {
-            this.elements.tableBody.addEventListener("click", event => {
+            this.registerEvent(this.elements.tableBody, "click", event => {
                 const button = event.target.closest("button[data-action]");
                 if (!button) {
                     return;
@@ -87,6 +102,91 @@ const BudgetController = {
                 }
             });
         }
+    },
+
+    normalizeServiceResult(result, successMessage = "Operation completed.", failureMessage = "Operation failed.") {
+        if (result && typeof result === "object" && (
+            Object.prototype.hasOwnProperty.call(result, "success") ||
+            Object.prototype.hasOwnProperty.call(result, "errors") ||
+            Object.prototype.hasOwnProperty.call(result, "warnings") ||
+            Object.prototype.hasOwnProperty.call(result, "message")
+        )) {
+            const errors = Array.isArray(result.errors)
+                ? result.errors.filter(Boolean)
+                : (result.error ? [result.error] : []);
+
+            const warnings = Array.isArray(result.warnings)
+                ? result.warnings.filter(Boolean)
+                : [];
+
+            const success = typeof result.success === "boolean"
+                ? result.success
+                : (result.valid === true && errors.length === 0);
+
+            return {
+                success,
+                data: result.data ?? null,
+                errors,
+                warnings,
+                message: result.message || (success ? successMessage : failureMessage)
+            };
+        }
+
+        if (result && typeof result === "object" && result.error) {
+            return {
+                success: false,
+                data: null,
+                errors: [result.error],
+                warnings: [],
+                message: failureMessage
+            };
+        }
+
+        if (result && typeof result === "object") {
+            return {
+                success: true,
+                data: result,
+                errors: [],
+                warnings: [],
+                message: successMessage
+            };
+        }
+
+        if (typeof result === "boolean") {
+            return {
+                success: result,
+                data: null,
+                errors: result ? [] : [failureMessage],
+                warnings: [],
+                message: result ? successMessage : failureMessage
+            };
+        }
+
+        return {
+            success: false,
+            data: null,
+            errors: [failureMessage],
+            warnings: [],
+            message: failureMessage
+        };
+    },
+
+    getDisplayMessage(result, fallback) {
+        const parts = [];
+
+        if (result.message) {
+            parts.push(result.message);
+        }
+
+        if (Array.isArray(result.errors) && result.errors.length > 0) {
+            parts.push(result.errors.join(" "));
+        }
+
+        if (Array.isArray(result.warnings) && result.warnings.length > 0) {
+            parts.push(result.warnings.join(" "));
+        }
+
+        return parts.join(" ").trim() || fallback;
     },
 
     loadBudgets() {
@@ -152,20 +252,38 @@ const BudgetController = {
 
     handleSave() {
         const budget = this.getFormData();
-        let result;
+        let operation;
 
         if (this.currentBudgetId) {
-            result = BudgetService.updateBudget(this.currentBudgetId, budget);
+            operation = this.normalizeServiceResult(
+                BudgetService.updateBudget(this.currentBudgetId, budget),
+                "Budget updated successfully.",
+                "Unable to update budget."
+            );
         } else {
-            result = BudgetService.addBudget(budget);
+            operation = this.normalizeServiceResult(
+                BudgetService.addBudget(budget),
+                "Budget added successfully.",
+                "Unable to save budget."
+            );
         }
 
-        if (result && result.error) {
-            this.showMessage(result.error, "error");
+        if (!operation.success) {
+            const fallback = this.currentBudgetId
+                ? "Unable to update budget."
+                : "Unable to save budget.";
+            this.showMessage(this.getDisplayMessage(operation, fallback), "error");
             return;
         }
 
-        this.showMessage(this.currentBudgetId ? "Budget updated successfully." : "Budget added successfully.", "success");
+        const successFallback = this.currentBudgetId
+            ? "Budget updated successfully."
+            : "Budget added successfully.";
+        const successMessage = operation.warnings.length > 0
+            ? this.getDisplayMessage(operation, successFallback)
+            : successFallback;
+
+        this.showMessage(successMessage, operation.warnings.length > 0 ? "warning" : "success");
         this.clearForm();
         this.loadBudgets();
         this.refreshDashboard();
@@ -203,13 +321,18 @@ const BudgetController = {
             return;
         }
 
-        const result = BudgetService.deleteBudget(id);
-        if (result && result.error) {
-            this.showMessage(result.error, "error");
+        const operation = this.normalizeServiceResult(
+            BudgetService.deleteBudget(id),
+            "Budget deleted.",
+            "Unable to delete budget."
+        );
+
+        if (!operation.success) {
+            this.showMessage(this.getDisplayMessage(operation, "Unable to delete budget."), "error");
             return;
         }
 
-        this.showMessage("Budget deleted.", "success");
+        this.showMessage(this.getDisplayMessage(operation, "Budget deleted."), "success");
         this.clearForm();
         this.loadBudgets();
         this.refreshDashboard();

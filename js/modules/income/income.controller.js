@@ -20,6 +20,11 @@ const IncomeController = {
         incomeTotal: null
     },
 
+    handlers: {
+        searchInput: null,
+        sortChange: null
+    },
+
     initialize() {
         if (this.initialized) {
             return;
@@ -88,15 +93,16 @@ const IncomeController = {
         }
 
         if (this.elements.incomeSearch) {
-            this.elements.incomeSearch.addEventListener("input", () => {
-                this.searchAndRender();
-            });
+            this.handlers.searchInput = typeof Scheduler === "object" && typeof Scheduler.debounce === "function"
+                ? Scheduler.debounce(() => this.searchAndRender(), 120)
+                : (() => this.searchAndRender());
+
+            this.elements.incomeSearch.addEventListener("input", this.handlers.searchInput);
         }
 
         if (this.elements.incomeSort) {
-            this.elements.incomeSort.addEventListener("change", () => {
-                this.sortAndRender();
-            });
+            this.handlers.sortChange = () => this.sortAndRender();
+            this.elements.incomeSort.addEventListener("change", this.handlers.sortChange);
         }
     },
 
@@ -197,6 +203,14 @@ const IncomeController = {
         }
 
         if (!Array.isArray(incomes) || incomes.length === 0) {
+            if (typeof TableRenderer === "object" && typeof TableRenderer.renderHTMLRows === "function") {
+                TableRenderer.renderHTMLRows(this.elements.tableBody, [], {
+                    emptyColspan: 6,
+                    emptyMessage: "No Income Records"
+                });
+                return;
+            }
+
             this.elements.tableBody.innerHTML = `
                 <tr>
                     <td colspan="6">No Income Records</td>
@@ -205,7 +219,17 @@ const IncomeController = {
             return;
         }
 
-        this.elements.tableBody.innerHTML = incomes.map(income => this.renderIncomeRow(income)).join("");
+        const rows = incomes.map(income => this.renderIncomeRow(income));
+
+        if (typeof TableRenderer === "object" && typeof TableRenderer.renderHTMLRows === "function") {
+            TableRenderer.renderHTMLRows(this.elements.tableBody, rows, {
+                emptyColspan: 6,
+                emptyMessage: "No Income Records"
+            });
+            return;
+        }
+
+        this.elements.tableBody.innerHTML = rows.join("");
     },
 
     renderIncomeRow(income) {

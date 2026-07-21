@@ -1,12 +1,64 @@
-/* Shared UI foundation: cards, feedback, and table containment. */
+/* Shared design system foundation: tokens, accessible focus, cards, feedback, and dialogs. */
 
-.card {
+:root {
+    --sfm-bg: #f3f6fb;
+    --sfm-surface: #ffffff;
+    --sfm-surface-soft: #f8fbff;
+    --sfm-text: #172033;
+    --sfm-muted: #5b667a;
+    --sfm-border: #d9e2f0;
+    --sfm-border-strong: #c6d3e6;
+    --sfm-primary: #2457d6;
+    --sfm-primary-strong: #183eab;
+    --sfm-success: #137333;
+    --sfm-warning: #a66400;
+    --sfm-danger: #b42318;
+    --sfm-info: #1d4ed8;
+    --sfm-radius-sm: 10px;
+    --sfm-radius-md: 14px;
+    --sfm-radius-lg: 18px;
+    --sfm-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.08);
+    --sfm-shadow-md: 0 10px 26px rgba(17, 35, 71, 0.12);
+    --sfm-shadow-lg: 0 18px 36px rgba(17, 35, 71, 0.18);
+    --sfm-focus: 0 0 0 3px rgba(36, 87, 214, 0.22);
+    --sfm-anim: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+    transition: border-color var(--sfm-anim), box-shadow var(--sfm-anim), background-color var(--sfm-anim), color var(--sfm-anim), transform var(--sfm-anim);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    box-shadow: var(--sfm-focus);
+}
+
+.card,
+.sfm-card {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    background: #ffffff;
-    border: 1px solid #e5eaf2;
-    border-radius: 16px;
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.08);
+    background: var(--sfm-surface);
+    border: 1px solid var(--sfm-border);
+    border-radius: var(--sfm-radius-lg);
+    box-shadow: var(--sfm-shadow-sm);
+}
+
+.sfm-card--interactive:hover {
+    border-color: var(--sfm-border-strong);
+    box-shadow: var(--sfm-shadow-md);
+    transform: translateY(-2px);
 }
 
 .message-box {
@@ -14,7 +66,7 @@
     margin: 1rem 0;
     padding: 0.75rem 1rem;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: var(--sfm-radius-sm);
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.45;
@@ -25,33 +77,28 @@
 }
 
 .message-box.success {
-    color: #137333;
+    color: var(--sfm-success);
     background: #ecfdf3;
     border-color: #bbf7d0;
 }
 
 .message-box.error,
 .message-box.validation {
-    color: #b42318;
+    color: var(--sfm-danger);
     background: #fef2f2;
     border-color: #fecaca;
 }
 
 .message-box.warning {
-    color: #92400e;
+    color: var(--sfm-warning);
     background: #fffbeb;
     border-color: #fde68a;
 }
 
 .message-box.info {
-    color: #1d4ed8;
+    color: var(--sfm-info);
     background: #eff6ff;
     border-color: #bfdbfe;
-}
-
-.message-box:focus-visible {
-    outline: 3px solid rgba(37, 99, 235, 0.24);
-    outline-offset: 2px;
 }
 
 .table-responsive {
@@ -59,8 +106,155 @@
     max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
 .table-responsive > table {
     width: 100%;
+}
+
+.notification-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(360px, calc(100vw - 2rem));
+    pointer-events: none;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    box-shadow: var(--sfm-shadow-md);
+    background: var(--sfm-surface);
+    color: #0f172a;
+    pointer-events: auto;
+}
+
+.notification-item.success {
+    background: #ecfdf3;
+    border-color: #bbf7d0;
+    color: var(--sfm-success);
+}
+
+.notification-item.error {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: var(--sfm-danger);
+}
+
+.notification-item.warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: var(--sfm-warning);
+}
+
+.notification-item.info {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: var(--sfm-info);
+}
+
+.notification-text {
+    flex: 1;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.notification-close {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding: 0.125rem;
+}
+
+.confirm-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: grid;
+    place-items: center;
+}
+
+.confirm-dialog[hidden] {
+    display: none;
+}
+
+.confirm-dialog-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+}
+
+.confirm-dialog-panel {
+    position: relative;
+    width: min(420px, calc(100vw - 2rem));
+    background: var(--sfm-surface);
+    border-radius: var(--sfm-radius-md);
+    border: 1px solid var(--sfm-border);
+    box-shadow: var(--sfm-shadow-lg);
+    padding: 1.25rem;
+}
+
+.confirm-dialog-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.confirm-dialog-message {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.45;
+}
+
+.confirm-dialog-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.confirm-dialog-btn {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.confirm-dialog-btn.secondary {
+    background: var(--sfm-surface);
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+.confirm-dialog-btn.primary {
+    background: #0f766e;
+    color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

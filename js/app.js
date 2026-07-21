@@ -1,8 +1,8 @@
-"use strict";
+﻿"use strict";
 
 /*==================================================
  SFM PRO Enterprise
- App Controller v3.5 Stable
+ App Controller v5.0 Production Release
  Part 1 : Core Controller
 ==================================================*/
 
@@ -12,7 +12,7 @@
 
 const APP_ENGINE = {
 
-    version: "3.5 Stable",
+    version: "v5.0 Production Release",
 
     name: "SFM Application Controller"
 
@@ -25,6 +25,14 @@ function escapeAppHtml(value) {
         .replace(/>/g, '&gt;')
         .split(String.fromCharCode(34)).join('&quot;')
         .replace(/'/g, '&#39;');
+}
+
+function sanitizeText(value) {
+    if (typeof Sanitizer === "object" && typeof Sanitizer.text === "function") {
+        return Sanitizer.text(value);
+    }
+
+    return String(value ?? "").trim();
 }
 
 /*==================================================
@@ -86,6 +94,11 @@ function registerGlobalEvents() {
 ==================================================*/
 
 function initializeForms() {
+
+    if (typeof FormEngine === "object" && typeof FormEngine.prepareAllForms === "function") {
+        FormEngine.prepareAllForms(document, { autocomplete: "off" });
+        return;
+    }
 
     const forms = document.querySelectorAll("form");
 
@@ -197,6 +210,20 @@ function showNotification(
 
     );
 
+    const resolvedType = String(type || "success").toLowerCase();
+
+    if (typeof ErrorHandler === "object" && typeof ErrorHandler.notify === "function") {
+        ErrorHandler.notify(message, resolvedType, {
+            fallbackMessage: "Operation status unavailable."
+        });
+        return;
+    }
+
+    if (typeof Notification === "object" && typeof Notification.show === "function") {
+        Notification.show(message, resolvedType);
+        return;
+    }
+
     alert(message);
 
 }
@@ -223,11 +250,13 @@ function validateRequired(fields) {
 
     for (const field of fields) {
 
-        if (
+        const value = sanitizeText(field && "value" in field ? field.value : "");
 
-            isEmpty(field.value)
+        const isValid = typeof Validator === "object" && typeof Validator.required === "function"
+            ? Validator.required(value)
+            : !isEmpty(value);
 
-        ) {
+        if (!isValid) {
 
             field.focus();
 
@@ -254,6 +283,9 @@ function validateRequired(fields) {
 ==================================================*/
 
 function confirmDelete(message = "Delete this record?") {
+    if (typeof Dialog === "object" && typeof Dialog.confirmSync === "function") {
+        return Dialog.confirmSync(message);
+    }
 
     return confirm(message);
 
@@ -448,7 +480,7 @@ class="delete-btn"
 
 onclick="deleteIncomeRecord('${record.id}')">
 
-🗑 Delete
+ðŸ—‘ Delete
 
 </button>
 
@@ -736,7 +768,7 @@ class="delete-btn"
 
 onclick="deleteBudgetRecord('${record.id}')">
 
-🗑 Delete
+ðŸ—‘ Delete
 
 </button>
 
@@ -1049,7 +1081,7 @@ function createLoanRow(record) {
 class="delete-btn"
 onclick="deleteLoanRecord('${record.id}')">
 
-🗑 Delete
+ðŸ—‘ Delete
 
 </button>
 
@@ -1325,7 +1357,7 @@ function createCreditCardRow(record) {
 class="delete-btn"
 onclick="deleteCreditCardRecord('${record.id}')">
 
-🗑 Delete
+ðŸ—‘ Delete
 
 </button>
 
@@ -1449,3 +1481,4 @@ function refreshCreditCardModule() {
 initializeCreditCardModule();
 
 console.log("App Part 6 Ready");
+

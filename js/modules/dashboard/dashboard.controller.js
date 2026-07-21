@@ -968,6 +968,10 @@ if (usageCard) {
 
         container.style.color = tones[tone] || tones.info;
         container.textContent = text;
+
+        if (tone === "error" && typeof ErrorHandler === "object" && typeof ErrorHandler.notify === "function") {
+            ErrorHandler.notify(text, "error", { duration: 2600 });
+        }
     },
 
     exportBackup() {
@@ -1030,29 +1034,42 @@ if (usageCard) {
     },
 
     processImportedBackupText(text) {
-        if (typeof BackupManager !== "object" || typeof DashboardService !== "object") {
+        const execute = () => {
+            if (typeof BackupManager !== "object" || typeof DashboardService !== "object") {
+                return;
+            }
+
+            const parsed = BackupManager.parseBackupFile(text);
+
+            if (parsed.error) {
+                this.showBackupMessage(parsed.error, "error");
+                this.hideBackupPreview();
+                return;
+            }
+
+            const validation = DashboardService.validateBackupData(parsed.payload);
+
+            if (!validation.valid) {
+                this.showBackupMessage(validation.error, "error");
+                this.hideBackupPreview();
+                return;
+            }
+
+            this.pendingBackupPayload = parsed.payload;
+            this.renderBackupImportPreview(parsed.payload);
+            this.showBackupMessage("Backup file validated. Review the preview before restoring.", "info");
+        };
+
+        if (typeof ErrorHandler === "object" && typeof ErrorHandler.run === "function") {
+            ErrorHandler.run("dashboard.backup.import", execute, {
+                notify: true,
+                fallbackValue: null,
+                fallbackMessage: "Backup validation failed due to an unexpected error."
+            });
             return;
         }
 
-        const parsed = BackupManager.parseBackupFile(text);
-
-        if (parsed.error) {
-            this.showBackupMessage(parsed.error, "error");
-            this.hideBackupPreview();
-            return;
-        }
-
-        const validation = DashboardService.validateBackupData(parsed.payload);
-
-        if (!validation.valid) {
-            this.showBackupMessage(validation.error, "error");
-            this.hideBackupPreview();
-            return;
-        }
-
-        this.pendingBackupPayload = parsed.payload;
-        this.renderBackupImportPreview(parsed.payload);
-        this.showBackupMessage("Backup file validated. Review the preview before restoring.", "info");
+        execute();
     },
 
     buildBackupSummaryCards(summary, overrides) {
@@ -1119,21 +1136,34 @@ if (usageCard) {
     },
 
     confirmBackupRestore() {
-        if (!this.pendingBackupPayload || typeof BackupManager !== "object") {
-            this.showBackupMessage("No validated backup is ready to restore.", "error");
+        const execute = () => {
+            if (!this.pendingBackupPayload || typeof BackupManager !== "object") {
+                this.showBackupMessage("No validated backup is ready to restore.", "error");
+                return;
+            }
+
+            const result = BackupManager.restore(this.pendingBackupPayload);
+
+            if (result.error) {
+                this.showBackupMessage(result.error, "error");
+                return;
+            }
+
+            this.hideBackupPreview();
+            this.showBackupMessage("Backup restored successfully.", "success");
+            this.refresh();
+        };
+
+        if (typeof ErrorHandler === "object" && typeof ErrorHandler.run === "function") {
+            ErrorHandler.run("dashboard.backup.restore", execute, {
+                notify: true,
+                fallbackValue: null,
+                fallbackMessage: "Backup restore failed due to an unexpected error."
+            });
             return;
         }
 
-        const result = BackupManager.restore(this.pendingBackupPayload);
-
-        if (result.error) {
-            this.showBackupMessage(result.error, "error");
-            return;
-        }
-
-        this.hideBackupPreview();
-        this.showBackupMessage("Backup restored successfully.", "success");
-        this.refresh();
+        execute();
     },
 
     cancelBackupRestore() {

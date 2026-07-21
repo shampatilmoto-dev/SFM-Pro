@@ -1,9 +1,9 @@
-"use strict";
+﻿"use strict";
 
 /*==================================================
  SFM PRO Enterprise
  Bootstrap
- Version : v3.5 Stable
+ Version : v5.0 Production Release
 ==================================================*/
 
 const Bootstrap = {
@@ -47,41 +47,41 @@ const Bootstrap = {
 
         if (typeof APP_CONFIG !== "undefined") {
 
-            console.log("✔ APP_CONFIG Loaded");
+            console.log("âœ” APP_CONFIG Loaded");
 
         } else {
 
-            console.error("❌ APP_CONFIG Not Loaded");
+            console.error("âŒ APP_CONFIG Not Loaded");
 
         }
 
         if (typeof Common !== "undefined") {
 
-            console.log("✔ Common Loaded");
+            console.log("âœ” Common Loaded");
 
         } else {
 
-            console.error("❌ Common Not Loaded");
+            console.error("âŒ Common Not Loaded");
 
         }
 
         if (typeof EventBus !== "undefined") {
 
-            console.log("✔ EventBus Loaded");
+            console.log("âœ” EventBus Loaded");
 
         } else {
 
-            console.error("❌ EventBus Not Loaded");
+            console.error("âŒ EventBus Not Loaded");
 
         }
 
         if (typeof Router !== "undefined") {
 
-            console.log("✔ Router Loaded");
+            console.log("âœ” Router Loaded");
 
         } else {
 
-            console.error("❌ Router Not Loaded");
+            console.error("âŒ Router Not Loaded");
 
         }
 
@@ -109,7 +109,7 @@ const Bootstrap = {
 
         } else {
 
-            console.error("❌ Router Not Available");
+            console.error("âŒ Router Not Available");
 
         }
 
@@ -128,3 +128,4 @@ document.addEventListener("DOMContentLoaded", () => {
     Bootstrap.start();
 
 });
+

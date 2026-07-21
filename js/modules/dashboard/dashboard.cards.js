@@ -126,6 +126,11 @@ const DashboardCards = {
         };
 
         const setValue = (id, value) => {
+            if (typeof CardRenderer === "object" && typeof CardRenderer.setCurrency === "function") {
+                CardRenderer.setCurrency(id, value, formatValue);
+                return;
+            }
+
             const element = document.getElementById(id);
             if (!element) return;
             element.textContent = formatValue(value);

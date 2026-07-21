@@ -2,8 +2,54 @@
 
 const LoanService = {
 
+    createResponse(overrides = {}) {
+        const base = {
+            success: false,
+            data: null,
+            errors: [],
+            warnings: [],
+            message: "",
+            // Backward compatibility fields.
+            valid: false,
+            error: null
+        };
+
+        const response = {
+            ...base,
+            ...overrides
+        };
+
+        response.valid = response.success;
+        response.error = response.errors[0] || null;
+
+        return response;
+    },
+
+    fromValidation(validation, fallbackMessage = "Validation failed.") {
+        return this.createResponse({
+            success: Boolean(validation?.success || validation?.valid),
+            data: validation?.data || null,
+            errors: Array.isArray(validation?.errors)
+                ? validation.errors
+                : (validation?.error ? [validation.error] : []),
+            warnings: Array.isArray(validation?.warnings)
+                ? validation.warnings
+                : [],
+            message: validation?.message || fallbackMessage
+        });
+    },
+
+    toError(response, fallbackMessage = "Operation failed.") {
+        const text = Array.isArray(response?.errors) && response.errors.length > 0
+            ? response.errors.join(" ")
+            : (response?.message || fallbackMessage);
+        const error = new Error(text);
+        error.response = response;
+        return error;
+    },
+
     loadLoans() {
-        return LoanStorage.getAll();
+        return LoanStorage.load();
     },
 
     getLoanById(id) {
@@ -11,10 +57,13 @@ const LoanService = {
     },
 
     createLoan(loan) {
-        const validation = LoanEngine.validateLoan(loan);
+        const validation = this.fromValidation(
+            LoanEngine.validateLoan(loan),
+            "Loan validation failed."
+        );
 
-        if (!validation.valid) {
-            throw new Error(validation.errors.join(" "));
+        if (!validation.success) {
+            throw this.toError(validation, "Loan validation failed.");
         }
 
         const loanToSave = LoanEngine.calculateLoan({
@@ -22,32 +71,68 @@ const LoanService = {
             id: loan.id || (typeof LoanStorage.generateId === "function" ? LoanStorage.generateId() : `${Date.now()}`)
         });
 
-        return LoanStorage.add(loanToSave);
+        const saved = LoanStorage.add(loanToSave);
+        if (!saved) {
+            throw this.toError(this.createResponse({
+                errors: ["Unable to save loan."],
+                message: "Loan save failed."
+            }), "Loan save failed.");
+        }
+
+        return saved;
     },
 
     updateLoan(loan) {
         if (!loan || !loan.id) {
-            throw new Error("Loan id is required.");
+            throw this.toError(this.createResponse({
+                errors: ["Loan id is required."],
+                message: "Loan update failed."
+            }), "Loan update failed.");
         }
 
-        const validation = LoanEngine.validateLoan(loan);
+        const validation = this.fromValidation(
+            LoanEngine.validateLoan(loan),
+            "Loan validation failed."
+        );
 
-        if (!validation.valid) {
-            throw new Error(validation.errors.join(" "));
+        if (!validation.success) {
+            throw this.toError(validation, "Loan validation failed.");
         }
 
         const loanToSave = LoanEngine.calculateLoan(loan);
         const updated = LoanStorage.update(loan.id, loanToSave);
 
         if (!updated) {
-            throw new Error("Loan update failed.");
+            throw this.toError(this.createResponse({
+                errors: ["Loan update failed."],
+                message: "Loan update failed."
+            }), "Loan update failed.");
         }
 
         return this.getLoanById(loan.id);
     },
 
     deleteLoan(id) {
-        return LoanStorage.remove(id);
+        if (!id) {
+            return this.createResponse({
+                errors: ["Loan id is required."],
+                message: "Loan delete failed."
+            });
+        }
+
+        const removed = LoanStorage.remove(id);
+        if (!removed) {
+            return this.createResponse({
+                errors: ["Unable to delete loan."],
+                message: "Loan delete failed."
+            });
+        }
+
+        return this.createResponse({
+            success: true,
+            data: { id },
+            message: "Loan deleted successfully."
+        });
     },
 
     calculateLoan(loan) {
@@ -55,17 +140,17 @@ const LoanService = {
     },
 
     getLoanSummary() {
-        return LoanEngine.getLoanSummary(LoanStorage.getAll());
+        return LoanEngine.getLoanSummary(LoanStorage.load());
     },
 
     searchLoans(keyword) {
         const query = String(keyword || "").trim().toLowerCase();
 
         if (query === "") {
-            return LoanStorage.getAll();
+            return LoanStorage.load();
         }
 
-        return LoanStorage.getAll().filter(loan => {
+        return LoanStorage.load().filter(loan => {
             const loanName = String(loan.loanName || "").toLowerCase();
             const bank = String(loan.bank || "").toLowerCase();
             const status = String(loan.status || LoanEngine.calculateLoan(loan).status || "").toLowerCase();
@@ -97,7 +182,7 @@ const LoanService = {
 
         const key = fieldMap[field] || field;
         const direction = String(order).toLowerCase() === "desc" ? -1 : 1;
-        const loans = [...LoanStorage.getAll()];
+        const loans = [...LoanStorage.load()];
 
         loans.sort((a, b) => {
             const aValue = a[key];

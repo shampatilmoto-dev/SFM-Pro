@@ -1,9 +1,9 @@
-"use strict";
+﻿"use strict";
 
 /*==================================================
  SFM PRO Enterprise
  File: config.js
- Version: v3.5 Stable
+ Version: v5.0 Production Release
  Description:
  Central configuration for the entire application.
 ==================================================*/
@@ -14,9 +14,9 @@ const APP_CONFIG = Object.freeze({
     // Application Information
     // ==============================
     APP_NAME: "SFM PRO Enterprise",
-    VERSION: "3.5 Stable",
+    VERSION: "v5.0 Production Release",
     COMPANY: "Sham Patil",
-    BUILD: "001",
+    BUILD: "005",
 
     // ==============================
     // Regional Settings
@@ -86,6 +86,11 @@ const APP_CONFIG = Object.freeze({
 
 });
 
-console.log(
-    `${APP_CONFIG.APP_NAME} v${APP_CONFIG.VERSION} Loaded`
-);
+if (typeof console !== "undefined") {
+    console.log = function () {};
+    console.info = function () {};
+    console.debug = function () {};
+}
+
+
+

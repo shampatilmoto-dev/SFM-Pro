@@ -3,6 +3,7 @@
 const LoanController = {
 
     currentLoanId: null,
+    isInitialized: false,
 
     elements: {
         form: null,
@@ -20,6 +21,11 @@ const LoanController = {
     },
 
     initialize() {
+        if (this.isInitialized) {
+            this.loadLoans();
+            return;
+        }
+
         if (typeof LoanService !== "object") {
             console.error("LoanService is required for LoanController.");
             return;
@@ -28,6 +34,56 @@ const LoanController = {
         this.cacheElements();
         this.bindEvents();
         this.loadLoans();
+        this.isInitialized = true;
+    },
+
+    registerEvent(target, eventName, handler) {
+        if (!target || typeof handler !== "function") {
+            return;
+        }
+
+        target.addEventListener(eventName, handler);
+    },
+
+    notify(message, type = "info") {
+        const text = String(message || "").trim();
+        if (!text) {
+            return;
+        }
+
+        if (typeof showNotification === "function") {
+            showNotification(text, type);
+            return;
+        }
+
+        const logger = type === "error" ? console.error : console.log;
+        logger(text);
+    },
+
+    normalizeServiceError(error, fallback = "Operation failed.") {
+        if (error && error.response && typeof error.response === "object") {
+            const response = error.response;
+            const errors = Array.isArray(response.errors)
+                ? response.errors.filter(Boolean)
+                : (response.error ? [response.error] : []);
+
+            return {
+                message: response.message || fallback,
+                errors
+            };
+        }
+
+        if (error instanceof Error) {
+            return {
+                message: error.message || fallback,
+                errors: []
+            };
+        }
+
+        return {
+            message: fallback,
+            errors: []
+        };
     },
 
     cacheElements() {
@@ -47,20 +103,20 @@ const LoanController = {
 
     bindEvents() {
         if (this.elements.form) {
-            this.elements.form.addEventListener("submit", event => {
+            this.registerEvent(this.elements.form, "submit", event => {
                 event.preventDefault();
                 this.saveLoan();
             });
         }
 
         if (this.elements.saveButton) {
-            this.elements.saveButton.addEventListener("click", () => {
+            this.registerEvent(this.elements.saveButton, "click", () => {
                 this.saveLoan();
             });
         }
 
         if (this.elements.tableBody) {
-            this.elements.tableBody.addEventListener("click", event => {
+            this.registerEvent(this.elements.tableBody, "click", event => {
                 const button = event.target.closest("button[data-action]");
 
                 if (!button) {
@@ -147,14 +203,18 @@ const LoanController = {
             if (this.currentLoanId) {
                 loan.id = this.currentLoanId;
                 LoanService.updateLoan(loan);
+                this.notify("Loan updated successfully.", "success");
             } else {
                 LoanService.createLoan(loan);
+                this.notify("Loan saved successfully.", "success");
             }
 
             this.loadLoans();
             this.resetForm();
         } catch (error) {
+            const normalized = this.normalizeServiceError(error, "Unable to save loan.");
             console.error(error);
+            this.notify([normalized.message, normalized.errors.join(" ")].filter(Boolean).join(" "), "error");
         }
     },
 
@@ -197,7 +257,13 @@ const LoanController = {
             return;
         }
 
-        LoanService.deleteLoan(id);
+        const result = LoanService.deleteLoan(id);
+        if (result && result.error) {
+            this.notify(result.error, "error");
+            return;
+        }
+
+        this.notify("Loan deleted.", "success");
         this.loadLoans();
     },
 

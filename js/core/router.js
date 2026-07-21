@@ -1,7 +1,7 @@
-"use strict";
+﻿"use strict";
 
 /*==================================================
- SFM PRO Enterprise v3.5 Stable
+ SFM PRO Enterprise v5.0 Production Release
  Router
 ==================================================*/
 
@@ -88,4 +88,5 @@ const Router = {
 
 };
 
-console.log("✔ Router Loaded");
+console.log("âœ” Router Loaded");
+

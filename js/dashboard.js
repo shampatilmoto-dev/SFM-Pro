@@ -6,6 +6,13 @@
 
 "use strict";
 
+const dashboardSelectors = {
+    byId: {},
+    byQuery: {},
+    filterHandler: null,
+    quickActionBound: false
+};
+
 /*==================================================
  Global Selectors
 ==================================================*/
@@ -58,7 +65,11 @@ function hideElement(selector) {
 
 function setText(selector, value) {
 
-    const element = $(selector);
+    if (!dashboardSelectors.byQuery[selector]) {
+        dashboardSelectors.byQuery[selector] = $(selector);
+    }
+
+    const element = dashboardSelectors.byQuery[selector];
 
     if (!element) return;
 
@@ -554,25 +565,11 @@ function refreshCompleteDashboard() {
 
 function loadRecentTransactions() {
 
+    const run = () => {
+
     const tableBody = $("#transactionTableBody");
 
     if (!tableBody) return;
-
-    tableBody.innerHTML = "";
-
-    if (dashboardState.transactions.length === 0) {
-
-        tableBody.innerHTML =
-
-        `<tr>
-            <td colspan="6" style="text-align:center;">
-                No transactions available.
-            </td>
-        </tr>`;
-
-        return;
-
-    }
 
     const transactions =
 
@@ -588,6 +585,40 @@ function loadRecentTransactions() {
 
         .slice(0,10);
 
+    const emptyStateRenderer = () => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td colspan="6" style="text-align:center;">
+                No transactions available.
+            </td>
+        `;
+        return row;
+    };
+
+    if (typeof ListRenderer === "object" && typeof ListRenderer.render === "function") {
+        ListRenderer.render(tableBody, transactions, createTransactionRow, {
+            clear: true,
+            emptyStateRenderer
+        });
+        return;
+    }
+
+    if (typeof TableRenderer === "object" && typeof TableRenderer.renderNodeRows === "function") {
+        const rows = transactions.map(createTransactionRow);
+        TableRenderer.renderNodeRows(tableBody, rows, {
+            emptyStateRenderer
+        });
+        return;
+    }
+
+    tableBody.innerHTML = "";
+
+    if (transactions.length === 0) {
+        const emptyNode = emptyStateRenderer();
+        tableBody.appendChild(emptyNode);
+        return;
+    }
+
     transactions.forEach(transaction=>{
 
         tableBody.appendChild(
@@ -597,6 +628,15 @@ function loadRecentTransactions() {
         );
 
     });
+
+    };
+
+    if (typeof PerformanceBenchmark === "object" && typeof PerformanceBenchmark.measure === "function") {
+        PerformanceBenchmark.measure("dashboard.loadRecentTransactions", run);
+        return;
+    }
+
+    run();
 
 }
 
@@ -672,13 +712,13 @@ function initializeTransactionSearch(){
 
     if(!search) return;
 
-    search.addEventListener(
+    if (!dashboardSelectors.filterHandler) {
+        dashboardSelectors.filterHandler = typeof Scheduler === "object" && typeof Scheduler.debounce === "function"
+            ? Scheduler.debounce(filterTransactions, 120)
+            : filterTransactions;
+    }
 
-        "input",
-
-        filterTransactions
-
-    );
+    search.addEventListener("input", dashboardSelectors.filterHandler);
 
 }
 
@@ -692,13 +732,13 @@ function initializeTransactionFilter(){
 
     if(!filter) return;
 
-    filter.addEventListener(
+    if (!dashboardSelectors.filterHandler) {
+        dashboardSelectors.filterHandler = typeof Scheduler === "object" && typeof Scheduler.debounce === "function"
+            ? Scheduler.debounce(filterTransactions, 120)
+            : filterTransactions;
+    }
 
-        "change",
-
-        filterTransactions
-
-    );
+    filter.addEventListener("change", dashboardSelectors.filterHandler);
 
 }
 
@@ -707,6 +747,8 @@ function initializeTransactionFilter(){
 ==================================================*/
 
 function filterTransactions(){
+
+    const run = () => {
 
     const keyword=
 
@@ -730,7 +772,7 @@ function filterTransactions(){
 
     tableBody.innerHTML="";
 
-    dashboardState.transactions
+    const filtered = dashboardState.transactions
 
     .filter(item=>{
 
@@ -759,7 +801,24 @@ function filterTransactions(){
 
     })
 
-    .forEach(item=>{
+    ;
+
+    if (typeof ListRenderer === "object" && typeof ListRenderer.render === "function") {
+        if (filtered.length > 200 && typeof ListRenderer.renderLazy === "function") {
+            ListRenderer.renderLazy(tableBody, filtered, createTransactionRow, {
+                clear: true,
+                chunkSize: 120
+            });
+            return;
+        }
+
+        ListRenderer.render(tableBody, filtered, createTransactionRow, {
+            clear: true
+        });
+        return;
+    }
+
+    filtered.forEach(item=>{
 
         tableBody.appendChild(
 
@@ -769,6 +828,15 @@ function filterTransactions(){
 
     });
 
+    };
+
+    if (typeof PerformanceBenchmark === "object" && typeof PerformanceBenchmark.measure === "function") {
+        PerformanceBenchmark.measure("dashboard.filterTransactions", run);
+        return;
+    }
+
+    run();
+
 }
 
 /*==================================================
@@ -777,29 +845,34 @@ function filterTransactions(){
 
 function initializeQuickActions(){
 
+    if (dashboardSelectors.quickActionBound) {
+        return;
+    }
+
+    const actionGrid = $(".action-grid");
+    if (!actionGrid) {
+        return;
+    }
+
+    if (typeof EventDelegate === "object" && typeof EventDelegate.on === "function") {
+        EventDelegate.on(actionGrid, "click", "button", (_event, button) => {
+            console.log("Quick Action :", button.innerText.trim());
+        });
+        dashboardSelectors.quickActionBound = true;
+        return;
+    }
+
     $$(".action-grid button")
-
     .forEach(button=>{
-
         button.addEventListener(
-
             "click",
-
             ()=>{
-
-                console.log(
-
-                    "Quick Action :",
-
-                    button.innerText.trim()
-
-                );
-
+                console.log("Quick Action :", button.innerText.trim());
             }
-
         );
-
     });
+
+    dashboardSelectors.quickActionBound = true;
 
 }
 

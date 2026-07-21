@@ -19,6 +19,47 @@ class SettingsManager {
         return Boolean(value) && Object.prototype.toString.call(value) === '[object Object]';
     }
 
+    hasUnsafeKeys(value, depth = 0) {
+        if (depth > 20) {
+            return true;
+        }
+
+        if (Array.isArray(value)) {
+            return value.some(item => this.hasUnsafeKeys(item, depth + 1));
+        }
+
+        if (!this.isPlainObject(value)) {
+            return false;
+        }
+
+        return Object.keys(value).some(key => {
+            if (['__proto__', 'prototype', 'constructor'].includes(key)) {
+                return true;
+            }
+
+            const child = value[key];
+            return (Array.isArray(child) || this.isPlainObject(child)) && this.hasUnsafeKeys(child, depth + 1);
+        });
+    }
+
+    safeParseJson(raw) {
+        if (typeof raw !== 'string' || raw.length === 0 || raw.length > 65535) {
+            return null;
+        }
+
+        try {
+            const parsed = JSON.parse(raw);
+
+            if (!this.isPlainObject(parsed) || this.hasUnsafeKeys(parsed)) {
+                return null;
+            }
+
+            return parsed;
+        } catch (error) {
+            return null;
+        }
+    }
+
     normalize(settings, base = this.defaults) {
         if (!this.isPlainObject(settings)) {
             return null;
@@ -93,7 +134,12 @@ class SettingsManager {
                 return { ...this.defaults };
             }
 
-            const parsed = JSON.parse(raw);
+            const parsed = this.safeParseJson(raw);
+
+            if (!parsed) {
+                return { ...this.defaults };
+            }
+
             return this.normalize(parsed) || { ...this.defaults };
         } catch (error) {
             return { ...this.defaults };

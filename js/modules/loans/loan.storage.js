@@ -3,6 +3,10 @@
 const LoanStorage = {
     moduleName: "loans",
 
+    load() {
+        return this.getAll();
+    },
+
     getAll() {
         if (typeof loadDatabase === "function") {
             loadDatabase();
@@ -53,5 +57,26 @@ const LoanStorage = {
         return typeof generateId === "function"
             ? generateId()
             : Date.now().toString();
+    },
+
+    // Standardized aliases for unified module interfaces.
+    list() {
+        return this.getAll();
+    },
+
+    read(id) {
+        return this.getById(id);
+    },
+
+    create(loan) {
+        return this.add(loan);
+    },
+
+    replace(id, loan) {
+        return this.update(id, loan);
+    },
+
+    delete(id) {
+        return this.remove(id);
     }
 };

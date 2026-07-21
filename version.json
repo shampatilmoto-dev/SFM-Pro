@@ -1,6 +1,7 @@
-{
+﻿{
   "application": "SFM PRO Enterprise",
-  "version": "3.5",
-  "channel": "Stable",
-  "displayVersion": "v3.5 Stable"
+  "version": "5.0",
+  "channel": "Production",
+  "displayVersion": "v5.0 Production Release"
 }
+

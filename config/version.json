@@ -1,10 +1,10 @@
-{
+﻿{
   "schemaVersion": "1.0.0",
   "description": "Metadata-document version contract for future configuration governance.",
   "purpose": "Track configuration-document compatibility separately from application and backup versions.",
   "sampleObject": {
     "metadataRelease": {
-      "productLabel": "SFM PRO Enterprise v4.0",
+      "productLabel": "SFM PRO Enterprise v5.0 Production Release",
       "configurationCompatibility": "1.x",
       "activationState": "not-configured"
     }
@@ -14,3 +14,4 @@
     "Future version transitions require migration and rollback review."
   ]
 }
+

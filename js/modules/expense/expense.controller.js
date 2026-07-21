@@ -3,6 +3,7 @@
 const ExpenseController = {
     currentExpenseId: null,
     expenses: [],
+    isInitialized: false,
 
     elements: {
         form: null,
@@ -23,10 +24,23 @@ const ExpenseController = {
         count: null
     },
 
+    handlers: {
+        searchInput: null,
+        filterCategoryChange: null,
+        filterPaymentChange: null,
+        sortChange: null
+    },
+
     initialize() {
+        if (this.isInitialized) {
+            this.loadExpenses();
+            return;
+        }
+
         this.cacheElements();
         this.bindEvents();
         this.loadExpenses();
+        this.isInitialized = true;
     },
 
     cacheElements() {
@@ -57,19 +71,25 @@ const ExpenseController = {
         }
 
         if (this.elements.search) {
-            this.elements.search.addEventListener("input", () => this.render());
+            this.handlers.searchInput = typeof Scheduler === "object" && typeof Scheduler.debounce === "function"
+                ? Scheduler.debounce(() => this.render(), 120)
+                : (() => this.render());
+            this.elements.search.addEventListener("input", this.handlers.searchInput);
         }
 
         if (this.elements.filterCategory) {
-            this.elements.filterCategory.addEventListener("change", () => this.render());
+            this.handlers.filterCategoryChange = () => this.render();
+            this.elements.filterCategory.addEventListener("change", this.handlers.filterCategoryChange);
         }
 
         if (this.elements.filterPayment) {
-            this.elements.filterPayment.addEventListener("change", () => this.render());
+            this.handlers.filterPaymentChange = () => this.render();
+            this.elements.filterPayment.addEventListener("change", this.handlers.filterPaymentChange);
         }
 
         if (this.elements.sort) {
-            this.elements.sort.addEventListener("change", () => this.render());
+            this.handlers.sortChange = () => this.render();
+            this.elements.sort.addEventListener("change", this.handlers.sortChange);
         }
 
         if (this.elements.tableBody) {
@@ -211,6 +231,14 @@ const ExpenseController = {
         }
 
         if (!Array.isArray(expenses) || expenses.length === 0) {
+            if (typeof TableRenderer === "object" && typeof TableRenderer.renderHTMLRows === "function") {
+                TableRenderer.renderHTMLRows(this.elements.tableBody, [], {
+                    emptyColspan: 7,
+                    emptyMessage: "No expense records found."
+                });
+                return;
+            }
+
             this.elements.tableBody.innerHTML = `
                 <tr>
                     <td colspan="7">No expense records found.</td>
@@ -219,9 +247,17 @@ const ExpenseController = {
             return;
         }
 
-        this.elements.tableBody.innerHTML = expenses
-            .map(expense => this.renderTableRow(expense))
-            .join("");
+        const rows = expenses.map(expense => this.renderTableRow(expense));
+
+        if (typeof TableRenderer === "object" && typeof TableRenderer.renderHTMLRows === "function") {
+            TableRenderer.renderHTMLRows(this.elements.tableBody, rows, {
+                emptyColspan: 7,
+                emptyMessage: "No expense records found."
+            });
+            return;
+        }
+
+        this.elements.tableBody.innerHTML = rows.join("");
     },
 
     renderTableRow(expense) {

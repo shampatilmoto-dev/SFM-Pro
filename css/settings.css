@@ -35,6 +35,9 @@ body[data-page='settings'] {
     background: var(--settings-bg);
     color: var(--settings-text);
     font-family: Inter, 'Segoe UI', sans-serif;
+    background-image:
+        radial-gradient(circle at 10% 0%, rgba(36, 87, 214, 0.09), transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(22, 163, 74, 0.08), transparent 28%);
 }
 
 .skip-link {
@@ -239,6 +242,12 @@ body[data-page='settings'] {
     border: 1px solid var(--settings-border);
     border-radius: 1rem;
     box-shadow: var(--settings-shadow);
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.settings-card:hover {
+    border-color: color-mix(in srgb, var(--settings-primary) 30%, var(--settings-border));
+    transform: translateY(-2px);
 }
 
 .settings-card-wide {
@@ -466,6 +475,13 @@ body[data-page='settings'] {
     background: var(--settings-primary-strong);
 }
 
+.settings-button-primary,
+.settings-button-secondary,
+.dashboard-link,
+.action-link {
+    box-shadow: 0 3px 8px rgba(26, 45, 81, 0.1);
+}
+
 .settings-button:active,
 .dashboard-link:active {
     transform: translateY(1px);
@@ -545,5 +561,15 @@ body[data-page='settings'] {
 
     .settings-button {
         width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

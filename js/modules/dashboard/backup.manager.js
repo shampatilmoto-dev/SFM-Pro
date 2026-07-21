@@ -35,8 +35,42 @@ const BackupManager = {
             return { error: 'Backup file is too large. The maximum supported size is 5 MB.' };
         }
 
+        const hasUnsafeKeys = (value, depth = 0) => {
+            if (depth > 20) {
+                return true;
+            }
+
+            if (Array.isArray(value)) {
+                return value.some(item => hasUnsafeKeys(item, depth + 1));
+            }
+
+            if (!value || typeof value !== 'object') {
+                return false;
+            }
+
+            const proto = Object.getPrototypeOf(value);
+            if (proto !== Object.prototype && proto !== null) {
+                return true;
+            }
+
+            return Object.keys(value).some(key => {
+                if (['__proto__', 'prototype', 'constructor'].includes(key)) {
+                    return true;
+                }
+
+                return hasUnsafeKeys(value[key], depth + 1);
+            });
+        };
+
         try {
-            const payload = JSON.parse(text);
+            const payload = typeof Sanitizer === 'object' && typeof Sanitizer.safeJsonParse === 'function'
+                ? Sanitizer.safeJsonParse(text, null, { maxLength: this.maxBackupBytes, requireSafeObject: true })
+                : JSON.parse(text);
+
+            if (!payload || typeof payload !== 'object' || Array.isArray(payload) || hasUnsafeKeys(payload)) {
+                return { error: 'Backup file is unsafe or malformed.' };
+            }
+
             return { payload };
         } catch (error) {
             return { error: 'Selected file is not valid JSON.' };

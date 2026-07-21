@@ -1,11 +1,11 @@
-{
+﻿{
   "schemaVersion": "1.0.0",
   "description": "Application-level metadata contract for SFM PRO Enterprise.",
   "purpose": "Reserve a reviewed location for future application metadata without binding the current runtime.",
   "sampleObject": {
     "application": {
       "displayName": "SFM PRO Enterprise",
-      "releaseLabel": "v4.0",
+      "releaseLabel": "v5.0 Production Release",
       "runtimeBinding": "not-configured"
     }
   },
@@ -14,3 +14,4 @@
     "Do not store credentials, business data, or runtime calculations here."
   ]
 }
+

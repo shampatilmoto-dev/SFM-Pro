@@ -60,6 +60,59 @@ function deepClone(value) {
 
 }
 
+function hasUnsafeJsonKeys(value, depth = 0) {
+
+    if (depth > 20) {
+        return true;
+    }
+
+    if (Array.isArray(value)) {
+        return value.some(item => hasUnsafeJsonKeys(item, depth + 1));
+    }
+
+    if (!value || typeof value !== "object") {
+        return false;
+    }
+
+    const proto = Object.getPrototypeOf(value);
+    if (proto !== Object.prototype && proto !== null) {
+        return true;
+    }
+
+    return Object.keys(value).some(key => {
+        if (["__proto__", "prototype", "constructor"].includes(key)) {
+            return true;
+        }
+
+        return hasUnsafeJsonKeys(value[key], depth + 1);
+    });
+
+}
+
+function parseStoredDatabaseJson(text) {
+
+    if (typeof text !== "string" || text.length === 0 || text.length > 8 * 1024 * 1024) {
+        return null;
+    }
+
+    try {
+        const parsed = JSON.parse(text);
+
+        if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+            return null;
+        }
+
+        if (hasUnsafeJsonKeys(parsed)) {
+            return null;
+        }
+
+        return parsed;
+    } catch (error) {
+        return null;
+    }
+
+}
+
 /*==================================================
  Default Database
 ==================================================*/
@@ -103,6 +156,7 @@ const defaultDatabase = {
 ==================================================*/
 
 let database = {};
+let isDatabaseLoaded = false;
 
 /*==================================================
  Create Database
@@ -121,6 +175,8 @@ function createDatabase() {
 
     console.log("Database Created");
 
+    isDatabaseLoaded = true;
+
     return true;
 
 }
@@ -129,7 +185,11 @@ function createDatabase() {
  Load Database
 ==================================================*/
 
-function loadDatabase() {
+function loadDatabase(force = false) {
+
+    if (isDatabaseLoaded && !force) {
+        return;
+    }
 
     let saved = null;
 
@@ -149,21 +209,18 @@ function loadDatabase() {
 
     }
 
-    try {
+    const parsed = parseStoredDatabaseJson(saved);
 
-        database = JSON.parse(saved);
-
-        migrateDatabase();
-
-    }
-
-    catch (error) {
-
+    if (!parsed) {
         console.error("Database Corrupted");
-
         createDatabase();
-
+        return;
     }
+
+    database = parsed;
+
+    migrateDatabase();
+    isDatabaseLoaded = true;
 
 }
 
@@ -260,6 +317,8 @@ function resetDatabase() {
 
     const saved = saveDatabase();
 
+    isDatabaseLoaded = true;
+
     return saved.success;
 
 }
@@ -311,6 +370,12 @@ function initializeStorage() {
 }
 
 initializeStorage();
+
+window.addEventListener("storage", event => {
+    if (event && event.key === DB_NAME) {
+        isDatabaseLoaded = false;
+    }
+});
 
 /*==================================================
  Part 2 : Generic CRUD Engine
