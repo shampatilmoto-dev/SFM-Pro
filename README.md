@@ -63,4 +63,76 @@ SFM-Pro/
 ├── pages/
 ├── prompts/
 └── README.md
+```---
+
+# 🛠️ Technology Stack
+
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Application Structure |
+| CSS3 | Styling & Responsive Design |
+| JavaScript (ES6+) | Application Logic |
+| Local Storage | Client-side Data Storage |
+| Git | Version Control |
+| GitHub | Source Code Management |
+| Visual Studio Code | Development Environment |
+
+---
+
+# 📦 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/shampatilmoto-dev/SFM-Pro.git
 ```
+
+## Open Project
+
+```bash
+cd SFM-Pro
+```
+
+## Run Application
+
+Open `index.html` in your browser
+
+or
+
+Use the VS Code **Live Server** extension.
+
+---
+
+# 📁 Folder Structure
+
+```
+SFM-Pro/
+├── .github/
+├── AI_DOCUMENTS/
+├── assets/
+│   └── screenshots/
+├── components/
+├── config/
+├── css/
+├── docs/
+├── js/
+├── pages/
+├── prompts/
+├── README.md
+└── index.html
+```
+
+---
+
+# ⚙️ Core Modules
+
+| Module | Status |
+|---------|--------|
+| Dashboard | ✅ Complete |
+| Income | ✅ Complete |
+| Expense | ✅ Complete |
+| Reports | 🟡 In Progress |
+| Budget | 🔄 Planned |
+| Loans | 🔄 Planned |
+| Investments | 🔄 Planned |
+| Settings | 🟡 Basic |
