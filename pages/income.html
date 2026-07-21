@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SFM PRO | Income</title>
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/module.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body data-page="income">
+
+<div class="page-container">
+
+    <!-- ===========================
+         Page Header
+    ============================ -->
+
+    <div class="page-header">
+
+        <h1>💰 Add Income</h1>
+
+        <a href="../dashboard.html" class="back-btn">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+    <!-- ===========================
+         Income Form
+    ============================ -->
+
+    <form id="incomeForm">
+
+        <div class="form-card">
+
+            <div class="form-group">
+
+                <label>Income Title</label>
+
+                <input
+                    type="text"
+                    id="incomeSource"
+                    aria-label="Income title"
+                    placeholder="Salary">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select id="incomeCategory" aria-label="Income category">
+
+                    <option value="">Select Category</option>
+
+                    <option>Salary</option>
+
+                    <option>Bonus</option>
+
+                    <option>Freelance</option>
+
+                    <option>Business</option>
+
+                    <option>Interest</option>
+
+                    <option>Rental</option>
+
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Amount</label>
+
+                <input
+                    type="number"
+                    id="incomeAmount"
+                    aria-label="Income amount"
+                    placeholder="60000">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Date</label>
+
+                <input
+                    type="date"
+                    id="incomeDate"
+                    aria-label="Income date">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Notes</label>
+
+                <textarea
+                    id="incomeNotes"
+                    aria-label="Income notes"
+                    rows="4"
+                    placeholder="Optional"></textarea>
+
+            </div>
+
+            <button
+                type="button"
+                id="saveIncomeBtn">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Income
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <div class="history-card">
+
+        <h2>Income Summary</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <h4>Total Entries</h4>
+                <h2 id="incomeCount">0</h2>
+            </div>
+
+            <div>
+                <h4>Total Income</h4>
+                <h2 id="incomeTotal">₹0</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="history-card">
+
+        <div class="history-header">
+            <h2>Income History</h2>
+            <div class="history-actions">
+                <input type="search" id="incomeSearch" aria-label="Search income" placeholder="Search income...">
+                <select id="incomeSort" aria-label="Sort income">
+                    <option value="date">Date</option>
+                    <option value="source">Title</option>
+                    <option value="category">Category</option>
+                    <option value="amount">Amount</option>
+                </select>
+            </div>
+        </div>
+
+        <div class='table-responsive'>
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="incomeTableBody">
+
+            </tbody>
+
+        </table>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     Engine
+=========================== -->
+
+<script src="../js/engine/storage.js"></script>
+<script src="../js/engine/finance.js"></script>
+
+<!-- ===========================
+     Income Module
+=========================== -->
+
+<script src="../js/modules/income/income.storage.js"></script>
+<script src="../js/modules/income/income.engine.js"></script>
+<script src="../js/services/income.service.js"></script>
+<script src="../js/modules/income/income.controller.js"></script>
+
+
+</body>
+</html>

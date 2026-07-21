@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Dashboard metadata contract for future layout composition.",
+  "purpose": "Describe future dashboard regions without changing the current dashboard.",
+  "sampleObject": {
+    "dashboardRegion": {
+      "id": "future-region",
+      "widgetIds": ["future-widget"],
+      "visibility": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Dashboard changes require separate UX and business review.",
+    "This file is not loaded by the existing dashboard."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Permission metadata contract for future role and capability governance.",
+  "purpose": "Reserve a reviewed permission-model structure without changing current authentication.",
+  "sampleObject": {
+    "permissionProfile": {
+      "id": "future-permission-profile",
+      "roleKey": "future.role.key",
+      "capabilityKeys": ["future.capability.key"],
+      "enabled": false
+    }
+  },
+  "futureExtensionNotes": [
+    "Authentication and authorization changes require security review.",
+    "Do not store user accounts, credentials, or active grants in this file."
+  ]
+}

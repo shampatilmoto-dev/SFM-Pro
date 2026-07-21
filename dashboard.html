@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SFM PRO Enterprise | Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="css/common.css">
+
+    <link rel="stylesheet"
+          href="css/dashboard.css">
+
+</head>
+
+<body data-page="dashboard">
+
+<div class="app">
+
+<!-- ===================================================== -->
+<!-- Sidebar -->
+<!-- ===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-wallet"></i>
+
+        </div>
+
+        <div class="logo-text">
+
+            <h2>SFM PRO Enterprise</h2>
+
+            <span>v4.0</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="dashboard.html"
+           class="active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+        <a href="pages/income.html">
+
+            <i class="fa-solid fa-money-bill-trend-up"></i>
+
+            <span>Income</span>
+
+        </a>
+
+        <a href="pages/expense.html">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <span>Expenses</span>
+
+        </a>
+
+        <a href="pages/budget.html">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <span>Budget</span>
+
+        </a>
+
+        <a href="pages/loans.html">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <span>Loans</span>
+
+        </a>
+
+        <a href="pages/creditcards.html">
+
+            <i class="fa-regular fa-credit-card"></i>
+
+            <span>Credit Cards</span>
+
+        </a>
+
+        <a href="pages/emi.html">
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            <span>EMI Tracker</span>
+
+        </a>
+
+        <a href="pages/investments.html">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <span>Investments</span>
+
+        </a>
+
+        <a href="pages/reports.html">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>Reports</span>
+
+        </a>
+
+        <a href="pages/settings.html">
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <div class="user-card">
+
+            <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+
+            <div>
+
+                <h4>Sham Patil</h4>
+
+                <small>Administrator</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+<!-- ===================================================== -->
+<!-- Main Content -->
+<!-- ===================================================== -->
+
+<main class="main-content">
+
+<!-- ===================================================== -->
+<!-- Header -->
+<!-- ===================================================== -->
+
+<header class="top-header">
+
+    <div class="header-left">
+
+        <button class="menu-btn" type="button" aria-label="Toggle navigation">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+        <div>
+
+            <h1 id="greeting">
+
+                👋 Good Morning
+
+            </h1>
+
+            <p id="todayDate">
+
+                Loading Date...
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="header-center">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input type="search"
+                   placeholder="Search Transactions, Loans, Budgets...">
+
+        </div>
+
+    </div>
+
+    <div class="header-right">
+
+        <button class="header-btn">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="badge">3</span>
+
+        </button>
+
+        <button class="header-btn">
+
+            <i class="fa-regular fa-envelope"></i>
+
+            <span class="badge">5</span>
+
+        </button>
+
+       <button class="header-btn dark-mode-btn" type="button" aria-label="Toggle dark mode">
+
+    <i class="fa-solid fa-moon"></i>
+
+</button>
+        <div class="profile-menu" tabindex="0" role="group" aria-label="Profile menu">
+
+            <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+
+            <div>
+
+                <h4>Sham Patil</h4>
+
+                <small>Finance Manager</small>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down profile-chevron" aria-hidden="true"></i>
+
+            <button id="logoutBtn" type="button" class="profile-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                <span>Log out</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ===================================================== -->
+<!-- Dashboard Content Starts -->
+<!-- ===================================================== -->
+
+<section class="dashboard-container"><section class="welcome-banner">
+
+    <div class="welcome-content">
+
+        <div>
+
+            <h2>
+
+                Welcome Back,
+                <span id="userName">
+
+                    Sham 👋
+
+                </span>
+
+            </h2>
+
+            <p>
+
+                Take Control. Build Wealth.
+
+            </p>
+
+            <small>
+
+                Your financial summary for today is shown below.
+
+            </small>
+
+        </div>
+
+        <div class="welcome-actions">
+
+            <button class="primary-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Transaction
+
+            </button>
+
+            <button class="secondary-btn">
+
+                <i class="fa-solid fa-download"></i>
+
+                Export Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Balance Overview -->
+<!-- ======================================= -->
+
+<div class="balance-grid">
+
+    <!-- Available Balance -->
+
+    <div class="balance-card">
+
+        <span>Available Balance</span>
+
+        <h1 id="totalBalance">₹0</h1>
+
+        <small>
+            Updated Automatically
+        </small>
+
+    </div>
+
+    <!-- Total Income -->
+
+    <div class="summary-card income">
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+        <span>Total Income</span>
+
+        <h2 id="summaryIncome">₹0</h2>
+
+    </div>
+
+    <!-- Total Expense -->
+
+    <div class="summary-card expense">
+
+        <i class="fa-solid fa-arrow-trend-down"></i>
+
+        <span>Total Expense</span>
+
+        <h2 id="summaryExpense">₹0</h2>
+
+    </div>
+
+    <!-- Total Savings -->
+
+    <div class="summary-card saving">
+
+        <i class="fa-solid fa-piggy-bank"></i>
+
+        <span>Total Savings</span>
+
+        <h2 id="summarySavings">₹0</h2>
+
+    </div>
+
+</div>
+<!-- ======================================= -->
+<!-- Enterprise KPI Cards -->
+<!-- ======================================= -->
+
+<section class="kpi-grid">
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <span>Net Worth</span>
+
+        <h2 id="netWorthCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-money-bill"></i>
+
+        <span>Cash in Hand</span>
+
+        <h2 id="cashCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-building-columns"></i>
+
+        <span>Bank Balance</span>
+
+        <h2 id="bankBalanceCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-scale-balanced"></i>
+
+        <span>Monthly Cash Flow</span>
+
+        <h2 id="cashFlowCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-building-columns"></i>
+
+        <span>Outstanding Loans</span>
+
+        <h2 id="loanOutstandingCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        <span>Investment Value</span>
+
+        <h2 id="investmentCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Budget Remaining</span>
+
+        <h2 id="budgetRemainingCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-calendar-days"></i>
+
+        <span>Upcoming EMI</span>
+
+        <h2 id="nextEmiCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-card">
+
+        <i class="fa-solid fa-money-check-dollar"></i>
+
+        <span>Total Outstanding EMI</span>
+
+        <h2 id="emiOutstandingCard">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Monthly Summary -->
+<!-- ======================================= -->
+
+<section class="monthly-summary">
+
+    <div class="summary-box">
+
+        <span>Income</span>
+
+        <h2 id="monthlyIncome">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+        <span>Expense</span>
+
+        <h2 id="monthlyExpense">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+        <span>Savings</span>
+
+        <h2 id="monthlySavings">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="summary-box">
+
+        <span>Budget Usage</span>
+
+        <h2 id="budgetUsage">
+
+            0%
+
+        </h2>
+
+    </div>
+
+</section><!-- ======================================= -->
+<!-- Financial Analytics -->
+<!-- ======================================= -->
+
+<section class="analytics-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Financial Analytics
+
+        </h2>
+
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-scale-balanced"></i>
+
+            <span>Net Worth</span>
+
+            <h2 id="analyticsNetWorth">₹0</h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-percent"></i>
+
+            <span>Savings Rate</span>
+
+            <h2 id="analyticsSavingsRate">0%</h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-money-bills"></i>
+
+            <span>Monthly Cash Flow</span>
+
+            <h2 id="analyticsCashFlow">₹0</h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <span>Budget Utilization</span>
+
+            <h2 id="analyticsBudgetUtilization">0%</h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <span>Investment Growth</span>
+
+            <h2 id="analyticsInvestmentGrowth">₹0</h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <span>Loan-to-Income Ratio</span>
+
+            <h2 id="analyticsLoanIncomeRatio">0%</h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Financial Trends -->
+<!-- ======================================= -->
+
+<section class="trends-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            Financial Trends
+
+        </h2>
+
+    </div>
+
+    <div class="chart-grid">
+
+        <div class="chart-card">
+
+            <h3>Income vs Expense Trend</h3>
+
+            <canvas id="trendsIncomeExpenseChart"></canvas>
+
+            <p id="trendsIncomeExpenseEmpty" style="display:none; margin-top:0.75rem; color:#6b7280;">No chart data available.</p>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Expense by Category</h3>
+
+            <canvas id="trendsExpenseCategoryChart"></canvas>
+
+            <p id="trendsExpenseCategoryEmpty" style="display:none; margin-top:0.75rem; color:#6b7280;">No chart data available.</p>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Cash Flow Trend</h3>
+
+            <canvas id="trendsCashFlowChart"></canvas>
+
+            <p id="trendsCashFlowEmpty" style="display:none; margin-top:0.75rem; color:#6b7280;">No chart data available.</p>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Investment Allocation</h3>
+
+            <canvas id="trendsInvestmentAllocationChart"></canvas>
+
+            <p id="trendsInvestmentAllocationEmpty" style="display:none; margin-top:0.75rem; color:#6b7280;">No investments available to display.</p>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Budget Utilization</h3>
+
+            <canvas id="trendsBudgetUtilizationChart"></canvas>
+
+            <p id="trendsBudgetUtilizationEmpty" style="display:none; margin-top:0.75rem; color:#6b7280;">No chart data available.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Smart Financial Insights -->
+<!-- ======================================= -->
+
+<section class="insight-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+            Smart Financial Insights
+
+        </h2>
+
+    </div>
+
+    <div id="financialInsight" class="kpi-grid">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>Insight</span>
+
+            <h2>Your finances look healthy.</h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Financial Goals -->
+<!-- ======================================= -->
+
+<section class="goal-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-bullseye"></i>
+
+            Financial Goals
+
+        </h2>
+
+    </div>
+
+    <form id="financialGoalForm" class="goal-card" novalidate>
+
+        <input id="financialGoalId" type="hidden">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label for="financialGoalType">Goal Type</label>
+
+                <select id="financialGoalType">
+
+                    <option value="Emergency Fund">Emergency Fund</option>
+                    <option value="House">House</option>
+                    <option value="Car">Car</option>
+                    <option value="Vacation">Vacation</option>
+                    <option value="Education">Education</option>
+                    <option value="Retirement">Retirement</option>
+                    <option value="Custom">Custom</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="financialGoalName">Goal Name</label>
+
+                <input id="financialGoalName" type="text" placeholder="Emergency reserve">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="financialGoalTarget">Target Amount</label>
+
+                <input id="financialGoalTarget" type="number" min="0" step="0.01">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="financialGoalSaved">Current Saved Amount</label>
+
+                <input id="financialGoalSaved" type="number" min="0" step="0.01" value="0">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="financialGoalContribution">Monthly Contribution</label>
+
+                <input id="financialGoalContribution" type="number" min="0" step="0.01" value="0">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="financialGoalDate">Target Date</label>
+
+                <input id="financialGoalDate" type="date">
+
+            </div>
+
+        </div>
+
+        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+
+            <button id="saveFinancialGoalBtn" type="submit" class="primary-btn">Save Goal</button>
+
+            <button id="cancelFinancialGoalEditBtn" type="button" class="secondary-btn" style="display:none;">Cancel Edit</button>
+
+        </div>
+
+    </form>
+
+    <div id="financialGoalsList" class="kpi-grid" style="margin-top:1rem;">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-bullseye"></i>
+
+            <span>No financial goals created yet.</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Notification Center -->
+<!-- ======================================= -->
+
+<section class="insight-section" aria-labelledby="notificationCenterTitle">
+
+    <div class="section-header">
+
+        <h2 id="notificationCenterTitle">
+
+            <i class="fa-solid fa-bell"></i>
+
+            Notification Center
+
+            <span id="notificationCountBadge" class="badge" style="position:static; display:inline-flex; align-items:center; justify-content:center; margin-left:0.5rem; vertical-align:middle;">0</span>
+
+        </h2>
+
+    </div>
+
+    <div id="notificationList" class="kpi-grid">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-bell-slash"></i>
+
+            <span>No notifications.</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Financial Calendar -->
+<!-- ======================================= -->
+
+<section class="insight-section" aria-labelledby="financialCalendarTitle">
+
+    <div class="section-header">
+
+        <h2 id="financialCalendarTitle">
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            Financial Calendar
+
+        </h2>
+
+    </div>
+
+    <div id="financialCalendarSummary" class="kpi-grid">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-calendar"></i>
+
+            <span>This Month</span>
+
+            <h2>0</h2>
+
+        </div>
+
+    </div>
+
+    <div id="financialCalendarList" class="kpi-grid" style="margin-top:1rem;">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-calendar-xmark"></i>
+
+            <span>No upcoming financial events.</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Recurring Transactions -->
+<!-- ======================================= -->
+
+<section class="goal-section" aria-labelledby="recurringTransactionsTitle">
+
+    <div class="section-header">
+
+        <h2 id="recurringTransactionsTitle">
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Recurring Transactions
+
+        </h2>
+
+    </div>
+
+    <form id="recurringTemplateForm" class="goal-card" novalidate>
+
+        <input id="recurringTemplateId" type="hidden">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label for="recurringTemplateName">Name</label>
+
+                <input id="recurringTemplateName" type="text" placeholder="Monthly salary">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="recurringTemplateType">Type</label>
+
+                <select id="recurringTemplateType">
+
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                    <option value="EMI Reminder">EMI Reminder</option>
+                    <option value="Credit Card Reminder">Credit Card Reminder</option>
+                    <option value="Savings Goal Contribution">Savings Goal Contribution</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="recurringTemplateAmount">Amount</label>
+
+                <input id="recurringTemplateAmount" type="number" min="0" step="0.01">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="recurringTemplateFrequency">Frequency</label>
+
+                <select id="recurringTemplateFrequency">
+
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly" selected>Monthly</option>
+                    <option value="Yearly">Yearly</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="recurringTemplateStartDate">Start Date</label>
+
+                <input id="recurringTemplateStartDate" type="date">
+
+            </div>
+
+        </div>
+
+        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+
+            <button id="saveRecurringTemplateBtn" type="submit" class="primary-btn">Save Template</button>
+
+            <button id="cancelRecurringTemplateEditBtn" type="button" class="secondary-btn" style="display:none;">Cancel Edit</button>
+
+        </div>
+
+    </form>
+
+    <div id="recurringSummary" class="kpi-grid" style="margin-top:1rem;"></div>
+
+    <div id="recurringTemplateList" class="kpi-grid" style="margin-top:1rem;">
+
+        <div class="kpi-card">
+
+            <i class="fa-solid fa-rotate"></i>
+
+            <span>No recurring transactions.</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Backup & Restore -->
+<!-- ======================================= -->
+
+<section class="insight-section" aria-labelledby="backupRestoreTitle">
+
+    <div class="section-header">
+
+        <h2 id="backupRestoreTitle">
+
+            <i class="fa-solid fa-box-archive"></i>
+
+            Backup &amp; Restore
+
+        </h2>
+
+    </div>
+
+    <div class="goal-card" style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;">
+
+        <button id="exportBackupBtn" type="button" class="primary-btn">
+            <i class="fa-solid fa-file-export"></i> Export Backup
+        </button>
+
+        <input id="backupFileInput" type="file" accept="application/json,.json" aria-label="Choose backup JSON file" style="max-width:260px;">
+
+        <button id="importBackupBtn" type="button" class="secondary-btn">
+            <i class="fa-solid fa-file-import"></i> Import Backup
+        </button>
+
+    </div>
+
+    <div id="backupMessage" style="margin-top:0.75rem; font-weight:600;"></div>
+
+    <div id="backupSummary" class="kpi-grid" style="margin-top:1rem;"></div>
+
+    <div id="backupImportPreview" style="margin-top:1rem; display:none;">
+
+        <h3 style="margin-bottom:0.5rem;">Restore Preview</h3>
+
+        <div id="backupImportSummary" class="kpi-grid"></div>
+
+        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+
+            <button id="confirmBackupRestoreBtn" type="button" class="primary-btn">Confirm Restore</button>
+
+            <button id="cancelBackupRestoreBtn" type="button" class="secondary-btn">Cancel</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Financial Health -->
+<!-- ======================================= -->
+
+<section class="health-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-heart-circle-check"></i>
+
+            Financial Health
+
+        </h2>
+
+    </div>
+
+    <div class="health-grid">
+
+        <div class="health-card">
+
+            <span>Overall Score</span>
+
+            <h2 id="healthScore">
+
+                100
+
+            </h2>
+
+        </div>
+
+        <div class="health-card">
+
+            <span>Status</span>
+
+            <h2 id="healthStatus">
+
+                🟢 Excellent
+
+            </h2>
+
+        </div>
+
+        <div class="health-card">
+
+            <span>Savings Rate</span>
+
+            <h2 id="savingRate">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <div class="health-card">
+
+            <span>Debt Ratio</span>
+
+            <h2 id="debtRatio">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <div class="health-card">
+
+            <span>Expense Ratio</span>
+
+            <h2 id="expenseRatio">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <div class="health-card">
+
+            <span>Total Transactions</span>
+
+            <h2 id="totalTransactions">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Budget Progress -->
+<!-- ======================================= -->
+
+<section class="budget-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-simple"></i>
+
+            Monthly Budget Progress
+
+        </h2>
+
+    </div>
+
+    <div class="budget-card">
+
+        <div class="progress-bar">
+
+            <div id="budgetProgressFill"
+                 class="progress-fill">
+
+            </div>
+
+        </div>
+
+        <div class="budget-details">
+
+            <div>
+
+                <span>Used</span>
+
+                <h3 id="budgetSpent">
+
+                    ₹0
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <span>Remaining</span>
+
+                <h3 id="budgetRemaining">
+
+                    ₹0
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <span>Usage</span>
+
+                <h3 id="budgetUsagePercent">
+
+                    0%
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Quick Actions -->
+<!-- ======================================= -->
+
+<section class="quick-actions">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-bolt"></i>
+
+            Quick Actions
+
+        </h2>
+
+    </div>
+
+    <div class="action-grid">
+
+        <button onclick="location.href='pages/income.html'">
+
+            <i class="fa-solid fa-plus"></i>
+
+            <span>Add Income</span>
+
+        </button>
+
+        <button onclick="location.href='pages/expense.html'">
+
+            <i class="fa-solid fa-minus"></i>
+
+            <span>Add Expense</span>
+
+        </button>
+
+        <button onclick="location.href='pages/budget.html'">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <span>Budget</span>
+
+        </button>
+
+        <button onclick="location.href='pages/loans.html'">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <span>Loans</span>
+
+        </button>
+
+        <button onclick="location.href='pages/investments.html'">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <span>Investments</span>
+
+        </button>
+
+        <button onclick="location.href='pages/reports.html'">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>Reports</span>
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Recent Transactions -->
+<!-- ======================================= -->
+
+<section class="transactions-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            Recent Transactions
+
+        </h2>
+
+        <div class="table-tools">
+
+            <input type="search"
+                   id="transactionSearch"
+                   aria-label="Search recent transactions"
+                   placeholder="Search transaction...">
+
+            <select id="transactionFilter" aria-label="Filter recent transactions">
+
+                <option value="all">All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="transaction-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="transactionTableBody">
+
+                <tr>
+
+                    <td colspan="6">
+
+                        No transactions available.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ======================================= -->
+<!-- Dashboard Footer -->
+<!-- ======================================= -->
+
+<footer class="dashboard-footer">
+
+    <div>
+
+        <strong>SFM PRO Enterprise v4.0</strong>
+
+        <p>
+
+            Take Control. Build Wealth.
+
+        </p>
+
+    </div>
+
+    <div>
+
+        © 2026 Sham Finance Manager
+
+    </div>
+
+</footer>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- ======================================= -->
+<!-- Chart.js -->
+<!-- ======================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- ======================================= -->
+<!-- Project JavaScript -->
+<!-- ======================================= -->
+
+<!-- Core -->
+<script src="js/core/config.js"></script>
+<script src="js/core/common.js"></script>
+<script src="js/core/events.js"></script>
+
+<!-- Engine -->
+<script src="js/engine/storage.js"></script>
+<script src="js/engine/finance.js"></script>
+
+<!-- EMI Module -->
+<script src="js/modules/emi/emi.storage.js"></script>
+<script src="js/modules/emi/emi.engine.js"></script>
+<script src="js/services/emi.service.js"></script>
+
+<script src="js/modules/dashboard/dashboard.state.js"></script>
+<script src="js/modules/dashboard/dashboard.init.js"></script>
+<script src="js/modules/dashboard/goals.planner.js"></script>
+<script src="js/modules/dashboard/notification.center.js"></script>
+<script src="js/modules/dashboard/calendar.center.js"></script>
+<script src="js/modules/dashboard/recurring.manager.js"></script>
+<script src="js/modules/dashboard/settings.manager.js"></script>
+<script src="js/modules/dashboard/backup.manager.js"></script>
+
+<!-- Dashboard Service -->
+<script src="js/services/dashboard.service.js"></script>
+
+<script src="js/modules/dashboard/dashboard.cards.js"></script>
+<script src="js/modules/dashboard/dashboard.controller.js"></script>
+
+<!-- Budget -->
+<!-- Budget Module -->
+<!-- Budget -->
+<script src="js/modules/budget/budget.state.js"></script>
+<script src="js/modules/budget/budget.storage.js"></script>
+<script src="js/modules/budget/budget.engine.js"></script>
+<script src="js/services/budget.service.js"></script>
+<script src="js/modules/budget/budget.controller.js"></script>
+
+<!-- Expense -->
+<script src="js/modules/expense/expense.storage.js"></script>
+<script src="js/modules/expense/expense.engine.js"></script>
+<script src="js/services/expense.service.js"></script>
+
+<!-- Loans -->
+<script src="js/modules/loans/loan.storage.js"></script>
+<script src="js/modules/loans/loan.engine.js"></script>
+<script src="js/services/loan.service.js"></script>
+
+<!-- Credit Cards -->
+<script src="js/modules/creditcards/creditcard.storage.js"></script>
+<script src="js/modules/creditcards/creditcard.engine.js"></script>
+<script src="js/services/creditcard.service.js"></script>
+
+<!-- Reports Service -->
+<script src="js/modules/reports/reports.engine.js"></script>
+<script src="js/services/reports.service.js"></script>
+
+<!-- Other Modules -->
+<script src="js/investments.js"></script>
+<script src="js/charts.js"></script>
+
+<!-- Income -->
+<script src="js/modules/income/income.state.js"></script>
+<script src="js/modules/income/income.storage.js"></script>
+<script src="js/modules/income/income.form.js"></script>
+<script src="js/modules/income/income.table.js"></script>
+<script src="js/modules/income/income.search.js"></script>
+<script src="js/modules/income/income.engine.js"></script>
+<script src="js/services/income.service.js"></script>
+<script src="js/modules/income/income.controller.js"></script>
+
+<!-- Dashboard Logic -->
+<script src="js/dashboard.js"></script>
+
+<script src="js/core/router.js"></script>
+
+<script src="js/core/bootstrap.js"></script>
+
+</body>
+</html>

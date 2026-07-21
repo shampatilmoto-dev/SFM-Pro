@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFM PRO Enterprise | Budget</title>
+    <link rel='stylesheet' href='../css/common.css'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/budget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body data-page="budget">
+
+<div class="page-container">
+
+    <div class="page-header">
+        <h2><i class="fa-solid fa-wallet"></i> Budget Management</h2>
+        <p>Plan monthly budgets, monitor spending, and stay on track.</p>
+    </div>
+
+    <div class="card">
+        <h3>Create Budget</h3>
+        <form id="budgetForm" novalidate>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="budgetCategory">Budget Category</label>
+                    <select id="budgetCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Education">Education</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budgetAmount">Monthly Budget Amount</label>
+                    <input type="number" id="budgetAmount" placeholder="Enter Budget Amount" min="0" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="budgetMonth">Month</label>
+                    <select id="budgetMonth" required>
+                        <option value="">Select Month</option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budgetYear">Year</label>
+                    <input type="number" id="budgetYear" placeholder="2026" min="2000" max="2100" required>
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="budgetNotes">Notes</label>
+                    <textarea id="budgetNotes" rows="4" placeholder="Optional notes"></textarea>
+                </div>
+            </div>
+
+            <div id="budgetMessage" class="message-box" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+
+            <button type="submit" id="saveBudgetBtn" class="btn btn-primary">
+                <i class="fa-solid fa-floppy-disk"></i> Save Budget
+            </button>
+        </form>
+    </div>
+
+    <section class="summary-card budget-summary">
+        <div class="summary-item">
+            <span>Total Budget</span>
+            <strong id="budgetTotal">₹0.00</strong>
+        </div>
+        <div class="summary-item">
+            <span>Budget Used</span>
+            <strong id="budgetUsed">₹0.00</strong>
+        </div>
+        <div class="summary-item">
+            <span>Remaining Budget</span>
+            <strong id="budgetRemaining">₹0.00</strong>
+        </div>
+        <div class="summary-item">
+            <span>Budget Utilization</span>
+            <strong id="budgetUtilization">0%</strong>
+        </div>
+    </section>
+
+    <div class="card">
+        <h3>Budget History</h3>
+        <div class="history-toolbar">
+            <input type="search" id="budgetSearch" aria-label="Search budgets" placeholder="Search budgets..." autocomplete="off">
+            <select id="budgetFilterCategory" aria-label="Filter budgets by category">
+                <option value="">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Medical">Medical</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Education">Education</option>
+                <option value="Investment">Investment</option>
+                <option value="Other">Other</option>
+            </select>
+            <select id="budgetSort" aria-label="Sort budgets">
+                <option value="month_desc">Month: Newest</option>
+                <option value="month_asc">Month: Oldest</option>
+                <option value="amount_desc">Budget: High to Low</option>
+                <option value="amount_asc">Budget: Low to High</option>
+                <option value="usage_desc">Usage: High to Low</option>
+                <option value="usage_asc">Usage: Low to High</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Category</th>
+                        <th>Budget</th>
+                        <th>Used</th>
+                        <th>Remaining</th>
+                        <th>Usage</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="budgetTableBody">
+                    <tr>
+                        <td colspan="7">No Budget Available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="../js/engine/storage.js"></script>
+<script src="../js/engine/finance.js"></script>
+<script src="../js/services/budget.service.js"></script>
+<script src="../js/modules/budget/budget.state.js"></script>
+<script src="../js/modules/budget/budget.storage.js"></script>
+<script src="../js/modules/budget/budget.engine.js"></script>
+<script src="../js/modules/budget/budget.controller.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof BudgetController !== "undefined" && typeof BudgetController.initialize === "function") {
+            BudgetController.initialize();
+        }
+    });
+</script>
+
+</body>
+
+</html>

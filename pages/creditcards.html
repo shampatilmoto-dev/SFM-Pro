@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFM PRO Enterprise | Credit Cards</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/module.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+        .creditcard-summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .creditcard-summary .summary-item {
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #e1e1e1;
+            border-radius: 0.5rem;
+        }
+
+        .creditcard-summary .summary-item strong {
+            display: block;
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .alert-box {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            background: #fff7e6;
+            border-left: 4px solid #f5a623;
+        }
+
+        .alert-item {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .transaction-card {
+            margin-top: 1.5rem;
+        }
+
+        .transaction-table,
+        .transaction-table th,
+        .transaction-table td {
+            border: 1px solid #e1e1e1;
+            border-collapse: collapse;
+        }
+
+        .transaction-table th,
+        .transaction-table td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .creditcard-safe {
+            background: #e9f7ef;
+        }
+
+        .creditcard-medium {
+            background: #fff7e6;
+        }
+
+        .creditcard-high {
+            background: #fde8e8;
+        }
+
+        .history-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .history-toolbar select,
+        .history-toolbar input {
+            min-width: 180px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 900px) {
+            .form-grid,
+            .creditcard-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .history-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="creditcards">
+
+    <div class="page-container">
+
+        <div class="page-header">
+            <h2><i class="fa-solid fa-credit-card"></i> Credit Card Management</h2>
+            <p>Manage cards, track limits, and record purchases, payments and refunds.</p>
+            <button onclick="location.href='../dashboard.html'">← Dashboard</button>
+        </div>
+
+        <section class="card">
+            <h3>Add or Update Credit Card</h3>
+            <form id="creditCardForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <input type="text" id="bankName" placeholder="Axis Bank" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Card Name</label>
+                        <input type="text" id="cardName" placeholder="Platinum Card" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardType">Card Type</label>
+                        <select id="cardType" required>
+                            <option value="">Select Type</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="American Express">American Express</option>
+                            <option value="Rupay">Rupay</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="creditLimit">Credit Limit</label>
+                        <input type="number" id="creditLimit" placeholder="50000" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outstandingAmount">Outstanding Amount</label>
+                        <input type="number" id="outstandingAmount" placeholder="12000" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interestRate">Interest Rate (%)</label>
+                        <input type="number" id="interestRate" placeholder="18.5" min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="billingDate">Billing Date</label>
+                        <input type="date" id="billingDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dueDate">Due Date</label>
+                        <input type="date" id="dueDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="annualFee">Annual Fee</label>
+                        <input type="number" id="annualFee" placeholder="499" min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="cardNotes">Notes</label>
+                        <textarea id="cardNotes" rows="4" placeholder="Optional notes"></textarea>
+                    </div>
+                </div>
+
+                <div id="creditCardMessage" class="message-box" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+
+                <button type="submit" id="saveCreditCardBtn" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Card
+                </button>
+            </form>
+        </section>
+
+        <section class="summary-card creditcard-summary">
+            <div class="summary-item">
+                <span>Total Credit Limit</span>
+                <strong id="creditLimitTotal">₹0.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Total Outstanding</span>
+                <strong id="creditOutstandingTotal">₹0.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Available Credit</span>
+                <strong id="creditAvailableTotal">₹0.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Credit Utilization</span>
+                <strong id="creditUtilizationTotal">0%</strong>
+            </div>
+        </section>
+
+        <div id="creditCardAlerts" class="alert-box" style="display:none;"></div>
+
+        <div class="card">
+            <h3>Credit Card List</h3>
+            <div class="history-toolbar">
+                <input type="search" id="creditCardSearch" aria-label="Search credit cards" placeholder="Search cards..." autocomplete="off">
+                <select id="creditCardSort" aria-label="Sort credit cards">
+                    <option value="utilization_desc">Utilization: High to Low</option>
+                    <option value="utilization_asc">Utilization: Low to High</option>
+                    <option value="limit_desc">Limit: High to Low</option>
+                    <option value="limit_asc">Limit: Low to High</option>
+                    <option value="outstanding_desc">Outstanding: High to Low</option>
+                    <option value="outstanding_asc">Outstanding: Low to High</option>
+                </select>
+            </div>
+
+            <div class="table-responsive">
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Bank</th>
+                            <th>Card</th>
+                            <th>Type</th>
+                            <th>Limit</th>
+                            <th>Outstanding</th>
+                            <th>Available</th>
+                            <th>Utilization</th>
+                            <th>Billing</th>
+                            <th>Due</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="creditCardTableBody">
+                        <tr>
+                            <td colspan="10">No credit cards found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <section class="card transaction-card">
+            <h3>Credit Card Transactions</h3>
+            <form id="creditCardTransactionForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="transactionCardSelect">Select Card</label>
+                        <select id="transactionCardSelect" required>
+                            <option value="">Choose a card</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transactionType">Transaction Type</label>
+                        <select id="transactionType" required>
+                            <option value="">Select Type</option>
+                            <option value="Purchase">Purchase</option>
+                            <option value="Payment">Payment</option>
+                            <option value="Refund">Refund</option>
+                            <option value="EMI Conversion">EMI Conversion</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transactionAmount">Amount</label>
+                        <input type="number" id="transactionAmount" placeholder="2500" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transactionDate">Date</label>
+                        <input type="date" id="transactionDate" required>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="transactionNotes">Notes</label>
+                        <textarea id="transactionNotes" rows="3" placeholder="Optional transaction notes"></textarea>
+                    </div>
+                </div>
+
+                <div id="transactionMessage" class="message-box" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+
+                <button type="submit" id="saveTransactionBtn" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i> Add Transaction
+                </button>
+            </form>
+        </section>
+
+        <div class="card">
+            <h3>Transaction History</h3>
+            <div class="table-responsive">
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Card</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="creditCardTransactionTableBody">
+                        <tr>
+                            <td colspan="5">Select a card to view transactions.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/engine/storage.js"></script>
+    <script src="../js/engine/finance.js"></script>
+    <script src="../js/services/creditcard.service.js"></script>
+    <script src="../js/modules/creditcards/creditcard.storage.js"></script>
+    <script src="../js/modules/creditcards/creditcard.engine.js"></script>
+    <script src="../js/modules/creditcards/creditcard.controller.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof CreditCardController !== "undefined" && typeof CreditCardController.initialize === "function") {
+                CreditCardController.initialize();
+            }
+        });
+    </script>
+</body>
+
+</html>

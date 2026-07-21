@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SFM PRO Enterprise | Reports</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/module.css">
+	<style>
+		.reports-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.reports-grid .form-group {
+			display: flex;
+			flex-direction: column;
+			gap: 0.4rem;
+		}
+
+		.summary-cards {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 1rem;
+			margin: 1rem 0 1.5rem;
+		}
+
+		.summary-card-item {
+			border: 1px solid #e3e3e3;
+			border-radius: 10px;
+			padding: 1rem;
+			background: #fff;
+		}
+
+		.summary-card-item span {
+			display: block;
+			color: #5e5e5e;
+			margin-bottom: 0.3rem;
+		}
+
+		.summary-card-item strong {
+			font-size: 1.2rem;
+		}
+
+		.chart-placeholder {
+			border: 1px dashed #b8b8b8;
+			border-radius: 10px;
+			min-height: 140px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			color: #555;
+			gap: 0.25rem;
+		}
+
+		.reports-charts-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.chart-card {
+			border: 1px solid #e3e3e3;
+			border-radius: 10px;
+			padding: 0.75rem;
+			background: #fff;
+		}
+
+		.chart-card h4 {
+			margin: 0 0 0.5rem;
+			font-size: 0.95rem;
+		}
+
+		.chart-canvas-wrap {
+			position: relative;
+			height: 220px;
+		}
+
+		.chart-empty-state {
+			display: none;
+			border: 1px dashed #d1d1d1;
+			border-radius: 10px;
+			padding: 1rem;
+			margin-top: 1rem;
+			text-align: center;
+			color: #666;
+		}
+
+		@media (max-width: 960px) {
+			.reports-grid,
+			.summary-cards,
+			.reports-charts-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body data-page="reports">
+	<div class="page-container">
+		<div class="page-header">
+			<h2>Reports</h2>
+			<p>Generate module-wise and overall financial report snapshots.</p>
+			<button type="button" onclick="location.href='../dashboard.html'">&larr; Dashboard</button>
+		</div>
+
+		<section class="card">
+			<h3>Filters</h3>
+			<form id="reportsForm" novalidate>
+				<div class="reports-grid">
+					<div class="form-group">
+						<label for="reportFrom">Date From</label>
+						<input id="reportFrom" type="date">
+					</div>
+					<div class="form-group">
+						<label for="reportTo">Date To</label>
+						<input id="reportTo" type="date">
+					</div>
+					<div class="form-group">
+						<label for="reportType">Report Type</label>
+						<select id="reportType">
+							<option value="income">Income</option>
+							<option value="expense">Expense</option>
+							<option value="budget">Budget</option>
+							<option value="loans">Loans</option>
+							<option value="creditcards">Credit Cards</option>
+							<option value="investments">Investments</option>
+							<option value="emi">EMI</option>
+							<option value="overall" selected>Overall Summary</option>
+						</select>
+					</div>
+				</div>
+
+				<div style="margin-top: 1rem;">
+					<button id="runReportBtn" type="submit">Run Report</button>
+				</div>
+			</form>
+		</section>
+
+		<section class="summary-cards">
+			<div class="summary-card-item">
+				<span>Total Income</span>
+				<strong id="reportTotalIncome">₹0.00</strong>
+			</div>
+			<div class="summary-card-item">
+				<span>Total Expense</span>
+				<strong id="reportTotalExpense">₹0.00</strong>
+			</div>
+			<div class="summary-card-item">
+				<span>Net Savings</span>
+				<strong id="reportNetSavings">₹0.00</strong>
+			</div>
+			<div class="summary-card-item">
+				<span>Total Investments</span>
+				<strong id="reportTotalInvestments">₹0.00</strong>
+			</div>
+		</section>
+
+		<section class="card">
+			<h3 id="reportsTableTitle">Report Table</h3>
+<div class='table-responsive'>
+<table>
+				<thead>
+					<tr>
+						<th>Metric</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody id="reportsTableBody">
+					<tr>
+						<td colspan="2">No data available.</td>
+					</tr>
+				</tbody>
+</table>
+</div>
+		</section>
+
+		<section class="card">
+			<h3>Chart</h3>
+			<div class="chart-placeholder">
+				<strong id="reportsChartTitle">Chart Placeholder</strong>
+				<span id="reportsChartSubtitle">Report Type: overall</span>
+			</div>
+
+			<div id="reportsChartsEmptyState" class="chart-empty-state">
+				No chart data available for the selected filters.
+			</div>
+
+			<div id="reportsChartsGrid" class="reports-charts-grid">
+				<div class="chart-card">
+					<h4>Income vs Expense</h4>
+					<div class="chart-canvas-wrap">
+						<canvas id="incomeExpenseChart"></canvas>
+					</div>
+				</div>
+				<div class="chart-card">
+					<h4>Cash Flow</h4>
+					<div class="chart-canvas-wrap">
+						<canvas id="cashFlowChart"></canvas>
+					</div>
+				</div>
+				<div class="chart-card">
+					<h4>Savings Trend</h4>
+					<div class="chart-canvas-wrap">
+						<canvas id="savingsTrendChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="card">
+			<h3>Export</h3>
+			<div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+				<button id="exportPdfBtn" type="button">Export PDF</button>
+				<button id="exportExcelBtn" type="button">Export Excel</button>
+				<button id="exportCsvBtn" type="button">Export CSV</button>
+			</div>
+		</section>
+	</div>
+
+	<script src="../js/engine/storage.js"></script>
+	<script src="../js/engine/finance.js"></script>
+
+	<script src="../js/modules/income/income.storage.js"></script>
+	<script src="../js/modules/income/income.engine.js"></script>
+	<script src="../js/services/income.service.js"></script>
+
+	<script src="../js/modules/expense/expense.storage.js"></script>
+	<script src="../js/modules/expense/expense.engine.js"></script>
+	<script src="../js/services/expense.service.js"></script>
+
+	<script src="../js/modules/budget/budget.storage.js"></script>
+	<script src="../js/modules/budget/budget.engine.js"></script>
+	<script src="../js/services/budget.service.js"></script>
+
+	<script src="../js/modules/loans/loan.storage.js"></script>
+	<script src="../js/modules/loans/loan.engine.js"></script>
+	<script src="../js/services/loan.service.js"></script>
+
+	<script src="../js/modules/creditcards/creditcard.storage.js"></script>
+	<script src="../js/modules/creditcards/creditcard.engine.js"></script>
+	<script src="../js/services/creditcard.service.js"></script>
+
+	<script src="../js/modules/emi/emi.storage.js"></script>
+	<script src="../js/modules/emi/emi.engine.js"></script>
+	<script src="../js/services/emi.service.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<script src="../js/modules/reports/reports.engine.js"></script>
+	<script src="../js/services/reports.service.js"></script>
+	<script src="../js/modules/reports/reports.export.js"></script>
+	<script src="../js/modules/reports/reports.controller.js"></script>
+</body>
+
+</html>

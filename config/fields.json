@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Field metadata contract for future form and table definitions.",
+  "purpose": "Reserve a reviewed schema for non-operational field descriptors.",
+  "sampleObject": {
+    "field": {
+      "id": "future-field",
+      "labelKey": "future.field.label",
+      "dataType": "text",
+      "required": false
+    }
+  },
+  "futureExtensionNotes": [
+    "Future field validation rules must be reviewed before runtime use.",
+    "Do not place personal, financial, or transaction data in this file."
+  ]
+}

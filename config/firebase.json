@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Future Firebase integration metadata contract.",
+  "purpose": "Reserve a non-secret location for reviewed Firebase integration descriptors.",
+  "sampleObject": {
+    "firebaseIntegration": {
+      "status": "not-configured",
+      "environmentKey": "future-environment",
+      "credentialSource": "external-approved-secret-store"
+    }
+  },
+  "futureExtensionNotes": [
+    "Do not store Firebase credentials, project identifiers, or connection details here.",
+    "Activation requires separate security, privacy, and architecture approval."
+  ]
+}

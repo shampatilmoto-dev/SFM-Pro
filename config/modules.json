@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Module metadata contract for future registration and discovery.",
+  "purpose": "Provide a neutral schema for future module definitions.",
+  "sampleObject": {
+    "module": {
+      "id": "future-module",
+      "displayKey": "future.module.key",
+      "lifecycleState": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Future module activation requires human approval.",
+    "Do not place business rules, calculations, or data in module metadata."
+  ]
+}

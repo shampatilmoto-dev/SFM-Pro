@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Form metadata contract for future declarative form definitions.",
+  "purpose": "Describe future form structure without modifying existing form behavior.",
+  "sampleObject": {
+    "form": {
+      "id": "future-form",
+      "fieldSetIds": ["future-field-set"],
+      "submissionMode": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Future forms must retain accessible labels and validation feedback.",
+    "No current form controller is connected to this metadata."
+  ]
+}

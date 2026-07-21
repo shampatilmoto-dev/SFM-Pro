@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SFM PRO | Investments</title>
+
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/investments.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+<div class="top-bar">
+
+<h1>
+<i class="fa-solid fa-chart-line"></i>
+Investment Management
+</h1>
+
+<button onclick="location.href='../dashboard.html'">
+← Dashboard
+</button>
+
+</div>
+
+<!-- ===================================== -->
+<!-- Investment Form -->
+<!-- ===================================== -->
+
+<form class="form-card" id="investmentForm">
+
+<div class="grid">
+
+<div>
+
+<label>Investment Name</label>
+
+<input
+id="investmentName"
+aria-label="Investment name"
+type="text"
+placeholder="SIP / FD / Gold">
+
+</div>
+
+<div>
+
+<label>Investment Type</label>
+
+<select id="investmentType" aria-label="Investment type">
+
+<option>Mutual Fund</option>
+<option>SIP</option>
+<option>FD</option>
+<option>Stocks</option>
+<option>Gold</option>
+<option>PPF</option>
+<option>EPF</option>
+<option>NPS</option>
+<option>Crypto</option>
+<option>Others</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Bank / Broker</label>
+
+<input
+id="brokerName"
+aria-label="Bank or broker"
+type="text"
+placeholder="Groww / Zerodha / SBI">
+
+</div>
+
+<div>
+
+<label>Invested Amount</label>
+
+<input
+id="investedAmount"
+aria-label="Invested amount"
+type="number">
+
+</div>
+
+<div>
+
+<label>Current Value</label>
+
+<input
+id="currentValue"
+aria-label="Current investment value"
+type="number">
+
+</div>
+
+<div>
+
+<label>Start Date</label>
+
+<input
+id="investmentDate"
+aria-label="Investment start date"
+type="date">
+
+</div>
+
+</div>
+
+<button
+id="saveInvestmentBtn"
+class="save-btn"
+>
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Investment
+
+</button>
+
+</form>
+
+<!-- ===================================== -->
+<!-- Investment Summary -->
+<!-- ===================================== -->
+
+<div class="summary-card">
+
+<h2>Investment Summary</h2>
+
+<div class="summary-grid">
+
+<div class="box">
+
+<p>Total Investments</p>
+
+<h2 id="totalInvestments">0</h2>
+
+</div>
+
+<div class="box">
+
+<p>Total Invested</p>
+
+<h2 id="totalInvested">₹0</h2>
+
+</div>
+
+<div class="box">
+
+<p>Current Value</p>
+
+<h2 id="currentInvestmentValue">₹0</h2>
+
+</div>
+
+<div class="box">
+
+<p>Profit / Loss</p>
+
+<h2 id="investmentProfit">₹0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- Investment History -->
+<!-- ===================================== -->
+
+<div class="history-card">
+
+<h2>Investment History</h2>
+
+<div class='table-responsive'>
+<table>
+
+<thead>
+
+<tr>
+
+<th>Investment</th>
+<th>Type</th>
+<th>Invested</th>
+<th>Current</th>
+<th>Profit / Loss</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="investmentTable">
+
+<tr>
+
+<td colspan="6">
+
+No Investments Found
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<script src="../js/engine/storage.js"></script>
+<script src="../js/engine/finance.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/investments.js"></script>
+
+</body>
+
+</html>

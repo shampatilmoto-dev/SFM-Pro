@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFM PRO Enterprise | EMI Tracker</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/module.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body data-page="emi">
+    <div class="page-container">
+        <div class="page-header">
+            <h1><i class="fa-solid fa-calendar-check"></i> EMI Tracker</h1>
+            <button type="button" onclick="location.href='../dashboard.html'">&larr; Dashboard</button>
+        </div>
+
+        <section class="card">
+            <h2>Add EMI</h2>
+            <form id="emiForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="emiName">EMI Name</label>
+                        <input id="emiName" type="text" placeholder="Vehicle Loan">
+                    </div>
+                    <div class="form-group">
+                        <label for="emiAmount">Monthly EMI</label>
+                        <input id="emiAmount" type="number" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="emiTotalAmount">Total Amount</label>
+                        <input id="emiTotalAmount" type="number" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="emiPaidAmount">Amount Paid</label>
+                        <input id="emiPaidAmount" type="number" min="0" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="emiDueDate">Due Date</label>
+                        <input id="emiDueDate" type="date">
+                    </div>
+                </div>
+                <button id="saveEmiBtn" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save EMI</button>
+            </form>
+        </section>
+
+        <section class="summary-card">
+            <div class="summary-grid">
+                <div><span>Monthly EMI</span><strong id="monthlyEmiTotal">₹0.00</strong></div>
+                <div><span>Paid EMI</span><strong id="paidEmiTotal">₹0.00</strong></div>
+                <div><span>Pending EMI</span><strong id="pendingEmiTotal">₹0.00</strong></div>
+                <div><span>Total Outstanding</span><strong id="emiOutstandingTotal">₹0.00</strong></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>EMI Schedule</h2>
+            <input id="emiSearch" type="search" aria-label="Search EMI records" placeholder="Search EMI records..." autocomplete="off">
+            <div class='table-responsive'>
+            <table>
+                <thead>
+                    <tr>
+                        <th>EMI</th>
+                        <th>Monthly Amount</th>
+                        <th>Total Amount</th>
+                        <th>Paid</th>
+                        <th>Outstanding</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="emiTableBody">
+                    <tr><td colspan="8">No EMI records found.</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="../js/modules/emi/emi.storage.js"></script>
+    <script src="../js/modules/emi/emi.engine.js"></script>
+    <script src="../js/services/emi.service.js"></script>
+    <script src="../js/modules/emi/emi.controller.js"></script>
+</body>
+
+</html>

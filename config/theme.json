@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Declarative theme metadata contract.",
+  "purpose": "Describe future theme tokens without replacing current application styling.",
+  "sampleObject": {
+    "themeProfile": {
+      "id": "future-theme-profile",
+      "tokenGroups": ["color", "spacing", "typography"],
+      "status": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Future token values require design-system approval.",
+    "This file must not change active CSS until a reviewed metadata engine exists."
+  ]
+}

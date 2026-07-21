@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Validation metadata contract for future import and configuration checks.",
+  "purpose": "Define a future declarative validation-rule format without changing existing validation logic.",
+  "sampleObject": {
+    "validationRule": {
+      "id": "future-validation-rule",
+      "target": "future-metadata-field",
+      "ruleType": "required",
+      "enabled": false
+    }
+  },
+  "futureExtensionNotes": [
+    "Future validation rules require business and accessibility review.",
+    "No current controller or service consumes this file."
+  ]
+}

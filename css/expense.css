@@ -1,0 +1,250 @@
+/* ==========================================
+   SHAM FINANCE MANAGER
+   Expense Module V2
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+.page-container{
+    width:95%;
+    max-width:1000px;
+    margin:40px auto;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    font-size:32px;
+    color:#d32f2f;
+}
+
+.back-btn{
+    background:#1565c0;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#0d47a1;
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   FORM CARD
+=========================== */
+
+.form-card{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #dcdcdc;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+    outline:none;
+    background:#fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#1565c0;
+    box-shadow:0 0 8px rgba(21,101,192,.25);
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:110px;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+#saveExpenseBtn{
+    width:100%;
+    border:none;
+    background:#d32f2f;
+    color:#fff;
+    padding:15px;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#saveExpenseBtn:hover{
+    background:#b71c1c;
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   HISTORY
+=========================== */
+
+.history-card{
+    background:#fff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.history-card h2{
+    margin-bottom:20px;
+    color:#222;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1565c0;
+    color:#fff;
+}
+
+th{
+    padding:14px;
+    text-align:center;
+}
+
+td{
+    padding:14px;
+    text-align:center;
+    border-bottom:1px solid #ececec;
+}
+
+tbody tr:hover{
+    background:#f8f9fc;
+}
+
+/* Delete Button */
+
+.delete-btn{
+    background:#d32f2f;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.delete-btn:hover{
+    background:#b71c1c;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.page-header{
+    flex-direction:column;
+    gap:15px;
+    text-align:center;
+}
+
+.page-header h1{
+    font-size:28px;
+}
+
+.form-card{
+    padding:20px;
+}
+
+th,
+td{
+    padding:10px;
+    font-size:14px;
+}
+
+#saveExpenseBtn{
+
+    width:100%;
+
+    padding:16px;
+
+    font-size:18px;
+
+    font-weight:bold;
+    font-size:16px;
+}
+
+}
+
+@media(max-width:480px){
+
+.page-container{
+    width:96%;
+}
+
+.page-header h1{
+    font-size:24px;
+}
+
+.back-btn{
+    width:100%;
+    text-align:center;
+}.form-group input,
+.form-group select,
+.form-group textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    font-size:17px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+    .form-group label{
+    font-size:16px;
+    font-weight:600;
+}
+}
+
+}   

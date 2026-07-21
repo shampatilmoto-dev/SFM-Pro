@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Table metadata contract for future table presentation definitions.",
+  "purpose": "Describe future column metadata without changing current table rendering.",
+  "sampleObject": {
+    "table": {
+      "id": "future-table",
+      "columnIds": ["future-column"],
+      "responsiveMode": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Future table metadata must retain captions, header scope, and responsive behavior.",
+    "No existing table renderer consumes this file."
+  ]
+}

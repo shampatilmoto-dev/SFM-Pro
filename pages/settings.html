@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>SFM PRO Enterprise | Settings</title>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css'>
+    <link rel='stylesheet' href='../css/common.css'>
+    <link rel='stylesheet' href='../css/module.css'>
+    <link rel='stylesheet' href='../css/settings.css'>
+</head>
+<body data-page='settings'>
+    <a class='skip-link' href='#settingsContent'>Skip to settings</a>
+
+    <main class='settings-shell' id='settingsContent'>
+        <header class='settings-header'>
+            <div class='settings-brand'>
+                <span class='settings-brand-icon' aria-hidden='true'><i class='fa-solid fa-wallet'></i></span>
+                <div>
+                    <p class='eyebrow'>SFM PRO Enterprise</p>
+                    <h1>Settings</h1>
+                    <p>Manage your local workspace preferences.</p>
+                </div>
+            </div>
+            <a class='dashboard-link' href='../dashboard.html'>
+                <i class='fa-solid fa-arrow-left' aria-hidden='true'></i>
+                Dashboard
+            </a>
+        </header>
+
+        <section class='settings-intro' aria-labelledby='settingsIntroTitle'>
+            <div>
+                <p class='eyebrow'>Workspace controls</p>
+                <h2 id='settingsIntroTitle'>Personalize SFM PRO with confidence</h2>
+                <p>Preferences are saved securely in this browser. Financial records are never changed from this page.</p>
+            </div>
+            <i class='fa-solid fa-sliders' aria-hidden='true'></i>
+        </section>
+
+        <div id='settingsStatus' class='settings-status' role='status' aria-live='polite' aria-atomic='true'></div>
+
+        <form id='settingsForm' novalidate>
+            <div class='settings-grid'>
+                <section class='settings-card settings-card-wide' aria-labelledby='preferencesTitle'>
+                    <div class='settings-card-heading'>
+                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-sliders'></i></span>
+                        <div>
+                            <h2 id='preferencesTitle'>Application Preferences</h2>
+                            <p>Set the values used when SFM PRO presents financial information.</p>
+                        </div>
+                    </div>
+
+                    <div class='settings-fields'>
+                        <div class='settings-field'>
+                            <label for='settingsCurrency'>Currency</label>
+                            <select id='settingsCurrency' name='currency' required>
+                                <option value='INR'>Indian Rupee (INR)</option>
+                                <option value='USD'>US Dollar (USD)</option>
+                                <option value='EUR'>Euro (EUR)</option>
+                                <option value='GBP'>British Pound (GBP)</option>
+                            </select>
+                        </div>
+
+                        <div class='settings-field'>
+                            <label for='settingsDateFormat'>Date Format</label>
+                            <select id='settingsDateFormat' name='dateFormat' required>
+                                <option value='DD/MM/YYYY'>DD/MM/YYYY</option>
+                                <option value='MM/DD/YYYY'>MM/DD/YYYY</option>
+                                <option value='YYYY-MM-DD'>YYYY-MM-DD</option>
+                            </select>
+                        </div>
+
+                        <div class='settings-field'>
+                            <label for='settingsDecimalPlaces'>Decimal Places</label>
+                            <select id='settingsDecimalPlaces' name='decimalPlaces' required>
+                                <option value='0'>0</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class='settings-card' aria-labelledby='themeTitle'>
+                    <div class='settings-card-heading'>
+                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-circle-half-stroke'></i></span>
+                        <div>
+                            <h2 id='themeTitle'>Theme</h2>
+                            <p>Choose the interface appearance.</p>
+                        </div>
+                    </div>
+
+                    <fieldset class='theme-options'>
+                        <legend>Color preference</legend>
+                        <label class='theme-option' for='settingsThemeLight'>
+                            <input id='settingsThemeLight' type='radio' name='theme' value='light' required>
+                            <span><i class='fa-solid fa-sun' aria-hidden='true'></i> Light</span>
+                        </label>
+                        <label class='theme-option' for='settingsThemeDark'>
+                            <input id='settingsThemeDark' type='radio' name='theme' value='dark'>
+                            <span><i class='fa-solid fa-moon' aria-hidden='true'></i> Dark</span>
+                        </label>
+                    </fieldset>
+                </section>
+
+                <section class='settings-card' aria-labelledby='notificationsTitle'>
+                    <div class='settings-card-heading'>
+                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-bell'></i></span>
+                        <div>
+                            <h2 id='notificationsTitle'>Notifications</h2>
+                            <p>Local display preferences only.</p>
+                        </div>
+                    </div>
+
+                    <div class='toggle-list'>
+                        <label class='toggle-row' for='settingsNotificationsEnabled'>
+                            <span>
+                                <strong>Notification centre</strong>
+                                <small>Show financial alerts in the application UI.</small>
+                            </span>
+                            <input id='settingsNotificationsEnabled' type='checkbox' role='switch'>
+                        </label>
+                        <label class='toggle-row' for='settingsDueDateReminders'>
+                            <span>
+                                <strong>Due-date reminders</strong>
+                                <small>Show upcoming payment reminders in the application UI.</small>
+                            </span>
+                            <input id='settingsDueDateReminders' type='checkbox' role='switch'>
+                        </label>
+                    </div>
+                    <p class='settings-hint'><i class='fa-solid fa-circle-info' aria-hidden='true'></i> SFM PRO does not send email, push, or background notifications from this setting.</p>
+                </section>
+
+                <section class='settings-card settings-card-wide' aria-labelledby='dataTitle'>
+                    <div class='settings-card-heading'>
+                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-database'></i></span>
+                        <div>
+                            <h2 id='dataTitle'>Data Management</h2>
+                            <p>Financial records remain in this browser until you deliberately export, restore, or clear them using supported workflows.</p>
+                        </div>
+                    </div>
+
+                    <div class='data-actions'>
+                        <a id='backupRestoreShortcut' class='action-link action-link-primary' href='../dashboard.html#backupRestoreTitle'>
+                            <i class='fa-solid fa-box-archive' aria-hidden='true'></i>
+                            <span><strong>Backup &amp; Restore</strong><small>Export a protected backup or restore a validated JSON file.</small></span>
+                            <i class='fa-solid fa-arrow-right' aria-hidden='true'></i>
+                        </a>
+                        <details class='storage-guidance'>
+                            <summary><i class='fa-solid fa-shield-halved' aria-hidden='true'></i> Local data guidance</summary>
+                            <p>Use Backup &amp; Restore before clearing browser data or changing devices. This page intentionally does not delete financial records, preventing accidental loss of business data.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section class='settings-card settings-card-wide' aria-labelledby='aboutTitle'>
+                    <div class='settings-card-heading'>
+                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-circle-info'></i></span>
+                        <div>
+                            <h2 id='aboutTitle'>About SFM PRO</h2>
+                            <p>Enterprise personal finance management for clear, informed decisions.</p>
+                        </div>
+                    </div>
+
+                    <dl class='about-list'>
+                        <div><dt>Product</dt><dd>SFM PRO Enterprise</dd></div>
+                        <div><dt>Release</dt><dd>SFM PRO Enterprise v4.0</dd></div>
+                        <div><dt>Backup format</dt><dd>v3.3–v3.5 compatible</dd></div>
+                        <div><dt>Preference storage</dt><dd>This browser only</dd></div>
+                    </dl>
+                </section>
+            </div>
+
+            <div class='settings-actions' aria-label='Settings actions'>
+                <button id='saveSettingsBtn' type='submit' class='settings-button settings-button-primary'>
+                    <i class='fa-solid fa-floppy-disk' aria-hidden='true'></i> Save Preferences
+                </button>
+                <button id='resetSettingsBtn' type='button' class='settings-button settings-button-secondary'>
+                    <i class='fa-solid fa-rotate-left' aria-hidden='true'></i> Restore Defaults
+                </button>
+            </div>
+        </form>
+
+        <footer class='settings-footer'>
+            <span id='settingsSavedAt'>Preferences load automatically when this page opens.</span>
+            <a href='../dashboard.html'>Return to dashboard</a>
+        </footer>
+    </main>
+
+    <script src='../js/core/config.js'></script>
+    <script src='../js/modules/dashboard/settings.manager.js'></script>
+    <script src='../js/modules/dashboard/settings.controller.js'></script>
+</body>
+</html>

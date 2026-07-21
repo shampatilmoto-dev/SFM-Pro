@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Report metadata contract for future report definitions.",
+  "purpose": "Reserve report descriptors without altering current reports or calculations.",
+  "sampleObject": {
+    "report": {
+      "id": "future-report",
+      "titleKey": "future.report.title",
+      "availability": "not-configured"
+    }
+  },
+  "futureExtensionNotes": [
+    "Future report definitions require calculation and export review.",
+    "Do not store report results or financial records in this file."
+  ]
+}

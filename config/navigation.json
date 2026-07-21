@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Navigation metadata contract for future runtime consumption.",
+  "purpose": "Define a future declarative navigation structure without changing current routes.",
+  "sampleObject": {
+    "navigationItem": {
+      "id": "future-module-entry",
+      "labelKey": "future.label.key",
+      "placement": "future",
+      "enabled": false
+    }
+  },
+  "futureExtensionNotes": [
+    "Future entries require accessibility and route review.",
+    "Do not use this file to alter current navigation before integration approval."
+  ]
+}
