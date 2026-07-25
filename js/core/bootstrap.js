@@ -91,31 +91,44 @@ const Bootstrap = {
         Initialize Modules
     ==================================================*/
 
-    initializeModules() {
+   initializeModules() {
 
-        console.log("Initializing Modules...");
+    console.log("Initializing Modules...");
 
-        // Finance Engine
-        if (typeof initializeFinanceEngine === "function") {
-
-            initializeFinanceEngine();
-
-        }
-
-        // Enterprise Router
-        if (typeof Router !== "undefined") {
-
-            Router.initialize();
-
-        } else {
-
-            console.error("âŒ Router Not Available");
-
-        }
-
-        console.log("Modules Ready");
-
+    // Finance Engine
+    if (typeof initializeFinanceEngine === "function") {
+        initializeFinanceEngine();
     }
+
+    // Enterprise Router
+    if (typeof Router !== "undefined") {
+        Router.initialize();
+    } else {
+        console.error("❌ Router Not Available");
+    }
+
+    // Enterprise Managers
+    if (window.AppManager?.init) {
+        AppManager.init();
+        console.log("✔ Enterprise Managers Initialized");
+    } else {
+        console.warn("⚠ AppManager Not Available");
+    }
+
+    // Health Check
+    console.table({
+        AppManager: !!window.AppManager,
+        ThemeManager: !!window.ThemeManager,
+        LayoutManager: !!window.LayoutManager,
+        NavigationManager: !!window.NavigationManager,
+        NotificationManager: !!window.NotificationManager,
+        LoaderManager: !!window.LoaderManager,
+        ModalManager: !!window.ModalManager
+    });
+
+    console.log("Modules Ready");
+
+"}"    }
 
 };
 
@@ -128,4 +141,3 @@ document.addEventListener("DOMContentLoaded", () => {
     Bootstrap.start();
 
 });
-

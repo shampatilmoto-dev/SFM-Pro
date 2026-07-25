@@ -1,0 +1,152 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Core Design Tokens
+   File: css/core/variables.css
+   ========================================================= */
+
+:root {
+
+    /* =====================================
+       Brand Colors
+    ===================================== */
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #dbeafe;
+
+    --secondary: #7c3aed;
+    --secondary-light: #ede9fe;
+
+    /* =====================================
+       Status Colors
+    ===================================== */
+
+    --success: #16a34a;
+    --success-light: #dcfce7;
+
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+
+    --warning: #d97706;
+    --warning-light: #fef3c7;
+
+    --info: #0891b2;
+    --info-light: #cffafe;
+
+    /* =====================================
+       Backgrounds
+    ===================================== */
+
+    --background: #f5f7fb;
+    --surface: #ffffff;
+    --surface-hover: #f8fafc;
+
+    /* =====================================
+       Text Colors
+    ===================================== */
+
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --text-white: #ffffff;
+
+    /* =====================================
+       Borders
+    ===================================== */
+
+    --border-color: #e5e7eb;
+    --border-light: #f3f4f6;
+
+    /* =====================================
+       Font Family
+    ===================================== */
+
+    --font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    /* =====================================
+       Font Sizes
+    ===================================== */
+
+    --font-xs: 12px;
+    --font-sm: 14px;
+    --font-md: 16px;
+    --font-lg: 18px;
+    --font-xl: 22px;
+    --font-2xl: 28px;
+    --font-3xl: 36px;
+
+    /* =====================================
+       Font Weights
+    ===================================== */
+
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* =====================================
+       Spacing
+    ===================================== */
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* =====================================
+       Border Radius
+    ===================================== */
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-round: 999px;
+
+    /* =====================================
+       Shadows
+    ===================================== */
+
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+
+    --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+
+    --shadow-lg: 0 10px 25px rgba(0,0,0,.15);
+
+    /* =====================================
+       Transitions
+    ===================================== */
+
+    --transition-fast: .2s ease;
+    --transition-normal: .3s ease;
+    --transition-slow: .5s ease;
+
+    /* =====================================
+       Z Index
+    ===================================== */
+
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal: 1040;
+    --z-toast: 1050;
+
+    /* =====================================
+       Layout
+    ===================================== */
+
+    --sidebar-width: 260px;
+    --header-height: 70px;
+    --content-max-width: 1600px;
+
+}

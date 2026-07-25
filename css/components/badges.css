@@ -1,0 +1,81 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Badge Component
+   File: css/components/badges.css
+   ========================================================= */
+
+/* Base Badge */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 10px;
+
+    border-radius: var(--radius-round);
+
+    font-size: var(--font-xs);
+    font-weight: var(--weight-semibold);
+
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Primary */
+.badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+/* Success */
+.badge-success {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+/* Danger */
+.badge-danger {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+/* Warning */
+.badge-warning {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+/* Info */
+.badge-info {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+/* Secondary */
+.badge-secondary {
+    background: var(--secondary-light);
+    color: var(--secondary);
+}
+
+/* Outline */
+.badge-outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Sizes */
+.badge-sm {
+    padding: 2px 8px;
+    font-size: 11px;
+}
+
+.badge-lg {
+    padding: 6px 14px;
+    font-size: var(--font-sm);
+}
+
+/* Rounded Pill */
+.badge-pill {
+    border-radius: 999px;
+}

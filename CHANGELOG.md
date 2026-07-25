@@ -1,10 +1,10 @@
 ﻿# CHANGELOG
 
-## v5.0 Production Release
+## v5.0.0 Production Release
 
 - Final production stabilization pass for SFM PRO Enterprise.
 - Updated release metadata and documentation to the v5.0 production label.
-- Cleaned startup markup and reduced debug logging noise in production runtime.
+- Added professional repository documentation and GitHub templates.
 - Preserved business logic, calculations, routing, storage schema, and API surface.
 
 ## v4.0G Enterprise UI

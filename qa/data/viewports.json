@@ -1,0 +1,8 @@
+﻿[
+  { "name": "desktop", "width": 1440, "height": 960 },
+  { "name": "laptop", "width": 1280, "height": 820 },
+  { "name": "tablet", "width": 1024, "height": 768 },
+  { "name": "mobile", "width": 390, "height": 844 },
+  { "name": "wide-2k", "width": 1920, "height": 1080 },
+  { "name": "wide-4k", "width": 2560, "height": 1440 }
+]

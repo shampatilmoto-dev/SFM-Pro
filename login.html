@@ -1,46 +1,151 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#2563eb">
+    <title>SFM PRO Enterprise | Secure Login</title>
 
-    <title>Sham Finance Manager</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
-
 </head>
 
-<body>
+<body class="login-page">
 
-    <div class="login-container">
+    <input id="togglePassword" class="visually-hidden password-toggle-state" type="checkbox" aria-hidden="true">
 
-        <div class="login-box">
+    <div class="login-shell">
 
-            <h1>💰</h1>
+        <aside class="brand-panel" aria-label="SFM PRO Enterprise overview">
+            <div class="brand-panel__glow brand-panel__glow--one"></div>
+            <div class="brand-panel__glow brand-panel__glow--two"></div>
+            <div class="brand-panel__grid"></div>
 
-            <h2>Sham Finance Manager</h2>
+            <div class="brand-panel__content">
+                <div class="brand-mark" aria-label="SFM PRO Enterprise">
+                    <img src="assets/logo/logo-placeholder.svg" alt="SFM PRO Enterprise logo" class="brand-mark__logo">
+                    <div>
+                        <strong>SFM PRO Enterprise</strong>
+                        <span>v6.0 Enterprise UI</span>
+                    </div>
+                </div>
 
-            <p>Personal Finance Management System</p>
+                <div class="hero-copy">
+                    <p class="eyebrow">Premium Fintech Workspace</p>
+                    <h1>Smart Finance.<br>Better Future.</h1>
+                    <p>Take control of your money with intelligent insights and smart planning.</p>
+                </div>
 
-            <input
-                type="text"
-                placeholder="Username"
-                id="username"
-                aria-label="Username">
+                <ul class="feature-list" aria-label="Key features">
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Income Tracking</li>
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Expense Analytics</li>
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Budget Planner</li>
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Investment Manager</li>
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Advanced Reports</li>
+                </ul>
 
-            <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                aria-label="Password">
+                <section class="health-widget" aria-labelledby="healthWidgetTitle">
+                    <div class="health-widget__header">
+                        <span id="healthWidgetTitle">Financial Health</span>
+                        <strong>Excellent</strong>
+                    </div>
+                    <div class="health-widget__score">
+                        <div>
+                            <span>92 / 100</span>
+                            <small>Strong operating posture</small>
+                        </div>
+                        <div class="health-widget__badge" aria-hidden="true">92</div>
+                    </div>
+                    <img src="assets/images/login-hero.svg" alt="Abstract finance dashboard illustration" class="health-widget__chart">
+                </section>
+            </div>
+        </aside>
 
-            <button onclick="login()">
-                Login
-            </button>
+        <main class="auth-panel">
+            <article class="login-card" aria-labelledby="loginHeading">
+                <header class="login-card__header">
+                    <div class="profile-frame">
+                        <img src="assets/images/login-avatar.svg" alt="Profile avatar illustration" class="profile-frame__avatar">
+                        <span class="profile-frame__verified" aria-hidden="true">
+                            <span class="material-symbols-outlined">verified</span>
+                        </span>
+                    </div>
 
-        </div>
+                    <div class="login-intro">
+                        <p class="login-intro__eyebrow">Welcome Back</p>
+                        <h2 id="loginHeading">Welcome Back <span aria-hidden="true">👋</span></h2>
+                        <p>Sign in to continue to SFM PRO Enterprise</p>
+                    </div>
+                </header>
+
+                <form class="login-form" novalidate>
+                    <div class="field">
+                        <span class="field__icon material-symbols-outlined" aria-hidden="true">person</span>
+                        <input
+                            type="text"
+                            placeholder=" "
+                            id="username"
+                            aria-label="Username"
+                            autocomplete="username"
+                            spellcheck="false"
+                        >
+                        <label for="username">Username</label>
+                    </div>
+
+                    <div class="field">
+                        <span class="field__icon material-symbols-outlined" aria-hidden="true">lock</span>
+                        <input
+                            type="text"
+                            placeholder=" "
+                            id="password"
+                            aria-label="Password"
+                            autocomplete="current-password"
+                            class="password-input"
+                        >
+                        <label for="password">Password</label>
+                        <label class="password-toggle" for="togglePassword" aria-label="Toggle password visibility">
+                            <span class="password-toggle__icon password-toggle__icon--hide material-symbols-outlined" aria-hidden="true">visibility_off</span>
+                            <span class="password-toggle__icon password-toggle__icon--show material-symbols-outlined" aria-hidden="true">visibility</span>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="remember-me">
+                            <input type="checkbox" checked>
+                            <span>Remember me</span>
+                        </label>
+
+                        <button type="button" class="text-link">Forgot Password?</button>
+                    </div>
+
+                    <button type="button" class="login-button" onclick="login()">
+                        <span class="login-button__label">SIGN IN</span>
+                        <span class="login-button__spinner" aria-hidden="true"></span>
+                    </button>
+                </form>
+
+                <div class="secondary-login" aria-label="Alternative sign-in options">
+                    <button type="button" class="secondary-login__button">
+                        <span class="material-symbols-outlined" aria-hidden="true">account_circle</span>
+                        Google
+                    </button>
+                    <button type="button" class="secondary-login__button">
+                        <span class="material-symbols-outlined" aria-hidden="true">domain</span>
+                        Microsoft
+                    </button>
+                </div>
+
+                <footer class="login-card__footer">
+                    <span>Secure Login</span>
+                    <span>Version 6.0</span>
+                    <span>&copy; 2026 SFM PRO Enterprise</span>
+                </footer>
+            </article>
+        </main>
 
     </div>
 
@@ -49,3 +154,4 @@
 </body>
 
 </html>
+

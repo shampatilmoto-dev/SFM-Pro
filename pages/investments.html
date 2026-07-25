@@ -1,237 +1,338 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SFM PRO | Investments</title>
-
+<title>SFM PRO Enterprise | Investments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/dashboard.css">
 <link rel="stylesheet" href="../css/investments.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
-
-<body>
-
-<div class="page-container">
-
-<div class="top-bar">
-
-<h1>
-<i class="fa-solid fa-chart-line"></i>
-Investment Management
-</h1>
-
-<button onclick="location.href='../dashboard.html'">
-← Dashboard
-</button>
-
-</div>
-
-<!-- ===================================== -->
-<!-- Investment Form -->
-<!-- ===================================== -->
-
-<form class="form-card" id="investmentForm">
-
-<div class="grid">
-
-<div>
-
-<label>Investment Name</label>
-
-<input
-id="investmentName"
-aria-label="Investment name"
-type="text"
-placeholder="SIP / FD / Gold">
-
-</div>
-
-<div>
-
-<label>Investment Type</label>
-
-<select id="investmentType" aria-label="Investment type">
-
-<option>Mutual Fund</option>
-<option>SIP</option>
-<option>FD</option>
-<option>Stocks</option>
-<option>Gold</option>
-<option>PPF</option>
-<option>EPF</option>
-<option>NPS</option>
-<option>Crypto</option>
-<option>Others</option>
-
-</select>
-
-</div>
-
-<div>
-
-<label>Bank / Broker</label>
-
-<input
-id="brokerName"
-aria-label="Bank or broker"
-type="text"
-placeholder="Groww / Zerodha / SBI">
-
-</div>
-
-<div>
-
-<label>Invested Amount</label>
-
-<input
-id="investedAmount"
-aria-label="Invested amount"
-type="number">
-
-</div>
-
-<div>
-
-<label>Current Value</label>
-
-<input
-id="currentValue"
-aria-label="Current investment value"
-type="number">
-
-</div>
-
-<div>
-
-<label>Start Date</label>
-
-<input
-id="investmentDate"
-aria-label="Investment start date"
-type="date">
-
-</div>
-
-</div>
-
-<button
-id="saveInvestmentBtn"
-class="save-btn"
->
-
-<i class="fa-solid fa-floppy-disk"></i>
-
-Save Investment
-
-</button>
-
-</form>
-
-<!-- ===================================== -->
-<!-- Investment Summary -->
-<!-- ===================================== -->
-
-<div class="summary-card">
-
-<h2>Investment Summary</h2>
-
-<div class="summary-grid">
-
-<div class="box">
-
-<p>Total Investments</p>
-
-<h2 id="totalInvestments">0</h2>
-
-</div>
-
-<div class="box">
-
-<p>Total Invested</p>
-
-<h2 id="totalInvested">₹0</h2>
-
-</div>
-
-<div class="box">
-
-<p>Current Value</p>
-
-<h2 id="currentInvestmentValue">₹0</h2>
-
-</div>
-
-<div class="box">
-
-<p>Profit / Loss</p>
-
-<h2 id="investmentProfit">₹0</h2>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ===================================== -->
-<!-- Investment History -->
-<!-- ===================================== -->
-
-<div class="history-card">
-
-<h2>Investment History</h2>
-
-<div class='table-responsive'>
-<table>
-
-<thead>
-
-<tr>
-
-<th>Investment</th>
-<th>Type</th>
-<th>Invested</th>
-<th>Current</th>
-<th>Profit / Loss</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="investmentTable">
-
-<tr>
-
-<td colspan="6">
-
-No Investments Found
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-</div>
-
-</div>
-
+<body data-page="investments">
+<a class="skip-link-dashboard" href="#investmentsMainContent">Skip to investments content</a>
+<div class="app investments-app">
+  <aside class="sidebar enterprise-sidebar" aria-label="Primary navigation">
+    <div class="logo sidebar-brand">
+      <div class="logo-icon brand-mark"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+      <div class="logo-text"><h2>SFM PRO Enterprise</h2><span>v6.0 Manager Layer</span></div>
+    </div>
+    <nav class="sidebar-menu sidebar-nav">
+      <a href="../dashboard.html"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Dashboard</span></a>
+      <a href="income.html"><i class="fa-solid fa-money-bill-trend-up" aria-hidden="true"></i><span>Income</span></a>
+      <a href="expense.html"><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i><span>Expenses</span></a>
+      <a href="budget.html"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Budget</span></a>
+      <a href="loans.html"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span>Loans</span></a>
+      <a href="creditcards.html"><i class="fa-regular fa-credit-card" aria-hidden="true"></i><span>Credit Cards</span></a>
+      <a href="investments.html" class="active" aria-current="page"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Investments</span></a>
+      <a href="emi.html"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i><span>EMI Tracker</span></a>
+      <a href="reports.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i><span>Reports</span></a>
+      <a href="settings.html"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer sidebar-profile-card">
+      <div class="user-card sidebar-profile-meta">
+        <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+        <div><h4>Sham Patil</h4><small>Administrator</small></div>
+      </div>
+      <a class="sidebar-logout" href="../login.html"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <main class="main-content investments-shell" id="investmentsMainContent">
+    <header class="top-header enterprise-header investments-header" aria-label="Investments header">
+      <div class="header-left header-copy">
+        <button class="menu-btn icon-button" type="button" aria-label="Toggle navigation"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+        <div>
+          <nav class="module-breadcrumb header-breadcrumb" aria-label="Breadcrumb">
+            <span>Portfolio</span><i class="fa-solid fa-angle-right" aria-hidden="true"></i><span>Investments</span>
+          </nav>
+          <h1>Investments</h1>
+          <p>Monitor portfolio value, allocation, and performance in a premium enterprise workspace.</p>
+        </div>
+      </div>
+      <div class="header-center header-actions">
+        <div class="search-box header-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" aria-label="Search investments" placeholder="Search investments, brokers, or asset types..." autocomplete="off">
+        </div>
+      </div>
+      <div class="header-right header-actions">
+        <button class="header-btn icon-button" type="button" aria-label="Notifications"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+        <button class="header-btn icon-button" type="button" aria-label="Toggle theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+        <button class="profile-chip" type="button" aria-label="Open profile">
+          <span class="profile-chip-avatar">SP</span>
+          <span><strong>Sham Patil</strong><small>Administrator</small></span>
+        </button>
+        <button class="header-btn header-back" type="button" aria-label="Back to dashboard" onclick="location.href='../dashboard.html'"><i class="fa-solid fa-house" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="page-container investments-page">
+      <section class="module-hero card-shell investments-hero" aria-labelledby="investmentsHeroTitle">
+        <div>
+          <div class="module-breadcrumb" aria-label="Breadcrumb">
+            <span>Portfolio</span><i class="fa-solid fa-angle-right" aria-hidden="true"></i><span>Investments</span>
+          </div>
+          <h2 id="investmentsHeroTitle"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Investment Management</h2>
+          <p>Track invested capital, portfolio value, and profit trends with a polished enterprise interface.</p>
+        </div>
+        <div class="module-hero-actions hero-metrics" aria-label="Portfolio overview">
+          <div><span>Portfolio value</span><strong>₹0</strong></div>
+          <div><span>Profit / Loss</span><strong>₹0</strong></div>
+          <div><span>Active records</span><strong>0</strong></div>
+        </div>
+      </section>
+
+      <section class="creditcards-quick-actions quick-actions-shell enterprise-card" aria-labelledby="investmentQuickActionsTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Quick actions</p>
+            <h3 id="investmentQuickActionsTitle">Portfolio shortcuts</h3>
+            <p>Fast access to common investment workflows.</p>
+          </div>
+        </div>
+        <div class="actions-grid quick-actions-grid">
+          <button type="button" class="quick-action-card"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>Add Investment</span></button>
+          <button type="button" class="quick-action-card"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Record Transaction</span></button>
+          <button type="button" class="quick-action-card"><i class="fa-solid fa-chart-column" aria-hidden="true"></i><span>Portfolio Analysis</span></button>
+          <button type="button" class="quick-action-card"><i class="fa-solid fa-file-export" aria-hidden="true"></i><span>Export</span></button>
+          <button type="button" class="quick-action-card"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i><span>Reports</span></button>
+        </div>
+      </section>
+
+      <section class="kpi-grid-premium" aria-label="Investment KPIs">
+        <article class="kpi-premium-card accent-primary">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div><span class="kpi-trend up">+11.4%</span></div>
+          <span>Portfolio Value</span><strong id="currentInvestmentValue">₹0</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 24 C16 20, 22 12, 34 14 S58 28, 74 18 S100 8, 120 10"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-success">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-coins" aria-hidden="true"></i></div><span class="kpi-trend up">+7.8%</span></div>
+          <span>Total Investment</span><strong id="totalInvested">₹0</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 28 C18 22, 30 20, 42 16 S70 4, 86 12 S104 22, 120 8"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-danger">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i></div><span class="kpi-trend down">Volatile</span></div>
+          <span>Total Profit / Loss</span><strong id="investmentProfit">₹0</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 14 C16 18, 26 26, 38 22 S62 8, 74 10 S100 20, 120 16"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-warning">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-percent" aria-hidden="true"></i></div><span class="kpi-trend up">Healthy</span></div>
+          <span>ROI %</span><strong>0%</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 26 C16 24, 30 18, 44 20 S66 12, 82 14 S104 8, 120 6"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-purple">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div><span class="kpi-trend up">Active</span></div>
+          <span>Active Investments</span><strong id="totalInvestments">0</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 30 C18 26, 28 16, 42 18 S74 30, 90 20 S106 10, 120 12"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-success">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div><span class="kpi-trend up">Balanced</span></div>
+          <span>Asset Allocation</span><strong>6 Sectors</strong>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 22 C14 18, 28 10, 40 14 S64 28, 80 20 S104 6, 120 10"></path></svg>
+        </article>
+      </section>
+
+      <section class="analytics-grid credit-chart-grid" aria-label="Analytics overview">
+        <section class="card-shell side-panel enterprise-card analytics-card" aria-labelledby="growthTrendTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Analytics</p>
+              <h3 id="growthTrendTitle">Portfolio Growth Trend</h3>
+              <p>Monthly performance trajectory for the portfolio.</p>
+            </div>
+          </div>
+          <div class="chart-panel chart-line-panel" aria-hidden="true">
+            <svg viewBox="0 0 920 320" class="chart-svg">
+              <g class="chart-grid">
+                <line x1="60" y1="40" x2="860" y2="40"></line>
+                <line x1="60" y1="100" x2="860" y2="100"></line>
+                <line x1="60" y1="160" x2="860" y2="160"></line>
+                <line x1="60" y1="220" x2="860" y2="220"></line>
+                <line x1="60" y1="280" x2="860" y2="280"></line>
+              </g>
+              <path d="M60 234 C128 210, 170 188, 238 176 S352 152, 408 164 S528 198, 592 164 S710 98, 770 116 S840 158, 860 84" fill="none" stroke="#dbeafe" stroke-width="18" stroke-linecap="round"></path>
+              <path d="M60 234 C128 210, 170 188, 238 176 S352 152, 408 164 S528 198, 592 164 S710 98, 770 116 S840 158, 860 84" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"></path>
+              <g fill="#fff" stroke="#2563eb" stroke-width="4">
+                <circle cx="60" cy="234" r="7"></circle>
+                <circle cx="238" cy="176" r="7"></circle>
+                <circle cx="408" cy="164" r="7"></circle>
+                <circle cx="592" cy="164" r="7"></circle>
+                <circle cx="770" cy="116" r="7"></circle>
+                <circle cx="860" cy="84" r="7"></circle>
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <section class="card-shell side-panel enterprise-card analytics-card" aria-labelledby="allocationTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Analytics</p>
+              <h3 id="allocationTitle">Asset Allocation</h3>
+              <p>Balanced view across portfolio categories.</p>
+            </div>
+          </div>
+          <div class="donut-chart-shell" aria-hidden="true">
+            <div class="donut-chart credit-donut investments-donut"></div>
+            <div class="donut-center"><strong>6</strong><span>Groups</span></div>
+          </div>
+          <ul class="chart-legend">
+            <li><span class="legend-dot salary"></span>Mutual Fund</li>
+            <li><span class="legend-dot business"></span>Stocks</li>
+            <li><span class="legend-dot freelance"></span>Gold</li>
+            <li><span class="legend-dot rental"></span>FD</li>
+            <li><span class="legend-dot investment"></span>PPF / EPF</li>
+            <li><span class="legend-dot other"></span>Others</li>
+          </ul>
+        </section>
+
+        <section class="card-shell side-panel enterprise-card analytics-card" aria-labelledby="performanceTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Analytics</p>
+              <h3 id="performanceTitle">Investment Performance</h3>
+              <p>Current value versus invested capital at a glance.</p>
+            </div>
+          </div>
+          <div class="comparison-bars credit-bars investments-bars" aria-hidden="true">
+            <div><span style="--budget-height:76%"></span><small>MF</small></div>
+            <div><span style="--budget-height:66%"></span><small>SIP</small></div>
+            <div><span style="--budget-height:84%"></span><small>FD</small></div>
+            <div><span style="--budget-height:70%"></span><small>Stocks</small></div>
+            <div><span style="--budget-height:88%"></span><small>Gold</small></div>
+            <div><span style="--budget-height:74%"></span><small>Other</small></div>
+          </div>
+          <div class="comparison-note"><span><i class="fa-solid fa-square" aria-hidden="true"></i>Invested</span><span><i class="fa-solid fa-square" aria-hidden="true"></i>Current</span></div>
+        </section>
+      </section>
+
+      <section class="bottom-grid" aria-label="Portfolio workspace">
+        <section class="card-shell form-shell" aria-labelledby="investmentFormTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Portfolio entry</p>
+              <h3 id="investmentFormTitle">Add or Update Investment</h3>
+              <p>Maintain portfolio records using a polished floating-label form.</p>
+            </div>
+          </div>
+          <form class="investment-form" id="investmentForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="investmentName">Investment Name</label>
+                <input id="investmentName" aria-label="Investment name" type="text" placeholder="SIP / FD / Gold">
+              </div>
+              <div class="form-group">
+                <label for="investmentType">Investment Type</label>
+                <select id="investmentType" aria-label="Investment type">
+                  <option>Mutual Fund</option>
+                  <option>SIP</option>
+                  <option>FD</option>
+                  <option>Stocks</option>
+                  <option>Gold</option>
+                  <option>PPF</option>
+                  <option>EPF</option>
+                  <option>NPS</option>
+                  <option>Crypto</option>
+                  <option>Others</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="brokerName">Bank / Broker</label>
+                <input id="brokerName" aria-label="Bank or broker" type="text" placeholder="Groww / Zerodha / SBI">
+              </div>
+              <div class="form-group">
+                <label for="investedAmount">Invested Amount</label>
+                <input id="investedAmount" aria-label="Invested amount" type="number">
+              </div>
+              <div class="form-group">
+                <label for="currentValue">Current Value</label>
+                <input id="currentValue" aria-label="Current investment value" type="number">
+              </div>
+              <div class="form-group">
+                <label for="investmentDate">Start Date</label>
+                <input id="investmentDate" aria-label="Investment start date" type="date">
+              </div>
+              <div class="form-group form-group-full">
+                <label for="investmentNotes">Notes</label>
+                <textarea id="investmentNotes" rows="4" placeholder="Optional notes"></textarea>
+              </div>
+            </div>
+            <div class="credit-form-actions form-actions">
+              <button id="saveInvestmentBtn" class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Investment</button>
+              <button class="btn btn-secondary" type="reset">Cancel</button>
+              <button class="btn btn-ghost" type="button">Reset</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card-shell table-shell" aria-labelledby="investmentTableTitle">
+          <div class="section-head-split">
+            <div>
+              <p class="section-kicker">Portfolio list</p>
+              <h3 id="investmentTableTitle">Investment History</h3>
+              <p class="section-subcopy">Search, filter, sort, and review the current portfolio table.</p>
+            </div>
+            <div class="history-toolbar" role="group" aria-label="Investment table controls">
+              <input type="search" aria-label="Search investments" placeholder="Search investments..." autocomplete="off">
+              <select aria-label="Filter investments">
+                <option value="all">All Investments</option>
+                <option value="mutual-fund">Mutual Fund</option>
+                <option value="sip">SIP</option>
+                <option value="fd">FD</option>
+                <option value="stocks">Stocks</option>
+                <option value="gold">Gold</option>
+              </select>
+              <select aria-label="Sort investments">
+                <option value="currentValue_desc">Current Value: High to Low</option>
+                <option value="currentValue_asc">Current Value: Low to High</option>
+                <option value="investedAmount_desc">Invested: High to Low</option>
+                <option value="investedAmount_asc">Invested: Low to High</option>
+                <option value="profit_desc">Profit: High to Low</option>
+                <option value="profit_asc">Profit: Low to High</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive" role="region" aria-label="Investment table">
+            <table class="transaction-table">
+              <thead>
+                <tr>
+                  <th>Investment</th>
+                  <th>Asset Type</th>
+                  <th>Purchase Date</th>
+                  <th>Invested Amount</th>
+                  <th>Current Value</th>
+                  <th>Profit / Loss</th>
+                </tr>
+              </thead>
+              <tbody id="investmentTable">
+                <tr><td colspan="6">No Investments Found</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" aria-label="Investment pagination">
+            <button class="pager-btn" type="button" aria-label="Previous page">Prev</button>
+            <span class="pagination-info">Page 1 of 1 | 0 records</span>
+            <button class="pager-btn" type="button" aria-label="Next page">Next</button>
+          </div>
+        </section>
+      </section>
+
+      <footer class="creditcards-footer investments-footer">
+        <span>SFM PRO Enterprise v6.0 · Investments Module</span>
+        <span>Premium enterprise UI refreshed for locked module consistency</span>
+      </footer>
+    </div>
+  </main>
 </div>
 
 <script src="../js/engine/storage.js"></script>
 <script src="../js/engine/finance.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/investments.js"></script>
-
 </body>
-
 </html>
+

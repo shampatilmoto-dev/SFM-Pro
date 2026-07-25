@@ -1,239 +1,311 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SFM PRO | Loans</title>
-
-<link rel="stylesheet" href="../css/common.css">
-<link rel="stylesheet" href="../css/module.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFM PRO Enterprise | Loans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/loans.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
-
 <body data-page="loans">
+<div class="loans-app">
+    <aside class="enterprise-sidebar loans-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-brand">
+            <div class="brand-mark">S</div>
+            <div><strong>SFM PRO</strong><span>Enterprise v6.0</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../dashboard.html"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+            <a href="income.html"><i class="fa-solid fa-money-bill-trend-up"></i><span>Income</span></a>
+            <a href="expense.html"><i class="fa-solid fa-receipt"></i><span>Expense</span></a>
+            <a href="budget.html"><i class="fa-solid fa-wallet"></i><span>Budget</span></a>
+            <a class="active" href="loans.html" aria-current="page"><i class="fa-solid fa-building-columns"></i><span>Loans</span></a>
+            <a href="creditcards.html"><i class="fa-solid fa-credit-card"></i><span>Credit Cards</span></a>
+            <a href="investments.html"><i class="fa-solid fa-chart-line"></i><span>Investments</span></a>
+            <a href="reports.html"><i class="fa-solid fa-file-lines"></i><span>Reports</span></a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        </nav>
+        <div class="sidebar-profile-card">
+            <div class="sidebar-profile-meta">
+                <div class="avatar-shell">JK</div>
+                <div><strong>Jayanth K</strong><span>Loan Portfolio Lead</span></div>
+            </div>
+            <a class="sidebar-logout" href="../login.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+    </aside>
 
-<div class="page-container">
+    <div class="loans-main">
+        <header class="enterprise-header loans-header">
+            <div class="header-copy">
+                <nav class="header-breadcrumb" aria-label="Breadcrumb">
+                    <span>Finance</span>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    <span>Loans</span>
+                </nav>
+                <h1>Loans</h1>
+                <p>Track liabilities, EMI obligations, and repayment health in one premium enterprise workspace.</p>
+            </div>
+            <div class="header-actions">
+                <label class="header-search" aria-label="Search loans page">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input type="search" placeholder="Search loans, banks, or balances" autocomplete="off">
+                </label>
+                <button type="button" class="icon-button" aria-label="Notifications"><i class="fa-regular fa-bell"></i></button>
+                <button type="button" class="icon-button" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+                <button type="button" class="profile-chip" aria-label="Open profile">
+                    <span class="profile-chip-avatar">JK</span>
+                    <span><strong>Jayanth</strong><small>Finance Owner</small></span>
+                </button>
+                <button class="header-back" onclick="location.href='../dashboard.html'">← Dashboard</button>
+            </div>
+        </header>
 
-<div class="page-header">
+        <main class="loans-content">
+            <section class="loans-hero enterprise-card">
+                <div>
+                    <p class="section-kicker">Loans overview</p>
+                    <h2>Enterprise Loan Control Center</h2>
+                    <p>Monitor portfolio health, upcoming dues, and repayment trends from one polished command surface.</p>
+                </div>
+                <div class="hero-metrics">
+                    <div><span>Live loans</span><strong>18</strong></div>
+                    <div><span>On-time EMI</span><strong>94%</strong></div>
+                    <div><span>Review flags</span><strong>2</strong></div>
+                </div>
+            </section>
 
-<h1>
+            <section class="loans-kpis" aria-label="Loan KPI overview">
+                <article class="kpi-card kpi-primary">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-building-columns"></i></span><span class="kpi-trend up">+4.8%</span></div>
+                    <p>Total Loans</p>
+                    <strong id="loanCount">0</strong>
+                    <small>Active facilities in the portfolio</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 24 C14 20, 26 22, 36 16 S56 8, 68 14 S86 26, 100 12 S110 8, 118 10"></path></svg>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-coins"></i></span><span class="kpi-trend down">-1.9%</span></div>
+                    <p>Outstanding Balance</p>
+                    <strong id="loanOutstanding">₹0</strong>
+                    <small>Principal still pending closure</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 12 C14 16, 24 28, 38 22 S58 10, 72 20 S88 28, 102 16 S112 12, 118 14"></path></svg>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-calendar-check"></i></span><span class="kpi-trend up">Stable</span></div>
+                    <p>Monthly EMI</p>
+                    <strong id="loanEMI">₹0</strong>
+                    <small>Total recurring monthly commitment</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 20 C16 18, 28 14, 42 18 S62 26, 74 14 S92 10, 106 18 S112 20, 118 12"></path></svg>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span><span class="kpi-trend up">+12%</span></div>
+                    <p>Interest Paid</p>
+                    <strong>₹1.42L</strong>
+                    <small>Lifetime interest outflow</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 26 C16 22, 28 28, 40 18 S58 8, 72 16 S90 22, 104 10 S112 12, 118 8"></path></svg>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-layer-group"></i></span><span class="kpi-trend up">+3</span></div>
+                    <p>Active Loans</p>
+                    <strong>12</strong>
+                    <small>Facilities currently monitored</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 18 C16 16, 30 20, 42 12 S62 8, 74 14 S92 24, 106 16 S112 14, 118 10"></path></svg>
+                </article>
+                <article class="kpi-card">
+                    <div class="kpi-topline"><span class="kpi-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="kpi-trend down">Due soon</span></div>
+                    <p>Upcoming Due</p>
+                    <strong>5</strong>
+                    <small>Repayments requiring attention</small>
+                    <svg viewBox="0 0 120 36" class="kpi-sparkline" aria-hidden="true"><path d="M2 28 C14 24, 24 18, 38 22 S56 30, 70 16 S88 8, 102 12 S112 20, 118 8"></path></svg>
+                </article>
+            </section>
 
-<i class="fa-solid fa-building-columns"></i>
+            <section class="loans-analytics" aria-label="Loan analytics">
+                <article class="enterprise-card chart-card chart-card-wide">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">Analytics</p><h3>Loan Balance Trend</h3></div>
+                        <span class="section-chip">Line chart</span>
+                    </div>
+                    <div class="chart-panel chart-line-panel" aria-hidden="true">
+                        <svg viewBox="0 0 920 320" class="chart-svg">
+                            <g class="chart-grid">
+                                <line x1="60" y1="40" x2="860" y2="40"></line>
+                                <line x1="60" y1="100" x2="860" y2="100"></line>
+                                <line x1="60" y1="160" x2="860" y2="160"></line>
+                                <line x1="60" y1="220" x2="860" y2="220"></line>
+                                <line x1="60" y1="280" x2="860" y2="280"></line>
+                            </g>
+                            <path d="M60 232 C130 224, 180 196, 240 182 S350 150, 410 160 S520 212, 590 170 S700 96, 770 118 S840 154, 860 82" fill="none" stroke="#dbeafe" stroke-width="18" stroke-linecap="round"></path>
+                            <path d="M60 232 C130 224, 180 196, 240 182 S350 150, 410 160 S520 212, 590 170 S700 96, 770 118 S840 154, 860 82" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"></path>
+                            <g fill="#fff" stroke="#2563eb" stroke-width="4">
+                                <circle cx="60" cy="232" r="7"></circle><circle cx="240" cy="182" r="7"></circle><circle cx="410" cy="160" r="7"></circle><circle cx="590" cy="170" r="7"></circle><circle cx="770" cy="118" r="7"></circle><circle cx="860" cy="82" r="7"></circle>
+                            </g>
+                        </svg>
+                    </div>
+                </article>
+                <article class="enterprise-card chart-card">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">Analytics</p><h3>Loan Type Distribution</h3></div>
+                        <span class="section-chip">Doughnut</span>
+                    </div>
+                    <div class="donut-chart-shell" aria-hidden="true">
+                        <div class="donut-chart loan-donut"></div>
+                        <div class="donut-center"><strong>6</strong><span>Types</span></div>
+                    </div>
+                    <ul class="chart-legend">
+                        <li><span class="legend-dot salary"></span>Home</li>
+                        <li><span class="legend-dot business"></span>Auto</li>
+                        <li><span class="legend-dot freelance"></span>Personal</li>
+                        <li><span class="legend-dot rental"></span>Education</li>
+                        <li><span class="legend-dot investment"></span>Business</li>
+                        <li><span class="legend-dot other"></span>Other</li>
+                    </ul>
+                </article>
+                <article class="enterprise-card chart-card">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">Analytics</p><h3>Monthly EMI Schedule</h3></div>
+                        <span class="section-chip">Bars</span>
+                    </div>
+                    <div class="comparison-bars loan-bars" aria-hidden="true">
+                        <div><span style="--budget-height:68%"></span><small>Jan</small></div>
+                        <div><span style="--budget-height:74%"></span><small>Feb</small></div>
+                        <div><span style="--budget-height:62%"></span><small>Mar</small></div>
+                        <div><span style="--budget-height:78%"></span><small>Apr</small></div>
+                        <div><span style="--budget-height:84%"></span><small>May</small></div>
+                        <div><span style="--budget-height:72%"></span><small>Jun</small></div>
+                    </div>
+                    <div class="comparison-note"><span><i class="fa-solid fa-square"></i>EMI</span><span><i class="fa-solid fa-square"></i>Balance</span></div>
+                </article>
+            </section>
 
-Loans Management
+            <section class="loans-quick-actions" aria-label="Quick loan actions">
+                <button type="button" class="quick-action-card" onclick="document.getElementById('loanForm').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-plus"></i><span>Add Loan</span></button>
+                <button type="button" class="quick-action-card"><i class="fa-solid fa-money-check-dollar"></i><span>Record EMI</span></button>
+                <button type="button" class="quick-action-card"><i class="fa-solid fa-file-export"></i><span>Export</span></button>
+                <button type="button" class="quick-action-card"><i class="fa-solid fa-chart-column"></i><span>Reports</span></button>
+                <button type="button" class="quick-action-card"><i class="fa-solid fa-calculator"></i><span>Loan Calculator</span></button>
+            </section>
 
-</h1>
+            <section class="enterprise-card loan-form-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Loan form</p>
+                        <h3>Create Loan</h3>
+                        <p class="section-subcopy">Floating labels, rounded controls, and modern validation styling for portfolio entry.</p>
+                    </div>
+                    <span class="section-chip">Premium form</span>
+                </div>
+                <form id="loanForm" aria-label="Loan form" novalidate class="loan-form">
+                    <div class="form-grid loan-form-grid">
+                        <div class="field-group">
+                            <input type="text" id="loanName" aria-label="Loan name" placeholder=" " required>
+                            <label for="loanName">Loan Name</label>
+                            <span class="field-icon"><i class="fa-solid fa-building-columns"></i></span>
+                        </div>
+                        <div class="field-group">
+                            <input type="text" id="bankName" aria-label="Bank name" placeholder=" " required>
+                            <label for="bankName">Bank Name</label>
+                            <span class="field-icon"><i class="fa-solid fa-landmark"></i></span>
+                        </div>
+                        <div class="field-group">
+                            <input type="number" id="loanAmount" aria-label="Loan amount" placeholder=" " required>
+                            <label for="loanAmount">Loan Amount</label>
+                            <span class="field-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                        </div>
+                        <div class="field-group">
+                            <input type="number" step="0.01" id="loanInterest" aria-label="Loan interest rate" placeholder=" " required>
+                            <label for="loanInterest">Interest Rate (%)</label>
+                            <span class="field-icon"><i class="fa-solid fa-percent"></i></span>
+                        </div>
+                        <div class="field-group">
+                            <input type="number" id="loanTenure" aria-label="Loan tenure in months" placeholder=" " required>
+                            <label for="loanTenure">Tenure (Months)</label>
+                            <span class="field-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                        </div>
+                        <div class="field-group">
+                            <input type="date" id="loanDate" aria-label="Loan start date" placeholder=" " required>
+                            <label for="loanDate">Start Date</label>
+                            <span class="field-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-actions loan-form-actions">
+                        <button type="button" id="saveLoanBtn" class="btn btn-primary btn-gradient"><i class="fa-solid fa-floppy-disk"></i> Save Loan</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="button" class="btn btn-ghost">Cancel</button>
+                    </div>
+                </form>
+            </section>
 
-<button onclick="location.href='../dashboard.html'">
+            <section class="enterprise-card loan-table-card">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Loan table</p>
+                        <h3>Loan History</h3>
+                        <p class="section-subcopy">Search, filter, and sort your portfolio with a premium enterprise ledger.</p>
+                    </div>
+                    <span class="section-chip">Sticky header</span>
+                </div>
+                <div class="history-toolbar loan-toolbar">
+                    <input type="search" aria-label="Search loans" placeholder="Search loans..." autocomplete="off">
+                    <select aria-label="Filter loans">
+                        <option value="">All Loans</option>
+                        <option>Home</option>
+                        <option>Auto</option>
+                        <option>Personal</option>
+                        <option>Education</option>
+                        <option>Business</option>
+                    </select>
+                    <select aria-label="Sort loans">
+                        <option value="outstanding_desc">Outstanding: High to Low</option>
+                        <option value="outstanding_asc">Outstanding: Low to High</option>
+                        <option value="emi_desc">EMI: High to Low</option>
+                        <option value="emi_asc">EMI: Low to High</option>
+                    </select>
+                </div>
+                <div class="table-responsive loan-table-wrap">
+                    <table class="transaction-table loan-table">
+                        <thead>
+                            <tr>
+                                <th>Loan Name</th>
+                                <th>Lender</th>
+                                <th>Principal</th>
+                                <th>Monthly EMI</th>
+                                <th>Outstanding</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loanTable">
+                            <tr><td colspan="6">No Loans Found</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="budget-pagination loan-pagination" aria-label="Loan pagination">
+                    <button type="button" class="page-nav" disabled>Previous</button>
+                    <button type="button" class="page-nav active">1</button>
+                    <button type="button" class="page-nav">2</button>
+                    <button type="button" class="page-nav">3</button>
+                    <button type="button" class="page-nav">Next</button>
+                </div>
+            </section>
+        </main>
 
-← Dashboard
-
-</button>
-
+        <footer class="enterprise-footer loans-footer">
+            <div><strong>SFM PRO Enterprise</strong><span>Loans module aligned to the approved enterprise design system.</span></div>
+            <span>Premium UI | Responsive | Accessible</span>
+        </footer>
+    </div>
 </div>
 
-<!-- =============================== -->
-<!-- Loan Form -->
-<!-- =============================== -->
-
-<form id="loanForm">
-
-<div class="form-card">
-
-<label>Loan Name</label>
-
-<input
-type="text"
-id="loanName"
-aria-label="Loan name"
-placeholder="Personal Loan"
-required>
-
-<label>Bank Name</label>
-
-<input
-type="text"
-id="bankName"
-aria-label="Bank name"
-placeholder="Axis Bank"
-required>
-
-<label>Loan Amount</label>
-
-<input
-type="number"
-id="loanAmount"
-aria-label="Loan amount"
-required>
-
-<label>Interest Rate (%)</label>
-
-<input
-type="number"
-step="0.01"
-id="loanInterest"
-aria-label="Loan interest rate"
-required>
-
-<label>Tenure (Months)</label>
-
-<input
-type="number"
-id="loanTenure"
-aria-label="Loan tenure in months"
-required>
-
-<label>Start Date</label>
-
-<input
-type="date"
-id="loanDate"
-aria-label="Loan start date"
-required>
-
-<button
-type="button"
-id="saveLoanBtn">
-
-<i class="fa-solid fa-floppy-disk"></i>
-
-Save Loan
-
-</button>
-
-</div>
-
-</form>
-
-<!-- =============================== -->
-<!-- Loan Summary -->
-<!-- =============================== -->
-
-<div class="history-card">
-
-<h2>
-
-Loan Summary
-
-</h2>
-
-<div class="summary-grid">
-
-<div>
-
-<h4>Total Loans</h4>
-
-<h2 id="loanCount">
-
-0
-
-</h2>
-
-</div>
-
-<div>
-
-<h4>Total Outstanding</h4>
-
-<h2 id="loanOutstanding">
-
-₹0
-
-</h2>
-
-</div>
-
-<div>
-
-<h4>Total EMI</h4>
-
-<h2 id="loanEMI">
-
-₹0
-
-</h2>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =============================== -->
-<!-- Loan Table -->
-<!-- =============================== -->
-
-<div class="history-card">
-
-<h2>
-
-Loan History
-
-</h2>
-
-<div class='table-responsive'>
-<table>
-
-<thead>
-
-<tr>
-
-<th>Loan</th>
-
-<th>Bank</th>
-
-<th>Amount</th>
-
-<th>EMI</th>
-
-<th>Outstanding</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="loanTable">
-
-<tr>
-
-<td colspan="6">
-
-No Loans Found
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-</div>
-
-</div>
-
-</div>
-
-<!-- =============================== -->
-<!-- JavaScript -->
-<!-- =============================== -->
-
-<!-- Shared Engine -->
 <script src="../js/engine/storage.js"></script>
 <script src="../js/engine/finance.js"></script>
-
-<!-- Loan Enterprise Module -->
 <script src="../js/modules/loans/loan.storage.js"></script>
 <script src="../js/modules/loans/loan.engine.js"></script>
 <script src="../js/services/loan.service.js"></script>
 <script src="../js/modules/loans/loan.controller.js"></script>
-
 </body>
 </html>

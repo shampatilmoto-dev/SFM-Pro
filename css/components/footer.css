@@ -1,0 +1,70 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Footer Component
+   File: css/components/footer.css
+   ========================================================= */
+
+/* Footer */
+.footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    padding: var(--space-4) var(--space-6);
+    margin-top: auto;
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+/* Left */
+.footer-left {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+}
+
+/* Right */
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Links */
+.footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+/* Version Badge */
+.footer-version {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: var(--radius-round);
+    font-size: var(--font-xs);
+    font-weight: var(--weight-semibold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

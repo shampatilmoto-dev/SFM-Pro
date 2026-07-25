@@ -4,22 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Management</title>
+    <title>SFM PRO Enterprise | Expenses</title>
     <link rel="stylesheet" href="../css/expense.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="page-container">
+<aside class='expense-sidebar' aria-label='Primary navigation'><div class='expense-logo'><i class='fa-solid fa-wallet'></i><div><b>SFM PRO Enterprise</b><small>v6.0 Enterprise Suite</small></div></div><nav><a href='../dashboard.html'><i class='fa-solid fa-house'></i>Dashboard</a><a href='income.html'><i class='fa-solid fa-money-bill-trend-up'></i>Income</a><a class='active' href='expense.html'><i class='fa-solid fa-money-bill-wave'></i>Expenses</a><a href='budget.html'>Budget</a><a href='loans.html'>Loans</a><a href='creditcards.html'>Credit Cards</a><a href='emi.html'>EMI Tracker</a><a href='investments.html'>Investments</a><a href='reports.html'>Reports</a><a href='settings.html'>Settings</a></nav><div class='expense-user'><i class='fa-solid fa-circle-user'></i><div><b>Sham Patil</b><small>Administrator</small></div></div></aside>
+<header class='expense-header'><div><span><a href='../dashboard.html'>Dashboard</a> / Expenses</span><h1>Expenses</h1><p>Monitor, control and optimize every outgoing payment</p></div><label><i class='fa-solid fa-magnifying-glass'></i><input type='search' aria-label='Global search' placeholder='Search transactions, reports...'></label><div class='expense-head-actions'><button type='button' aria-label='Notifications'><i class='fa-regular fa-bell'></i></button><button type='button' aria-label='Theme toggle'><i class='fa-solid fa-moon'></i></button><div><i class='fa-solid fa-circle-user'></i><span><b>Sham Patil</b><small>Finance Manager</small></span></div></div></header>
+<section class='expense-hero'><div><small>EXPENSE CONTROL CENTER</small><h2>Spend with complete clarity.</h2><p>Understand where money goes, identify patterns and keep every expense accountable.</p></div><a href='#expenseForm'><i class='fa-solid fa-plus'></i> Add expense</a></section>
 
+<div class="page-container">
+<section class="expense-dashboard" aria-labelledby="expenseKpiTitle"><div class="section-title"><div><small>OVERVIEW</small><h2 id="expenseKpiTitle">Expense performance</h2></div><span>● Updated automatically</span></div><div class="expense-kpis"><article><i class="fa-solid fa-wallet"></i><em>+9.2%</em><p>Total Expense</p><h3>Live total</h3><svg viewBox="0 0 150 30"><path d="M0 25L30 20L55 23L80 12L110 16L150 4"/></svg></article><article><i class="fa-solid fa-calendar-days"></i><em>+4.7%</em><p>Monthly Expense</p><h3>₹0</h3><svg viewBox="0 0 150 30"><path d="M0 27L25 22L50 25L75 15L100 18L125 7L150 10"/></svg></article><article><i class="fa-solid fa-chart-simple"></i><em>Stable</em><p>Average Expense</p><h3>₹0</h3><svg viewBox="0 0 150 30"><path d="M0 24L25 18L50 21L75 14L100 16L125 9L150 5"/></svg></article><!-- KPI-TWO --></div></section>
+
+    <div class="expense-kpis secondary-kpis"><article><i class="fa-solid fa-trophy"></i><em>Peak</em><p>Highest Expense</p><h3>₹0</h3><svg viewBox="0 0 150 30"><path d="M0 26L30 22L60 25L90 13L120 15L150 3"/></svg></article><article><i class="fa-solid fa-layer-group"></i><em>Active</em><p>Expense Categories</p><h3>12</h3><svg viewBox="0 0 150 30"><path d="M0 24L25 20L50 22L75 12L100 15L125 6L150 9"/></svg></article><article><i class="fa-solid fa-scale-balanced"></i><em>On track</em><p>Remaining Balance</p><h3>₹0</h3><svg viewBox="0 0 150 30"><path d="M0 28L25 23L50 25L75 18L100 12L125 9L150 2"/></svg></article></div>
     <div class="page-header">
         <h1>💸 Expense Management</h1>
         <a href="../dashboard.html" class="back-btn">← Dashboard</a>
     </div>
 
+    <section class="expense-analytics-section"><div class="section-title"><div><small>ANALYTICS</small><h2>Expense intelligence</h2></div><span>Last 12 months</span></div><div class="expense-analytics"><article class="expense-chart trend-chart"><h3>Expense Trend</h3><p>Monthly spending performance</p><div class="expense-line"><svg viewBox="0 0 600 200" preserveAspectRatio="none"><defs><linearGradient id="expenseFill"><stop stop-color="#ef4444" stop-opacity=".24"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 170C70 155 100 135 150 145S240 105 300 120S400 72 460 92S540 40 600 28V200H0Z"/><path d="M0 170C70 155 100 135 150 145S240 105 300 120S400 72 460 92S540 40 600 28"/></svg></div></article><article class="expense-chart category-chart"><h3>Expense Categories</h3><p>Distribution by category</p><div class="expense-donut"><b>12<small>Categories</small></b></div></article><article class="expense-chart comparison-chart"><h3>Monthly Comparison</h3><p>Current versus previous month</p><div class="compare-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="compare-labels"><span>Previous</span><span>Current</span></div></article></div></section>
+    <section class="expense-quick-section"><div class="section-title"><div><small>WORKSPACE</small><h2>Quick actions</h2></div></div><div class="expense-quick"><a href="#expenseForm"><i class="fa-solid fa-plus"></i><span><b>Add Expense</b><small>Create a record</small></span></a><button type="button"><i class="fa-solid fa-file-import"></i><span><b>Import</b><small>Upload data</small></span></button><button type="button"><i class="fa-solid fa-file-export"></i><span><b>Export</b><small>Download records</small></span></button><a href="reports.html"><i class="fa-solid fa-chart-pie"></i><span><b>Reports</b><small>View reports</small></span></a><button type="button"><i class="fa-solid fa-print"></i><span><b>Print</b><small>Print current view</small></span></button></div></section>
     <section class="form-card">
+        <div class="form-heading"><div><small>NEW RECORD</small><h2>Add expense</h2><p>Enter the details of your latest outgoing transaction.</p></div><span><i class="fa-solid fa-shield-halved"></i> Secure entry</span></div>
         <form id="expenseForm" novalidate>
             <div class="form-group">
                 <label for="expenseTitle">Expense Title</label>
@@ -72,7 +84,9 @@
                 <textarea id="expenseNotes" rows="4" placeholder="Optional"></textarea>
             </div>
 
+            <div class="expense-upload" role="button" tabindex="0" aria-label="Upload supporting document"><i class="fa-solid fa-cloud-arrow-up"></i><span><b>Supporting document</b><small>Drag and drop or browse · PDF, PNG, JPG</small></span></div>
             <div id="expenseMessage" class="message-box" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+            <div class="expense-form-actions"><button type="reset" class="reset-expense">Reset</button><a href="../dashboard.html" class="cancel-expense">Cancel</a></div>
 
             <button type="submit" id="saveExpenseBtn">
                 <i class="fa-solid fa-floppy-disk"></i> Save Expense
@@ -131,20 +145,22 @@
         <table>
             <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Expense</th>
                     <th>Category</th>
                     <th>Amount</th>
                     <th>Date</th>
-                    <th>Payment</th>
-                    <th>Notes</th>
-                    <th>Action</th>
+                    <th>Payment Method</th>
+                    <th>Status / Notes</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="expenseTableBody"></tbody>
         </table>
         </div>
+        <div class="expense-pagination"><span>Showing recent expense records</span><nav aria-label="Expense pagination"><button type="button">‹</button><button class="active" type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">›</button></nav></div>
     </section>
 
+    <footer class="expense-footer"><div><b>SFM PRO Enterprise</b><p>Financial clarity for smarter decisions.</p></div><span>© 2026 SFM PRO · Enterprise v6.0</span></footer>
 </div>
 
 <script src="../js/engine/storage.js"></script>
@@ -162,6 +178,7 @@
 </script>
 <script src="../js/app.js"></script>
 
+<button class="expense-logout" type="button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</button>
 </body>
 
 </html>

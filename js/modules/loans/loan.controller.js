@@ -45,9 +45,15 @@ const LoanController = {
         target.addEventListener(eventName, handler);
     },
 
-    notify(message, type = "info") {
+    // Enterprise integration: standardized notification entry point for Loan module.
+    notify(type, message) {
         const text = String(message || "").trim();
         if (!text) {
+            return;
+        }
+
+        if (window.NotificationManager && typeof NotificationManager[type] === "function") {
+            NotificationManager[type](text);
             return;
         }
 
@@ -58,6 +64,20 @@ const LoanController = {
 
         const logger = type === "error" ? console.error : console.log;
         logger(text);
+    },
+
+    // Enterprise integration: show global loader before save/update/delete operations.
+    showOperationLoader(message) {
+        if (window.LoaderManager && typeof LoaderManager.show === "function") {
+            LoaderManager.show(message);
+        }
+    },
+
+    // Enterprise integration: hide global loader when operation completes.
+    hideOperationLoader() {
+        if (window.LoaderManager && typeof LoaderManager.hide === "function") {
+            LoaderManager.hide();
+        }
     },
 
     normalizeServiceError(error, fallback = "Operation failed.") {
@@ -199,14 +219,17 @@ const LoanController = {
             return;
         }
 
+        // Enterprise integration: indicate save/update progress.
+        this.showOperationLoader(this.currentLoanId ? "Updating loan..." : "Saving loan...");
+
         try {
             if (this.currentLoanId) {
                 loan.id = this.currentLoanId;
                 LoanService.updateLoan(loan);
-                this.notify("Loan updated successfully.", "success");
+                this.notify("success", "Loan updated successfully.");
             } else {
                 LoanService.createLoan(loan);
-                this.notify("Loan saved successfully.", "success");
+                this.notify("success", "Loan saved successfully.");
             }
 
             this.loadLoans();
@@ -214,7 +237,10 @@ const LoanController = {
         } catch (error) {
             const normalized = this.normalizeServiceError(error, "Unable to save loan.");
             console.error(error);
-            this.notify([normalized.message, normalized.errors.join(" ")].filter(Boolean).join(" "), "error");
+            this.notify("error", [normalized.message, normalized.errors.join(" ")].filter(Boolean).join(" "));
+        } finally {
+            // Enterprise integration: always clear loader after save/update attempt.
+            this.hideOperationLoader();
         }
     },
 
@@ -257,14 +283,23 @@ const LoanController = {
             return;
         }
 
-        const result = LoanService.deleteLoan(id);
-        if (result && result.error) {
-            this.notify(result.error, "error");
-            return;
-        }
+        // Enterprise integration: indicate delete progress.
+        this.showOperationLoader("Deleting loan...");
 
-        this.notify("Loan deleted.", "success");
-        this.loadLoans();
+        try {
+
+            const result = LoanService.deleteLoan(id);
+            if (result && result.error) {
+                this.notify("error", result.error);
+                return;
+            }
+
+            this.notify("success", "Loan deleted.");
+            this.loadLoans();
+        } finally {
+            // Enterprise integration: always clear loader after delete attempt.
+            this.hideOperationLoader();
+        }
     },
 
     updateSummary() {

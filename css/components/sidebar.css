@@ -1,0 +1,107 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Sidebar Component
+   File: css/components/sidebar.css
+   ========================================================= */
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background: var(--surface);
+    border-right: 1px solid var(--border-color);
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: var(--shadow-sm);
+
+    z-index: var(--z-fixed);
+}
+
+/* Logo */
+.sidebar-logo {
+    height: var(--header-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: var(--font-xl);
+    font-weight: var(--weight-bold);
+
+    color: var(--primary);
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* Navigation */
+.sidebar-nav {
+    flex: 1;
+    padding: var(--space-4) 0;
+    overflow-y: auto;
+}
+
+/* Navigation Item */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    padding: 12px 20px;
+
+    color: var(--text-secondary);
+    font-weight: var(--weight-medium);
+
+    transition: all var(--transition-normal);
+}
+
+/* Hover */
+.sidebar-item:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+/* Active */
+.sidebar-item.active {
+    background: var(--primary);
+    color: var(--text-white);
+}
+
+/* Icon */
+.sidebar-icon {
+    width: 20px;
+    text-align: center;
+}
+
+/* Footer */
+.sidebar-footer {
+    padding: var(--space-4);
+    border-top: 1px solid var(--border-light);
+}
+
+/* Collapsed */
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}

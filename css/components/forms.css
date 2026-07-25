@@ -1,0 +1,110 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Form Component
+   File: css/components/forms.css
+   ========================================================= */
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+/* Label */
+.form-label {
+    font-size: var(--font-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+}
+
+/* Input, Select & Textarea */
+.form-control {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: var(--surface);
+    color: var(--text-primary);
+
+    font-size: var(--font-md);
+
+    transition: all var(--transition-normal);
+}
+
+/* Focus State */
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Placeholder */
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+/* Disabled */
+.form-control:disabled {
+    background: var(--border-light);
+    cursor: not-allowed;
+    opacity: .7;
+}
+
+/* Readonly */
+.form-control[readonly] {
+    background: var(--surface-hover);
+}
+
+/* Textarea */
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Checkbox & Radio */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.form-check input {
+    width: 16px;
+    height: 16px;
+}
+
+/* Help Text */
+.form-text {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+/* Validation States */
+.form-control.is-valid {
+    border-color: var(--success);
+}
+
+.form-control.is-invalid {
+    border-color: var(--danger);
+}
+
+.form-feedback {
+    font-size: var(--font-sm);
+}
+
+.form-feedback.success {
+    color: var(--success);
+}
+
+.form-feedback.error {
+    color: var(--danger);
+}

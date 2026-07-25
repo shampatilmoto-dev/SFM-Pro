@@ -1,0 +1,113 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Modal Component
+   File: css/components/modal.css
+   ========================================================= */
+
+/* Overlay */
+.modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: var(--z-modal);
+
+    padding: var(--space-4);
+}
+
+/* Show */
+.modal.show {
+    display: flex;
+    animation: fadeIn .25s ease;
+}
+
+/* Modal Box */
+.modal-content {
+    width: 100%;
+    max-width: 600px;
+
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-lg);
+
+    animation: scaleIn .25s ease;
+
+    overflow: hidden;
+}
+
+/* Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: var(--space-4);
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+.modal-title {
+    font-size: var(--font-lg);
+    font-weight: var(--weight-bold);
+}
+
+/* Close Button */
+.modal-close {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    transition: background var(--transition-normal);
+}
+
+.modal-close:hover {
+    background: var(--surface-hover);
+}
+
+/* Body */
+.modal-body {
+    padding: var(--space-4);
+}
+
+/* Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+
+    padding: var(--space-4);
+
+    border-top: 1px solid var(--border-light);
+}
+
+/* Sizes */
+.modal-sm .modal-content {
+    max-width: 400px;
+}
+
+.modal-lg .modal-content {
+    max-width: 900px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 100%;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+}

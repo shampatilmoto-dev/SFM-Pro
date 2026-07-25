@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SFM PRO Enterprise | Budget</title>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' rel='stylesheet'>
     <link rel='stylesheet' href='../css/common.css'>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -12,9 +15,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 
-<body data-page="budget">
+<body data-page='budget'>
 
-<div class="page-container">
+<div class='budget-app'>
+    <aside class='enterprise-sidebar budget-sidebar' aria-label='Primary navigation'><div class='sidebar-brand'><div class='brand-mark'>S</div><div><strong>SFM PRO</strong><span>Enterprise v6.0</span></div></div><nav class='sidebar-nav'><a href='../dashboard.html'><i class='fa-solid fa-chart-pie'></i><span>Dashboard</span></a><a href='income.html'><i class='fa-solid fa-money-bill-trend-up'></i><span>Income</span></a><a href='expense.html'><i class='fa-solid fa-receipt'></i><span>Expense</span></a><a class='active' href='budget.html' aria-current='page'><i class='fa-solid fa-wallet'></i><span>Budget</span></a><a href='loans.html'><i class='fa-solid fa-hand-holding-dollar'></i><span>Loans</span></a><a href='creditcards.html'><i class='fa-solid fa-credit-card'></i><span>Credit Cards</span></a><a href='investments.html'><i class='fa-solid fa-chart-line'></i><span>Investments</span></a><a href='reports.html'><i class='fa-solid fa-file-lines'></i><span>Reports</span></a><a href='settings.html'><i class='fa-solid fa-gear'></i><span>Settings</span></a></nav><div class='sidebar-profile-card'><div class='sidebar-profile-meta'><div class='avatar-shell'>JK</div><div><strong>Jayanth K</strong><span>Budget Analyst</span></div></div><a class='sidebar-logout' href='../login.html'><i class='fa-solid fa-right-from-bracket'></i><span>Logout</span></a></div></aside>
+    <div class='budget-main'>
+        <header class='enterprise-header budget-header'><div class='header-copy'><nav class='header-breadcrumb' aria-label='Breadcrumb'><span>Finance</span><i class='fa-solid fa-chevron-right' aria-hidden='true'></i><span>Budget</span></nav><h1>Budget</h1><p>Track allocations, spend patterns, and budget health across every category.</p></div><div class='header-actions'><label class='header-search' aria-label='Search budget page'><i class='fa-solid fa-magnifying-glass' aria-hidden='true'></i><input type='search' placeholder='Search budgets, categories, or notes' autocomplete='off'></label><button type='button' class='icon-button' aria-label='Notifications'><i class='fa-regular fa-bell'></i></button><button type='button' class='icon-button' aria-label='Toggle theme'><i class='fa-solid fa-moon'></i></button><button type='button' class='profile-chip' aria-label='Open profile'><span class='profile-chip-avatar'>JK</span><span><strong>Jayanth</strong><small>Budget Owner</small></span></button></div></header>
+        <main class='budget-content'>
+            <section class='budget-hero enterprise-card'><div><p class='section-kicker'>Budget overview</p><h2>Enterprise Budget Control Center</h2><p>Monitor allocations, spending progress, and alerts from one premium workspace.</p></div><div class='hero-metrics'><div><span>Live periods</span><strong>24</strong></div><div><span>Overspent</span><strong>3</strong></div><div><span>Protected</span><strong>91%</strong></div></div></section>
+            <section class='budget-kpis' aria-label='Budget KPI overview'><article class='kpi-card kpi-primary'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-wallet'></i></span><span class='kpi-trend up'>+6.2%</span></div><p>Total Budget</p><strong id='budgetTotal'>?0.00</strong><small>Allocated across all active plans</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 28 C14 20, 20 21, 30 16 S46 6, 58 14 S76 22, 90 10 S108 12, 118 6'></path></svg></article><article class='kpi-card'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-circle-pause'></i></span><span class='kpi-trend down'>-2.8%</span></div><p>Used Budget</p><strong id='budgetUsed'>?0.00</strong><small>Actual spend captured from activity</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 12 C14 15, 22 24, 34 20 S54 12, 66 22 S86 28, 98 18 S110 12, 118 15'></path></svg></article><article class='kpi-card'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-piggy-bank'></i></span><span class='kpi-trend up'>+4.9%</span></div><p>Remaining Budget</p><strong id='budgetRemaining'>?0.00</strong><small>Available headroom before limit</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 24 C14 18, 24 8, 34 14 S52 30, 66 18 S84 6, 96 12 S110 16, 118 10'></path></svg></article><article class='kpi-card'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-gauge-high'></i></span><span class='kpi-trend up'>Healthy</span></div><p>Budget Utilization %</p><strong id='budgetUtilization'>0%</strong><small>Plan efficiency across active budgets</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 26 C16 18, 28 18, 40 14 S64 8, 78 16 S98 30, 118 8'></path></svg></article><article class='kpi-card'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-layer-group'></i></span><span class='kpi-trend up'>+2 this month</span></div><p>Active Budgets</p><strong>12</strong><small>Plans currently monitored</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 20 C16 18, 28 24, 40 16 S58 8, 72 10 S92 24, 118 12'></path></svg></article><article class='kpi-card'><div class='kpi-topline'><span class='kpi-icon'><i class='fa-solid fa-triangle-exclamation'></i></span><span class='kpi-trend down'>Needs review</span></div><p>Budget Alerts</p><strong>3</strong><small>Items requiring immediate attention</small><svg viewBox='0 0 120 36' class='kpi-sparkline' aria-hidden='true'><path d='M2 28 C14 26, 22 18, 36 20 S52 30, 66 22 S84 8, 98 14 S110 20, 118 8'></path></svg></article></section>
+            <section class='budget-quick-actions' aria-label='Quick budget actions'><button type='button' class='quick-action-card'><i class='fa-solid fa-plus'></i><span>Add Budget</span></button><button type='button' class='quick-action-card'><i class='fa-solid fa-pen-to-square'></i><span>Edit Budget</span></button><button type='button' class='quick-action-card'><i class='fa-solid fa-file-export'></i><span>Export</span></button><button type='button' class='quick-action-card'><i class='fa-solid fa-chart-column'></i><span>Reports</span></button><button type='button' class='quick-action-card'><i class='fa-solid fa-tags'></i><span>Categories</span></button></section>
+
+            <section class='budget-analytics' aria-label='Budget analytics'><article class='enterprise-card chart-card chart-card-wide'><div class='section-heading'><div><p class='section-kicker'>Analytics</p><h3>Budget Utilization</h3></div><span class='section-chip'>Line chart</span></div><div class='chart-panel chart-line-panel' aria-hidden='true'><svg viewBox='0 0 920 320' class='chart-svg'><g class='chart-grid'><line x1='60' y1='40' x2='860' y2='40'></line><line x1='60' y1='100' x2='860' y2='100'></line><line x1='60' y1='160' x2='860' y2='160'></line><line x1='60' y1='220' x2='860' y2='220'></line><line x1='60' y1='280' x2='860' y2='280'></line></g><path d='M60 220 C120 206, 160 196, 220 176 S340 110, 400 132 S520 200, 580 150 S700 74, 760 96 S840 148, 860 72' fill='none' stroke='#fed7aa' stroke-width='18' stroke-linecap='round'></path><path d='M60 220 C120 206, 160 196, 220 176 S340 110, 400 132 S520 200, 580 150 S700 74, 760 96 S840 148, 860 72' fill='none' stroke='#ea580c' stroke-width='4' stroke-linecap='round'></path><g fill='#ffffff' stroke='#ea580c' stroke-width='4'><circle cx='60' cy='220' r='7'></circle><circle cx='220' cy='176' r='7'></circle><circle cx='400' cy='132' r='7'></circle><circle cx='580' cy='150' r='7'></circle><circle cx='760' cy='96' r='7'></circle><circle cx='860' cy='72' r='7'></circle></g></svg></div></article><article class='enterprise-card chart-card'><div class='section-heading'><div><p class='section-kicker'>Analytics</p><h3>Category Allocation</h3></div><span class='section-chip'>Doughnut</span></div><div class='donut-chart-shell' aria-hidden='true'><div class='donut-chart'></div><div class='donut-center'><strong>8</strong><span>Categories</span></div></div><ul class='chart-legend'><li><span class='legend-dot salary'></span>Operations</li><li><span class='legend-dot business'></span>Travel</li><li><span class='legend-dot freelance'></span>Technology</li><li><span class='legend-dot rental'></span>Marketing</li><li><span class='legend-dot investment'></span>Healthcare</li><li><span class='legend-dot other'></span>Other</li></ul></article><article class='enterprise-card chart-card'><div class='section-heading'><div><p class='section-kicker'>Analytics</p><h3>Monthly Budget vs Spending</h3></div><span class='section-chip'>Comparison</span></div><div class='comparison-bars' aria-hidden='true'><div><span style='--budget-height:72%'></span><small>Jan</small></div><div><span style='--budget-height:60%'></span><small>Feb</small></div><div><span style='--budget-height:84%'></span><small>Mar</small></div><div><span style='--budget-height:66%'></span><small>Apr</small></div><div><span style='--budget-height:90%'></span><small>May</small></div><div><span style='--budget-height:76%'></span><small>Jun</small></div></div><div class='comparison-note'><span><i class='fa-solid fa-square' aria-hidden='true'></i>Budget</span><span><i class='fa-solid fa-square' aria-hidden='true'></i>Spend</span></div></article></section>
+            <div class='page-container'>
 
     <div class="page-header">
         <h2><i class="fa-solid fa-wallet"></i> Budget Management</h2>
@@ -78,30 +91,9 @@
 
             <div id="budgetMessage" class="message-box" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
 
-            <button type="submit" id="saveBudgetBtn" class="btn btn-primary">
-                <i class="fa-solid fa-floppy-disk"></i> Save Budget
-            </button>
+            <div class='form-actions budget-form-actions'><button type='submit' id='saveBudgetBtn' class='btn btn-primary'>Save Budget</button><button type='reset' class='btn btn-secondary'>Reset</button><button type='button' class='btn btn-ghost'>Cancel</button></div>
         </form>
     </div>
-
-    <section class="summary-card budget-summary">
-        <div class="summary-item">
-            <span>Total Budget</span>
-            <strong id="budgetTotal">₹0.00</strong>
-        </div>
-        <div class="summary-item">
-            <span>Budget Used</span>
-            <strong id="budgetUsed">₹0.00</strong>
-        </div>
-        <div class="summary-item">
-            <span>Remaining Budget</span>
-            <strong id="budgetRemaining">₹0.00</strong>
-        </div>
-        <div class="summary-item">
-            <span>Budget Utilization</span>
-            <strong id="budgetUtilization">0%</strong>
-        </div>
-    </section>
 
     <div class="card">
         <h3>Budget History</h3>
@@ -133,13 +125,13 @@
             <table class="transaction-table">
                 <thead>
                     <tr>
-                        <th>Month</th>
+                        <th>Budget Period</th>
                         <th>Category</th>
-                        <th>Budget</th>
-                        <th>Used</th>
+                        <th>Allocated</th>
+                        <th>Spent</th>
                         <th>Remaining</th>
-                        <th>Usage</th>
-                        <th>Action</th>
+                        <th>Progress</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="budgetTableBody">
@@ -149,11 +141,16 @@
                 </tbody>
             </table>
         </div>
+        <div class='budget-pagination' aria-label='Budget pagination'><button type='button' class='page-nav' disabled>Previous</button><button type='button' class='page-nav active'>1</button><button type='button' class='page-nav'>2</button><button type='button' class='page-nav'>3</button><button type='button' class='page-nav'>Next</button></div>
     </div>
 
 </div>
+        </main>
+        <footer class='enterprise-footer budget-footer'><div><strong>SFM PRO Enterprise</strong><span>Budget module aligned to the approved design system.</span></div><span>Premium UI | Responsive | Accessible</span></footer>
+    </div>
+</div>
 
-<script src="../js/engine/storage.js"></script>
+<script src='../js/engine/storage.js'></script>
 <script src="../js/engine/finance.js"></script>
 <script src="../js/services/budget.service.js"></script>
 <script src="../js/modules/budget/budget.state.js"></script>
@@ -171,3 +168,9 @@
 </body>
 
 </html>
+
+
+
+
+
+

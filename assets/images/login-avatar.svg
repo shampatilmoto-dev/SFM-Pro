@@ -1,0 +1,22 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Professional login avatar placeholder</title>
+  <desc id="desc">Circular finance profile illustration for the SFM PRO login page</desc>
+  <defs>
+    <radialGradient id="bg" cx="32%" cy="28%" r="78%">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="55%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bfdbfe"/>
+    </linearGradient>
+  </defs>
+  <circle cx="160" cy="160" r="152" fill="url(#bg)"/>
+  <circle cx="160" cy="160" r="132" fill="none" stroke="rgba(255,255,255,0.46)" stroke-width="10"/>
+  <circle cx="160" cy="160" r="104" fill="#ffffff" opacity="0.15"/>
+  <circle cx="160" cy="125" r="44" fill="#ffffff" opacity="0.96"/>
+  <path d="M88 244c12-42 47-68 72-68s60 26 72 68" fill="#ffffff" opacity="0.96"/>
+  <circle cx="252" cy="78" r="24" fill="url(#ring)"/>
+  <path d="M252 66l5 11 12 2-9 8 2 12-10-6-11 6 2-12-9-8 12-2z" fill="#1d4ed8" opacity="0.9"/>
+</svg>

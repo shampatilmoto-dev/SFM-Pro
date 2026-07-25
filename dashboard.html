@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,13 +37,13 @@
 
 <a class="skip-link-dashboard" href="#dashboardMainContent">Skip to dashboard content</a>
 
-<div class="app">
+<div class="app dashboard-app">
 
 <!-- ===================================================== -->
 <!-- Sidebar -->
 <!-- ===================================================== -->
 
-<aside class="sidebar">
+<aside class="sidebar enterprise-sidebar">
 
     <div class="logo">
 
@@ -57,7 +57,7 @@
 
             <h2>SFM PRO Enterprise</h2>
 
-            <span>v5.0 Production Release</span>
+            <span>v6.0 Enterprise Workspace</span>
 
         </div>
 
@@ -172,13 +172,13 @@
 <!-- Main Content -->
 <!-- ===================================================== -->
 
-<main class="main-content" id="dashboardMainContent">
+<main class="main-content dashboard-shell" id="dashboardMainContent">
 
 <!-- ===================================================== -->
 <!-- Header -->
 <!-- ===================================================== -->
 
-<header class="top-header">
+<header class="top-header enterprise-header">
 
     <div class="header-left">
 
@@ -192,7 +192,7 @@
 
             <h1 id="greeting">
 
-                ðŸ‘‹ Good Morning
+                Ã°Å¸â€˜â€¹ Good Morning
 
             </h1>
 
@@ -213,7 +213,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
 
             <input type="search"
-                   placeholder="Search Transactions, Loans, Budgets...">
+                   placeholder="Search dashboard, transactions, goals, and reports...">
 
         </div>
 
@@ -221,21 +221,9 @@
 
     <div class="header-right">
 
-        <button class="header-btn">
+        <button class="header-btn" type="button" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="badge">3</span></button>
 
-            <i class="fa-regular fa-bell"></i>
-
-            <span class="badge">3</span>
-
-        </button>
-
-        <button class="header-btn">
-
-            <i class="fa-regular fa-envelope"></i>
-
-            <span class="badge">5</span>
-
-        </button>
+        <button class="header-btn" type="button" aria-label="Messages"><i class="fa-regular fa-envelope"></i><span class="badge">5</span></button>
 
        <button class="header-btn dark-mode-btn" type="button" aria-label="Toggle dark mode">
 
@@ -271,6 +259,41 @@
 <!-- Dashboard Content Starts -->
 <!-- ===================================================== -->
 
+<section class="enterprise-hero" aria-labelledby="enterpriseWorkspaceTitle">
+
+    <div class="enterprise-hero__copy">
+
+        <p class="section-kicker">Enterprise Workspace</p>
+
+        <h2 id="enterpriseWorkspaceTitle">Central command for cash flow, risk, and growth.</h2>
+
+        <p>One premium workspace for finance leaders to review health, momentum, and exceptions at a glance.</p>
+
+        <div class="hero-badges" aria-label="Workspace highlights">
+            <span><strong>9</strong><small>Connected modules</small></span>
+            <span><strong>24/7</strong><small>Live overview</small></span>
+            <span><strong>3</strong><small>Priority alerts</small></span>
+        </div>
+
+    </div>
+
+    <div class="enterprise-hero__panel" aria-hidden="true">
+        <div class="hero-panel-card">
+            <span>Workspace status</span>
+            <strong>Healthy</strong>
+        </div>
+        <div class="hero-panel-card">
+            <span>Forecast</span>
+            <strong>Stable</strong>
+        </div>
+        <div class="hero-panel-card hero-panel-card--accent">
+            <span>Alerts</span>
+            <strong>3</strong>
+        </div>
+    </div>
+
+</section>
+
 <section class="dashboard-container"><section class="welcome-banner">
 
     <div class="welcome-content">
@@ -290,13 +313,13 @@
 
             <p>
 
-                Take Control. Build Wealth.
+                Your central financial workspace, updated in real time.
 
             </p>
 
             <small>
 
-                Your financial summary for today is shown below.
+                Your overview, performance signals, and exceptions are shown below.
 
             </small>
 
@@ -307,7 +330,6 @@
             <button class="primary-btn">
 
                 <i class="fa-solid fa-plus"></i>
-
                 Add Transaction
 
             </button>
@@ -315,7 +337,6 @@
             <button class="secondary-btn">
 
                 <i class="fa-solid fa-download"></i>
-
                 Export Report
 
             </button>
@@ -338,7 +359,7 @@
 
         <span>Available Balance</span>
 
-        <h1 id="totalBalance">â‚¹0</h1>
+        <h1 id="totalBalance">Ã¢â€šÂ¹0</h1>
 
         <small>
             Updated Automatically
@@ -354,7 +375,7 @@
 
         <span>Total Income</span>
 
-        <h2 id="summaryIncome">â‚¹0</h2>
+        <h2 id="summaryIncome">Ã¢â€šÂ¹0</h2>
 
     </div>
 
@@ -366,7 +387,7 @@
 
         <span>Total Expense</span>
 
-        <h2 id="summaryExpense">â‚¹0</h2>
+        <h2 id="summaryExpense">Ã¢â€šÂ¹0</h2>
 
     </div>
 
@@ -378,7 +399,7 @@
 
         <span>Total Savings</span>
 
-        <h2 id="summarySavings">â‚¹0</h2>
+        <h2 id="summarySavings">Ã¢â€šÂ¹0</h2>
 
     </div>
 
@@ -397,7 +418,7 @@
 
         <h2 id="netWorthCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -411,7 +432,7 @@
 
         <h2 id="cashCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -425,7 +446,7 @@
 
         <h2 id="bankBalanceCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -439,7 +460,7 @@
 
         <h2 id="cashFlowCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -453,7 +474,7 @@
 
         <h2 id="loanOutstandingCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -467,7 +488,7 @@
 
         <h2 id="investmentCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -481,7 +502,7 @@
 
         <h2 id="budgetRemainingCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -495,7 +516,7 @@
 
         <h2 id="nextEmiCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -509,7 +530,7 @@
 
         <h2 id="emiOutstandingCard">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -529,7 +550,7 @@
 
         <h2 id="monthlyIncome">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -541,7 +562,7 @@
 
         <h2 id="monthlyExpense">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -553,7 +574,7 @@
 
         <h2 id="monthlySavings">
 
-            â‚¹0
+            Ã¢â€šÂ¹0
 
         </h2>
 
@@ -582,8 +603,7 @@
         <h2>
 
             <i class="fa-solid fa-chart-line"></i>
-
-            Financial Analytics
+            Enterprise Analytics
 
         </h2>
 
@@ -597,7 +617,7 @@
 
             <span>Net Worth</span>
 
-            <h2 id="analyticsNetWorth">â‚¹0</h2>
+            <h2 id="analyticsNetWorth">Ã¢â€šÂ¹0</h2>
 
         </div>
 
@@ -617,7 +637,7 @@
 
             <span>Monthly Cash Flow</span>
 
-            <h2 id="analyticsCashFlow">â‚¹0</h2>
+            <h2 id="analyticsCashFlow">Ã¢â€šÂ¹0</h2>
 
         </div>
 
@@ -637,7 +657,7 @@
 
             <span>Investment Growth</span>
 
-            <h2 id="analyticsInvestmentGrowth">â‚¹0</h2>
+            <h2 id="analyticsInvestmentGrowth">Ã¢â€šÂ¹0</h2>
 
         </div>
 
@@ -739,9 +759,8 @@
 
         <h2>
 
-            <i class="fa-solid fa-lightbulb"></i>
-
-            Smart Financial Insights
+            <i class="fa-solid fa-bolt"></i>
+            Recent Activity
 
         </h2>
 
@@ -882,8 +901,7 @@
         <h2 id="notificationCenterTitle">
 
             <i class="fa-solid fa-bell"></i>
-
-            Notification Center
+            Notifications
 
             <span id="notificationCountBadge" class="badge" style="position:static; display:inline-flex; align-items:center; justify-content:center; margin-left:0.5rem; vertical-align:middle;">0</span>
 
@@ -1150,7 +1168,7 @@
 
             <h2 id="healthStatus">
 
-                ðŸŸ¢ Excellent
+                Ã°Å¸Å¸Â¢ Excellent
 
             </h2>
 
@@ -1219,8 +1237,7 @@
         <h2>
 
             <i class="fa-solid fa-chart-simple"></i>
-
-            Monthly Budget Progress
+            Budget Health
 
         </h2>
 
@@ -1245,7 +1262,7 @@
 
                 <h3 id="budgetSpent">
 
-                    â‚¹0
+                    Ã¢â€šÂ¹0
 
                 </h3>
 
@@ -1257,7 +1274,7 @@
 
                 <h3 id="budgetRemaining">
 
-                    â‚¹0
+                    Ã¢â€šÂ¹0
 
                 </h3>
 
@@ -1434,11 +1451,11 @@
 
     <div>
 
-        <strong>SFM PRO Enterprise v5.0 Production Release</strong>
+        <strong>SFM PRO Enterprise v6.0 Enterprise Workspace</strong>
 
         <p>
 
-            Take Control. Build Wealth.
+            Your central financial workspace, updated in real time.
 
         </p>
 
@@ -1446,7 +1463,7 @@
 
     <div>
 
-        Â© 2026 Sham Finance Manager
+        Ã‚Â© 2026 Sham Finance Manager
 
     </div>
 
@@ -1542,10 +1559,26 @@
 <!-- Dashboard Logic -->
 <script src="js/dashboard.js"></script>
 
+<!-- Router -->
 <script src="js/core/router.js"></script>
+
+<!-- ======================================= -->
+<!-- Enterprise Managers -->
+<!-- ======================================= -->
+
+<script src="js/managers/theme.manager.js"></script>
+<script src="js/managers/layout.manager.js"></script>
+<script src="js/managers/navigation.manager.js"></script>
+<script src="js/managers/notification.manager.js"></script>
+<script src="js/managers/loader.manager.js"></script>
+<script src="js/managers/modal.manager.js"></script>
+<script src="js/managers/app.manager.js"></script>
+
+<!-- ======================================= -->
+<!-- Core Bootstrap -->
+<!-- ======================================= -->
 
 <script src="js/core/bootstrap.js"></script>
 
 </body>
 </html>
-

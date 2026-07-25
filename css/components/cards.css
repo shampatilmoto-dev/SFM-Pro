@@ -1,0 +1,88 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Card Component
+   File: css/components/cards.css
+   ========================================================= */
+
+/* Base Card */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+/* Hover Effect */
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+    background: var(--surface);
+}
+
+/* Card Title */
+.card-title {
+    font-size: var(--font-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+}
+
+/* Card Subtitle */
+.card-subtitle {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+
+/* Card Body */
+.card-body {
+    padding: var(--space-4);
+}
+
+/* Card Footer */
+.card-footer {
+    padding: var(--space-4);
+    border-top: 1px solid var(--border-light);
+    background: var(--surface-hover);
+}
+
+/* Compact Card */
+.card-sm .card-body {
+    padding: var(--space-3);
+}
+
+/* Large Card */
+.card-lg .card-body {
+    padding: var(--space-6);
+}
+
+/* Flat Card */
+.card-flat {
+    border: none;
+    box-shadow: none;
+}
+
+/* Elevated Card */
+.card-elevated {
+    box-shadow: var(--shadow-lg);
+}
+
+/* Clickable Card */
+.card-clickable {
+    cursor: pointer;
+}
+
+.card-clickable:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}

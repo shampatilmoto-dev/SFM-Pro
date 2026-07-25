@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SFM PRO | Income</title>
+    <title>SFM PRO Enterprise | Income</title>
 
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/module.css">
@@ -14,6 +14,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <link rel=stylesheet href=../css/income.css>
 </head>
 
 <body data-page="income">
@@ -36,9 +37,14 @@
 
     </div>
 
-    <!-- ===========================
-         Income Form
-    ============================ -->
+    <header class=income-header><div><span><a href=../dashboard.html>Dashboard</a> / Income</span><h1>Income</h1><p>Track, analyze and manage every revenue stream</p></div><label><i class=fa-solid></i><input type=search aria-label=Global-search placeholder=Search...></label><div class=income-header-actions><button type=button aria-label=Notifications>◉</button><button type=button aria-label=Theme>◐</button><div><i class=fa-solid></i><span><b>Sham Patil</b><small>Finance Manager</small></span></div></div></header>
+    <section class=income-hero><div><small>INCOME COMMAND CENTER</small><h2>Your revenue, clearly understood.</h2><p>Monitor cash inflow, uncover source performance and keep every income record current.</p></div><a href=#incomeForm><i class=fa-solid></i> Add income</a></section>
+    <section><div class=section-title><div><small>OVERVIEW</small><h2>Income performance</h2></div><span>Updated automatically</span></div><div class=income-kpis><article><i class=fa-solid></i><em>+12.4%</em><p>Total Income</p><h3>Live total</h3><svg viewBox=0,0,150,30><path d=M0,26L40,18L60,22L90,10L120,5L150,2 /></svg></article><article><i class=fa-solid></i><em>+8.2%</em><p>Monthly Income</p><h3>0</h3><svg viewBox=0,0,150,30><path d=M0,27L25,19L50,22L75,12L125,4L150,8 /></svg></article><!--KPI-CARDS--></div></section>
+    <div class=income-kpis><article><em>+5.1%</em><p>Average Income</p><h3>0</h3></article><article><em>+14.6%</em><p>Highest Income</p><h3>0</h3></article></div>
+    <div class=income-kpis><article><em>Active</em><p>Income Categories</p><h3>7</h3></article><article><em>On track</em><p>Growth</p><h3>0%</h3></article></div>
+    <section><div class=section-title><div><small>ANALYTICS</small><h2>Income intelligence</h2></div><span>Last 12 months</span></div><div class=analytics><article class=chart-card><h3>Income Trend</h3><p>Monthly revenue performance</p><div class=line-chart><svg viewBox=0,0,600,200><defs><linearGradient id=incomeFill><stop stop-color=#2563eb stop-opacity=.25 /><stop offset=1 stop-color=#2563eb stop-opacity=0 /></linearGradient></defs><path class=area d=M0,175C80,160,100,140,150,150S240,110,300,125S400,75,460,95S540,35,600,22V200H0Z /><path d=M0,175C80,160,100,140,150,150S240,110,300,125S400,75,460,95S540,35,600,22 /></svg></div></article><article class=chart-card><h3>Income Sources</h3><p>Distribution by category</p><div class=donut><b>6<span>Sources</span></b></div><ul class=legend><li>Salary <b>42%</b></li><li>Business <b>21%</b></li><li>Freelance <b>15%</b></li><li>Rental <b>10%</b></li><li>Investment <b>8%</b></li><li>Other <b>4%</b></li></ul></article></div></section>
+    <section><div class=section-title><div><small>WORKSPACE</small><h2>Quick actions</h2></div></div><div class=quick-actions><a href=#incomeForm><i class=fa-solid></i><span><b>Add Income</b><small>Create a record</small></span></a><button type=button><i class=fa-solid></i><span><b>Import</b><small>Upload data</small></span></button><button type=button><i class=fa-solid></i><span><b>Export</b><small>Download records</small></span></button><a href=reports.html><i class=fa-solid></i><span><b>Reports</b><small>View reports</small></span></a><button type=button><i class=fa-solid></i><span><b>Print</b><small>Print current view</small></span></button></div></section>
+    <!-- Income Form -->
 
     <form id="incomeForm">
 
@@ -79,6 +85,7 @@
                     <option>Other</option>
 
                 </select>
+                <button class=filter-income type=button>Filter</button>
 
             </div>
 
@@ -117,6 +124,9 @@
 
             </div>
 
+            <div class=upload-area tabindex=0 role=button aria-label=Supporting-document-upload><i class=fa-solid></i><span><b>Supporting document</b><small>Drag and drop or browse files</small></span></div>
+            <button class=reset-income type=reset>Reset</button>
+            <a class=cancel-income href=../dashboard.html>Cancel</a>
             <button
                 type="button"
                 id="saveIncomeBtn">
@@ -174,12 +184,12 @@
                 <tr>
 
                     <th>Date</th>
-                    <th>Title</th>
+                    <th>Source</th>
                     <th>Category</th>
                     <th>Amount</th>
-                    <th>Notes</th>
+                    <th>Method / Notes</th>
 
-                    <th>Action</th>
+                    <th>Status / Actions</th>
 
                 </tr>
 
@@ -192,13 +202,15 @@
         </table>
         </div>
 
+        <div class=income-pagination><span>Showing recent income records</span><nav aria-label=Income-pagination><button type=button>‹</button><button class=active type=button>1</button><button type=button>2</button><button type=button>3</button><button type=button>›</button></nav></div>
+
     </div>
 
 </div>
 
-<!-- ===========================
-     Engine
-=========================== -->
+<aside class=income-sidebar aria-label=Primary-navigation><div class=income-logo><i class=fa-solid></i><div><b>SFM PRO Enterprise</b><small>v6.0 Enterprise Suite</small></div></div><nav><a href=../dashboard.html>Dashboard</a><a class=active href=income.html>Income</a><a href=expense.html>Expenses</a><a href=budget.html>Budget</a><a href=loans.html>Loans</a><a href=creditcards.html>Credit Cards</a><a href=emi.html>EMI Tracker</a><a href=investments.html>Investments</a><a href=reports.html>Reports</a><a href=settings.html>Settings</a></nav><div class=income-user><i class=fa-solid></i><div><b>Sham Patil</b><small>Administrator</small></div></div></aside>
+
+<!-- Engine -->
 
 <script src="../js/engine/storage.js"></script>
 <script src="../js/engine/finance.js"></script>

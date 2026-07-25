@@ -1,0 +1,101 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Toast Component
+   File: css/components/toast.css
+   ========================================================= */
+
+/* Toast Container */
+.toast-container {
+    position: fixed;
+    top: var(--space-4);
+    right: var(--space-4);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    z-index: var(--z-toast);
+}
+
+/* Base Toast */
+.toast {
+    min-width: 320px;
+    max-width: 420px;
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    padding: 14px 18px;
+
+    border-radius: var(--radius-md);
+
+    background: var(--surface);
+
+    border-left: 5px solid var(--primary);
+
+    box-shadow: var(--shadow-lg);
+
+    animation: slideDown .3s ease;
+}
+
+/* Toast Icon */
+.toast-icon {
+    font-size: 20px;
+}
+
+/* Toast Content */
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: var(--weight-semibold);
+    margin-bottom: 2px;
+}
+
+.toast-message {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+/* Close Button */
+.toast-close {
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-round);
+}
+
+.toast-close:hover {
+    background: var(--surface-hover);
+}
+
+/* Variants */
+.toast-success {
+    border-left-color: var(--success);
+}
+
+.toast-error {
+    border-left-color: var(--danger);
+}
+
+.toast-warning {
+    border-left-color: var(--warning);
+}
+
+.toast-info {
+    border-left-color: var(--info);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .toast-container {
+        left: var(--space-3);
+        right: var(--space-3);
+    }
+
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+}

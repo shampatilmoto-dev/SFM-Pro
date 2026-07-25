@@ -1,0 +1,11 @@
+﻿[
+  { "name": "Dashboard", "path": "/dashboard.html", "dataPage": "dashboard", "group": "core" },
+  { "name": "Income", "path": "/pages/income.html", "dataPage": "income", "group": "finance" },
+  { "name": "Expense", "path": "/pages/expense.html", "dataPage": "expense", "group": "finance" },
+  { "name": "Budget", "path": "/pages/budget.html", "dataPage": "budget", "group": "finance" },
+  { "name": "Loans", "path": "/pages/loans.html", "dataPage": "loans", "group": "finance" },
+  { "name": "Credit Cards", "path": "/pages/creditcards.html", "dataPage": "creditcards", "group": "finance" },
+  { "name": "Investments", "path": "/pages/investments.html", "dataPage": "investments", "group": "finance" },
+  { "name": "Reports", "path": "/pages/reports.html", "dataPage": "reports", "group": "analytics" },
+  { "name": "Settings", "path": "/pages/settings.html", "dataPage": "settings", "group": "admin" }
+]

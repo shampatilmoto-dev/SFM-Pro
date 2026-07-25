@@ -189,6 +189,30 @@ const BudgetController = {
         return parts.join(" ").trim() || fallback;
     },
 
+    // Enterprise integration: route feedback through NotificationManager with graceful fallback.
+    notify(type, message) {
+        if (window.NotificationManager && typeof NotificationManager[type] === "function") {
+            NotificationManager[type](message);
+            return;
+        }
+
+        this.showMessage(message, type);
+    },
+
+    // Enterprise integration: show loader before save/update/delete operations.
+    showOperationLoader(message) {
+        if (window.LoaderManager && typeof LoaderManager.show === "function") {
+            LoaderManager.show(message);
+        }
+    },
+
+    // Enterprise integration: hide loader after save/update/delete operations.
+    hideOperationLoader() {
+        if (window.LoaderManager && typeof LoaderManager.hide === "function") {
+            LoaderManager.hide();
+        }
+    },
+
     loadBudgets() {
         this.budgets = BudgetService.loadBudgets();
         this.render();
@@ -254,39 +278,51 @@ const BudgetController = {
         const budget = this.getFormData();
         let operation;
 
-        if (this.currentBudgetId) {
-            operation = this.normalizeServiceResult(
-                BudgetService.updateBudget(this.currentBudgetId, budget),
-                "Budget updated successfully.",
-                "Unable to update budget."
-            );
-        } else {
-            operation = this.normalizeServiceResult(
-                BudgetService.addBudget(budget),
-                "Budget added successfully.",
-                "Unable to save budget."
-            );
+        // Enterprise integration: show loader before save/update operation starts.
+        this.showOperationLoader(this.currentBudgetId ? "Updating budget..." : "Saving budget...");
+
+        try {
+
+            if (this.currentBudgetId) {
+                operation = this.normalizeServiceResult(
+                    BudgetService.updateBudget(this.currentBudgetId, budget),
+                    "Budget updated successfully.",
+                    "Unable to update budget."
+                );
+            } else {
+                operation = this.normalizeServiceResult(
+                    BudgetService.addBudget(budget),
+                    "Budget added successfully.",
+                    "Unable to save budget."
+                );
+            }
+
+            if (!operation.success) {
+                const fallback = this.currentBudgetId
+                    ? "Unable to update budget."
+                    : "Unable to save budget.";
+                const errorMessage = this.getDisplayMessage(operation, fallback);
+                this.showMessage(errorMessage, "error");
+                this.notify("error", errorMessage);
+                return;
+            }
+
+            const successFallback = this.currentBudgetId
+                ? "Budget updated successfully."
+                : "Budget added successfully.";
+            const successMessage = operation.warnings.length > 0
+                ? this.getDisplayMessage(operation, successFallback)
+                : successFallback;
+
+            this.showMessage(successMessage, operation.warnings.length > 0 ? "warning" : "success");
+            this.notify(operation.warnings.length > 0 ? "warning" : "success", successMessage);
+            this.clearForm();
+            this.loadBudgets();
+            this.refreshDashboard();
+        } finally {
+            // Enterprise integration: hide loader in finally to guarantee cleanup.
+            this.hideOperationLoader();
         }
-
-        if (!operation.success) {
-            const fallback = this.currentBudgetId
-                ? "Unable to update budget."
-                : "Unable to save budget.";
-            this.showMessage(this.getDisplayMessage(operation, fallback), "error");
-            return;
-        }
-
-        const successFallback = this.currentBudgetId
-            ? "Budget updated successfully."
-            : "Budget added successfully.";
-        const successMessage = operation.warnings.length > 0
-            ? this.getDisplayMessage(operation, successFallback)
-            : successFallback;
-
-        this.showMessage(successMessage, operation.warnings.length > 0 ? "warning" : "success");
-        this.clearForm();
-        this.loadBudgets();
-        this.refreshDashboard();
     },
 
     getFormData() {
@@ -321,21 +357,34 @@ const BudgetController = {
             return;
         }
 
-        const operation = this.normalizeServiceResult(
-            BudgetService.deleteBudget(id),
-            "Budget deleted.",
-            "Unable to delete budget."
-        );
+        // Enterprise integration: show loader before delete operation starts.
+        this.showOperationLoader("Deleting budget...");
 
-        if (!operation.success) {
-            this.showMessage(this.getDisplayMessage(operation, "Unable to delete budget."), "error");
-            return;
+        try {
+
+            const operation = this.normalizeServiceResult(
+                BudgetService.deleteBudget(id),
+                "Budget deleted.",
+                "Unable to delete budget."
+            );
+
+            if (!operation.success) {
+                const errorMessage = this.getDisplayMessage(operation, "Unable to delete budget.");
+                this.showMessage(errorMessage, "error");
+                this.notify("error", errorMessage);
+                return;
+            }
+
+            const successMessage = this.getDisplayMessage(operation, "Budget deleted.");
+            this.showMessage(successMessage, "success");
+            this.notify("success", successMessage);
+            this.clearForm();
+            this.loadBudgets();
+            this.refreshDashboard();
+        } finally {
+            // Enterprise integration: hide loader in finally to guarantee cleanup.
+            this.hideOperationLoader();
         }
-
-        this.showMessage(this.getDisplayMessage(operation, "Budget deleted."), "success");
-        this.clearForm();
-        this.loadBudgets();
-        this.refreshDashboard();
     },
 
     clearForm() {

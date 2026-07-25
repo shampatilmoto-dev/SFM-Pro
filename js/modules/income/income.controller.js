@@ -197,6 +197,36 @@ const IncomeController = {
         return parts.join(" ").trim() || fallback;
     },
 
+    // Enterprise integration: centralize notification delivery through NotificationManager.
+    notify(type, message) {
+        if (window.NotificationManager && typeof NotificationManager[type] === "function") {
+            NotificationManager[type](message);
+            return;
+        }
+
+        // Enterprise integration fallback: preserve legacy feedback if manager is not available.
+        if (typeof window.alert === "function") {
+            window.alert(message);
+            return;
+        }
+
+        console.log(message);
+    },
+
+    // Enterprise integration: show loader for potentially long save/update/delete operations.
+    showOperationLoader(message) {
+        if (window.LoaderManager && typeof LoaderManager.show === "function") {
+            LoaderManager.show(message);
+        }
+    },
+
+    // Enterprise integration: always hide loader when operation is complete.
+    hideOperationLoader() {
+        if (window.LoaderManager && typeof LoaderManager.hide === "function") {
+            LoaderManager.hide();
+        }
+    },
+
     renderIncomeTable(incomes) {
         if (!this.elements.tableBody) {
             return;
@@ -270,6 +300,9 @@ const IncomeController = {
             return;
         }
 
+        // Enterprise integration: display loader while save/update operation is in progress.
+        this.showOperationLoader(this.currentIncomeId ? "Updating income..." : "Saving income...");
+
         try {
             if (this.currentIncomeId) {
                 income.id = this.currentIncomeId;
@@ -281,7 +314,7 @@ const IncomeController = {
                 );
 
                 if (!operation.success) {
-                    alert(this.getDisplayMessage(operation, "Unable to update income."));
+                    this.notify("error", this.getDisplayMessage(operation, "Unable to update income."));
                     return;
                 }
 
@@ -289,7 +322,7 @@ const IncomeController = {
                     ? this.getDisplayMessage(operation, "Income updated successfully.")
                     : "Income updated successfully.";
 
-                alert(updateMessage);
+                this.notify(operation.warnings.length > 0 ? "warning" : "success", updateMessage);
             } else {
                 const operation = this.normalizeServiceResult(
                     IncomeService.createIncome(income),
@@ -298,7 +331,7 @@ const IncomeController = {
                 );
 
                 if (!operation.success) {
-                    alert(this.getDisplayMessage(operation, "Unable to save income."));
+                    this.notify("error", this.getDisplayMessage(operation, "Unable to save income."));
                     return;
                 }
 
@@ -306,7 +339,7 @@ const IncomeController = {
                     ? this.getDisplayMessage(operation, "Income saved successfully.")
                     : "Income saved successfully.";
 
-                alert(saveMessage);
+                this.notify(operation.warnings.length > 0 ? "warning" : "success", saveMessage);
             }
 
             this.loadIncomes();
@@ -318,7 +351,10 @@ const IncomeController = {
                 : this.normalizeServiceResult({ error: error?.message || "Unable to save income." }, "Unable to save income.", "Unable to save income.");
 
             console.error(error);
-            alert(this.getDisplayMessage(normalizedError, "Unable to save income."));
+            this.notify("error", this.getDisplayMessage(normalizedError, "Unable to save income."));
+        } finally {
+            // Enterprise integration: loader is hidden even when operation fails.
+            this.hideOperationLoader();
         }
     },
 
@@ -357,6 +393,9 @@ const IncomeController = {
             return;
         }
 
+        // Enterprise integration: display loader while delete operation is in progress.
+        this.showOperationLoader("Deleting income...");
+
         try {
             const operation = this.normalizeServiceResult(
                 IncomeService.deleteIncome(id),
@@ -365,7 +404,7 @@ const IncomeController = {
             );
 
             if (!operation.success) {
-                alert(this.getDisplayMessage(operation, "Unable to delete income."));
+                this.notify("error", this.getDisplayMessage(operation, "Unable to delete income."));
                 return;
             }
 
@@ -373,7 +412,7 @@ const IncomeController = {
                 ? this.getDisplayMessage(operation, "Income deleted successfully.")
                 : "Income deleted successfully.";
 
-            alert(deleteMessage);
+            this.notify(operation.warnings.length > 0 ? "warning" : "success", deleteMessage);
             this.loadIncomes();
             this.resetForm();
             this.refreshDashboard();
@@ -383,7 +422,10 @@ const IncomeController = {
                 : this.normalizeServiceResult({ error: error?.message || "Unable to delete income." }, "Unable to delete income.", "Unable to delete income.");
 
             console.error(error);
-            alert(this.getDisplayMessage(normalizedError, "Unable to delete income."));
+            this.notify("error", this.getDisplayMessage(normalizedError, "Unable to delete income."));
+        } finally {
+            // Enterprise integration: loader is hidden even when operation fails.
+            this.hideOperationLoader();
         }
     },
 
@@ -448,7 +490,8 @@ const IncomeController = {
         const notes = this.elements.incomeNotes?.value.trim() || "";
 
         if (!source || !category || !date || amount <= 0) {
-            alert("Please fill all required fields.");
+            // Enterprise integration: validation feedback is surfaced through NotificationManager.
+            this.notify("warning", "Please fill all required fields.");
             return null;
         }
 

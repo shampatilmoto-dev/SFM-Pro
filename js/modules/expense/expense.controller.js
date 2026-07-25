@@ -208,6 +208,30 @@ const ExpenseController = {
         return parts.join(" ").trim() || fallback;
     },
 
+    // Enterprise integration: route user notifications through NotificationManager with graceful fallback.
+    notify(type, message) {
+        if (window.NotificationManager && typeof NotificationManager[type] === "function") {
+            NotificationManager[type](message);
+            return;
+        }
+
+        this.showMessage(message, type);
+    },
+
+    // Enterprise integration: show loader for save/update/delete operations.
+    showOperationLoader(message) {
+        if (window.LoaderManager && typeof LoaderManager.show === "function") {
+            LoaderManager.show(message);
+        }
+    },
+
+    // Enterprise integration: hide loader when save/update/delete operation completes.
+    hideOperationLoader() {
+        if (window.LoaderManager && typeof LoaderManager.hide === "function") {
+            LoaderManager.hide();
+        }
+    },
+
     render() {
         const filters = {
             category: this.elements.filterCategory?.value || "",
@@ -280,45 +304,60 @@ const ExpenseController = {
     handleSave() {
         const expense = this.getFormData();
 
-        if (this.currentExpenseId) {
-            const operation = this.normalizeServiceResult(
-                ExpenseService.updateExpense(this.currentExpenseId, expense),
-                "Expense updated successfully.",
-                "Unable to update expense."
-            );
+        // Enterprise integration: show loader before save/update starts.
+        this.showOperationLoader(this.currentExpenseId ? "Updating expense..." : "Saving expense...");
 
-            if (!operation.success) {
-                this.showMessage(this.getDisplayMessage(operation, "Unable to update expense."), "error");
-                return;
+        try {
+
+            if (this.currentExpenseId) {
+                const operation = this.normalizeServiceResult(
+                    ExpenseService.updateExpense(this.currentExpenseId, expense),
+                    "Expense updated successfully.",
+                    "Unable to update expense."
+                );
+
+                if (!operation.success) {
+                    const errorMessage = this.getDisplayMessage(operation, "Unable to update expense.");
+                    this.showMessage(errorMessage, "error");
+                    this.notify("error", errorMessage);
+                    return;
+                }
+
+                const updateMessage = operation.warnings.length > 0
+                    ? this.getDisplayMessage(operation, "Expense updated successfully.")
+                    : "Expense updated successfully.";
+
+                this.showMessage(updateMessage, operation.warnings.length > 0 ? "warning" : "success");
+                this.notify(operation.warnings.length > 0 ? "warning" : "success", updateMessage);
+            } else {
+                const operation = this.normalizeServiceResult(
+                    ExpenseService.addExpense(expense),
+                    "Expense added successfully.",
+                    "Unable to save expense."
+                );
+
+                if (!operation.success) {
+                    const errorMessage = this.getDisplayMessage(operation, "Unable to save expense.");
+                    this.showMessage(errorMessage, "error");
+                    this.notify("error", errorMessage);
+                    return;
+                }
+
+                const saveMessage = operation.warnings.length > 0
+                    ? this.getDisplayMessage(operation, "Expense added successfully.")
+                    : "Expense added successfully.";
+
+                this.showMessage(saveMessage, operation.warnings.length > 0 ? "warning" : "success");
+                this.notify(operation.warnings.length > 0 ? "warning" : "success", saveMessage);
             }
 
-            const updateMessage = operation.warnings.length > 0
-                ? this.getDisplayMessage(operation, "Expense updated successfully.")
-                : "Expense updated successfully.";
-
-            this.showMessage(updateMessage, operation.warnings.length > 0 ? "warning" : "success");
-        } else {
-            const operation = this.normalizeServiceResult(
-                ExpenseService.addExpense(expense),
-                "Expense added successfully.",
-                "Unable to save expense."
-            );
-
-            if (!operation.success) {
-                this.showMessage(this.getDisplayMessage(operation, "Unable to save expense."), "error");
-                return;
-            }
-
-            const saveMessage = operation.warnings.length > 0
-                ? this.getDisplayMessage(operation, "Expense added successfully.")
-                : "Expense added successfully.";
-
-            this.showMessage(saveMessage, operation.warnings.length > 0 ? "warning" : "success");
+            this.clearForm();
+            this.loadExpenses();
+            this.refreshDashboard();
+        } finally {
+            // Enterprise integration: hide loader in finally to guarantee cleanup.
+            this.hideOperationLoader();
         }
-
-        this.clearForm();
-        this.loadExpenses();
-        this.refreshDashboard();
     },
 
     getFormData() {
@@ -355,21 +394,34 @@ const ExpenseController = {
             return;
         }
 
-        const operation = this.normalizeServiceResult(
-            ExpenseService.deleteExpense(id),
-            "Expense deleted.",
-            "Unable to delete expense."
-        );
+        // Enterprise integration: show loader before delete starts.
+        this.showOperationLoader("Deleting expense...");
 
-        if (!operation.success) {
-            this.showMessage(this.getDisplayMessage(operation, "Unable to delete expense."), "error");
-            return;
+        try {
+
+            const operation = this.normalizeServiceResult(
+                ExpenseService.deleteExpense(id),
+                "Expense deleted.",
+                "Unable to delete expense."
+            );
+
+            if (!operation.success) {
+                const errorMessage = this.getDisplayMessage(operation, "Unable to delete expense.");
+                this.showMessage(errorMessage, "error");
+                this.notify("error", errorMessage);
+                return;
+            }
+
+            const successMessage = this.getDisplayMessage(operation, "Expense deleted.");
+            this.showMessage(successMessage, "success");
+            this.notify("success", successMessage);
+            this.clearForm();
+            this.loadExpenses();
+            this.refreshDashboard();
+        } finally {
+            // Enterprise integration: hide loader in finally to guarantee cleanup.
+            this.hideOperationLoader();
         }
-
-        this.showMessage(this.getDisplayMessage(operation, "Expense deleted."), "success");
-        this.clearForm();
-        this.loadExpenses();
-        this.refreshDashboard();
     },
 
     clearForm() {

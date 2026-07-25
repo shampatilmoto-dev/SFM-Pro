@@ -1,0 +1,107 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   CSS Reset
+   File: css/core/reset.css
+   ========================================================= */
+
+/* Box Model */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Root */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+/* Body */
+body {
+    min-height: 100vh;
+    font-family: var(--font-family);
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Images */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Media */
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Links */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Lists */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Buttons */
+button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+}
+
+/* Paragraphs */
+p {
+    margin: 0;
+}
+
+/* Utility */
+[hidden] {
+    display: none !important;
+}

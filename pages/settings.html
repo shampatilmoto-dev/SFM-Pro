@@ -1,197 +1,340 @@
-<!DOCTYPE html>
-<html lang='en'>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>SFM PRO Enterprise | Settings</title>
-    <link rel='preconnect' href='https://fonts.googleapis.com'>
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' rel='stylesheet'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css'>
-    <link rel='stylesheet' href='../css/common.css'>
-    <link rel='stylesheet' href='../css/module.css'>
-    <link rel='stylesheet' href='../css/settings.css'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SFM PRO Enterprise | Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/module.css">
+<link rel="stylesheet" href="../css/settings.css">
 </head>
-<body data-page='settings'>
-    <a class='skip-link' href='#settingsContent'>Skip to settings</a>
+<body data-page="settings">
+<a class="skip-link-dashboard" href="#settingsContent">Skip to settings content</a>
+<div class="app settings-app">
+  <aside class="sidebar enterprise-sidebar" aria-label="Primary navigation">
+    <div class="logo sidebar-brand">
+      <div class="logo-icon brand-mark"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+      <div class="logo-text"><h2>SFM PRO Enterprise</h2><span>v6.0 Manager Layer</span></div>
+    </div>
+    <nav class="sidebar-menu sidebar-nav">
+      <a href="../dashboard.html"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Dashboard</span></a>
+      <a href="income.html"><i class="fa-solid fa-money-bill-trend-up" aria-hidden="true"></i><span>Income</span></a>
+      <a href="expense.html"><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i><span>Expenses</span></a>
+      <a href="budget.html"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Budget</span></a>
+      <a href="loans.html"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span>Loans</span></a>
+      <a href="creditcards.html"><i class="fa-regular fa-credit-card" aria-hidden="true"></i><span>Credit Cards</span></a>
+      <a href="investments.html"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Investments</span></a>
+      <a href="reports.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i><span>Reports</span></a>
+      <a href="settings.html" class="active" aria-current="page"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer sidebar-profile-card">
+      <div class="user-card sidebar-profile-meta">
+        <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+        <div><h4>Sham Patil</h4><small>Administrator</small></div>
+      </div>
+      <a class="sidebar-logout" href="../login.html"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Logout</span></a>
+    </div>
+  </aside>
 
-    <main class='settings-shell' id='settingsContent'>
-        <header class='settings-header'>
-            <div class='settings-brand'>
-                <span class='settings-brand-icon' aria-hidden='true'><i class='fa-solid fa-wallet'></i></span>
+  <main class="main-content settings-shell" id="settingsContent">
+    <header class="top-header enterprise-header settings-header" aria-label="Settings header">
+      <div class="header-left header-copy">
+        <button class="menu-btn icon-button" type="button" aria-label="Toggle navigation"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+        <div>
+          <nav class="module-breadcrumb header-breadcrumb" aria-label="Breadcrumb">
+            <span>Administration</span><i class="fa-solid fa-angle-right" aria-hidden="true"></i><span>Settings</span>
+          </nav>
+          <h1>Settings</h1>
+          <p>Manage workspace preferences, security posture, backups, and system-level application settings.</p>
+        </div>
+      </div>
+      <div class="header-center header-actions">
+        <div class="search-box header-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" aria-label="Search settings" placeholder="Search settings, sections, or preferences..." autocomplete="off">
+        </div>
+      </div>
+      <div class="header-right header-actions">
+        <button class="header-btn icon-button" type="button" aria-label="Notifications"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+        <button class="header-btn icon-button" type="button" aria-label="Toggle theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+        <button class="profile-chip" type="button" aria-label="Open profile">
+          <span class="profile-chip-avatar">SP</span>
+          <span><strong>Sham Patil</strong><small>Administrator</small></span>
+        </button>
+        <button class="header-btn header-back" type="button" aria-label="Back to dashboard" onclick="location.href='../dashboard.html'"><i class="fa-solid fa-house" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="page-container settings-page">
+      <section class="module-hero card-shell settings-hero" aria-label="Settings overview">
+        <div>
+          <div class="module-breadcrumb" aria-label="Breadcrumb">
+            <span>Administration</span><i class="fa-solid fa-angle-right" aria-hidden="true"></i><span>Settings Center</span>
+          </div>
+          <h2><i class="fa-solid fa-sliders" aria-hidden="true"></i> Enterprise Settings Center</h2>
+          <p>Centralize profile preferences, security controls, backup actions, and system information in one polished workspace.</p>
+        </div>
+        <div class="module-hero-actions hero-metrics" aria-label="Settings status overview">
+          <div><span>Profile status</span><strong>Verified</strong></div>
+          <div><span>Security status</span><strong>Hardened</strong></div>
+          <div><span>System health</span><strong>98%</strong></div>
+        </div>
+      </section>
+
+      <section class="kpi-grid-premium settings-kpi-grid" aria-label="Settings KPI cards">
+        <article class="kpi-premium-card accent-primary">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-user-check" aria-hidden="true"></i></div><span class="kpi-trend up">Stable</span></div>
+          <span>Profile Status</span><strong>Verified</strong>
+          <small>Identity and workspace profile are current.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 24 C16 20, 24 10, 38 12 S64 24, 78 16 S104 8, 120 10"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-success">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><span class="kpi-trend up">Protected</span></div>
+          <span>Security Status</span><strong>Hardened</strong>
+          <small>Authentication and privacy settings are active.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 28 C16 22, 30 18, 42 18 S68 8, 84 12 S102 20, 120 8"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-warning">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-laptop" aria-hidden="true"></i></div><span class="kpi-trend up">3 devices</span></div>
+          <span>Active Sessions</span><strong>3</strong>
+          <small>Browser sessions currently connected to this workspace.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 26 C14 24, 26 14, 40 16 S66 26, 82 20 S104 12, 120 14"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-primary">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-bell" aria-hidden="true"></i></div><span class="kpi-trend up">Enabled</span></div>
+          <span>Notification Status</span><strong>On</strong>
+          <small>In-app alerts and reminders are active.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 30 C18 24, 30 20, 42 22 S70 10, 84 16 S102 8, 120 12"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-success">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div><span class="kpi-trend up">Synced</span></div>
+          <span>Backup Status</span><strong>Up to Date</strong>
+          <small>Latest backup is available for restore.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 20 C14 18, 28 10, 42 14 S70 28, 86 20 S102 10, 120 8"></path></svg>
+        </article>
+        <article class="kpi-premium-card accent-purple">
+          <div class="kpi-topline"><div class="kpi-icon"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div><span class="kpi-trend up">Healthy</span></div>
+          <span>System Health</span><strong>98%</strong>
+          <small>Core services and storage are stable.</small>
+          <svg class="kpi-sparkline" viewBox="0 0 120 34" aria-hidden="true"><path d="M0 22 C16 18, 30 22, 42 14 S68 8, 84 16 S104 12, 120 6"></path></svg>
+        </article>
+      </section>
+
+      <div id="settingsStatus" class="settings-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <form id="settingsForm" novalidate>
+        <div class="settings-grid">
+          <section class="settings-card settings-card-wide settings-profile-card" aria-labelledby="profileTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-user-gear"></i></span>
+              <div>
+                <p class="eyebrow">Profile</p>
+                <h2 id="profileTitle">Personal Information</h2>
+                <p>View a clean profile snapshot alongside contact and workspace identity details.</p>
+              </div>
+            </div>
+            <div class="profile-overview">
+              <div class="profile-avatar-panel">
+                <div class="profile-avatar" aria-hidden="true">SP</div>
                 <div>
-                    <p class='eyebrow'>SFM PRO Enterprise</p>
-                    <h1>Settings</h1>
-                    <p>Manage your local workspace preferences.</p>
+                  <strong>Sham Patil</strong>
+                  <span>Administrator · SFM PRO Enterprise</span>
                 </div>
+              </div>
+              <div class="profile-meta-grid">
+                <div>
+                  <span>Profile image</span>
+                  <strong>Managed within enterprise branding</strong>
+                </div>
+                <div>
+                  <span>Contact information</span>
+                  <strong>sham.patil@sfmpro.enterprise</strong>
+                </div>
+                <div>
+                  <span>Workspace role</span>
+                  <strong>Full administrative access</strong>
+                </div>
+              </div>
             </div>
-            <a class='dashboard-link' href='../dashboard.html'>
-                <i class='fa-solid fa-arrow-left' aria-hidden='true'></i>
-                Dashboard
-            </a>
-        </header>
+          </section>
 
-        <section class='settings-intro' aria-labelledby='settingsIntroTitle'>
-            <div>
-                <p class='eyebrow'>Workspace controls</p>
-                <h2 id='settingsIntroTitle'>Personalize SFM PRO with confidence</h2>
-                <p>Preferences are saved securely in this browser. Financial records are never changed from this page.</p>
+          <section class="settings-card settings-card-wide" aria-labelledby="preferencesTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-palette"></i></span>
+              <div>
+                <p class="eyebrow">Appearance</p>
+                <h2 id="preferencesTitle">Application Preferences</h2>
+                <p>Set the values used when SFM PRO presents financial information.</p>
+              </div>
             </div>
-            <i class='fa-solid fa-sliders' aria-hidden='true'></i>
-        </section>
-
-        <div id='settingsStatus' class='settings-status' role='status' aria-live='polite' aria-atomic='true'></div>
-
-        <form id='settingsForm' novalidate>
-            <div class='settings-grid'>
-                <section class='settings-card settings-card-wide' aria-labelledby='preferencesTitle'>
-                    <div class='settings-card-heading'>
-                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-sliders'></i></span>
-                        <div>
-                            <h2 id='preferencesTitle'>Application Preferences</h2>
-                            <p>Set the values used when SFM PRO presents financial information.</p>
-                        </div>
-                    </div>
-
-                    <div class='settings-fields'>
-                        <div class='settings-field'>
-                            <label for='settingsCurrency'>Currency</label>
-                            <select id='settingsCurrency' name='currency' required>
-                                <option value='INR'>Indian Rupee (INR)</option>
-                                <option value='USD'>US Dollar (USD)</option>
-                                <option value='EUR'>Euro (EUR)</option>
-                                <option value='GBP'>British Pound (GBP)</option>
-                            </select>
-                        </div>
-
-                        <div class='settings-field'>
-                            <label for='settingsDateFormat'>Date Format</label>
-                            <select id='settingsDateFormat' name='dateFormat' required>
-                                <option value='DD/MM/YYYY'>DD/MM/YYYY</option>
-                                <option value='MM/DD/YYYY'>MM/DD/YYYY</option>
-                                <option value='YYYY-MM-DD'>YYYY-MM-DD</option>
-                            </select>
-                        </div>
-
-                        <div class='settings-field'>
-                            <label for='settingsDecimalPlaces'>Decimal Places</label>
-                            <select id='settingsDecimalPlaces' name='decimalPlaces' required>
-                                <option value='0'>0</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
-
-                <section class='settings-card' aria-labelledby='themeTitle'>
-                    <div class='settings-card-heading'>
-                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-circle-half-stroke'></i></span>
-                        <div>
-                            <h2 id='themeTitle'>Theme</h2>
-                            <p>Choose the interface appearance.</p>
-                        </div>
-                    </div>
-
-                    <fieldset class='theme-options'>
-                        <legend>Color preference</legend>
-                        <label class='theme-option' for='settingsThemeLight'>
-                            <input id='settingsThemeLight' type='radio' name='theme' value='light' required>
-                            <span><i class='fa-solid fa-sun' aria-hidden='true'></i> Light</span>
-                        </label>
-                        <label class='theme-option' for='settingsThemeDark'>
-                            <input id='settingsThemeDark' type='radio' name='theme' value='dark'>
-                            <span><i class='fa-solid fa-moon' aria-hidden='true'></i> Dark</span>
-                        </label>
-                    </fieldset>
-                </section>
-
-                <section class='settings-card' aria-labelledby='notificationsTitle'>
-                    <div class='settings-card-heading'>
-                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-bell'></i></span>
-                        <div>
-                            <h2 id='notificationsTitle'>Notifications</h2>
-                            <p>Local display preferences only.</p>
-                        </div>
-                    </div>
-
-                    <div class='toggle-list'>
-                        <label class='toggle-row' for='settingsNotificationsEnabled'>
-                            <span>
-                                <strong>Notification centre</strong>
-                                <small>Show financial alerts in the application UI.</small>
-                            </span>
-                            <input id='settingsNotificationsEnabled' type='checkbox' role='switch'>
-                        </label>
-                        <label class='toggle-row' for='settingsDueDateReminders'>
-                            <span>
-                                <strong>Due-date reminders</strong>
-                                <small>Show upcoming payment reminders in the application UI.</small>
-                            </span>
-                            <input id='settingsDueDateReminders' type='checkbox' role='switch'>
-                        </label>
-                    </div>
-                    <p class='settings-hint'><i class='fa-solid fa-circle-info' aria-hidden='true'></i> SFM PRO does not send email, push, or background notifications from this setting.</p>
-                </section>
-
-                <section class='settings-card settings-card-wide' aria-labelledby='dataTitle'>
-                    <div class='settings-card-heading'>
-                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-database'></i></span>
-                        <div>
-                            <h2 id='dataTitle'>Data Management</h2>
-                            <p>Financial records remain in this browser until you deliberately export, restore, or clear them using supported workflows.</p>
-                        </div>
-                    </div>
-
-                    <div class='data-actions'>
-                        <a id='backupRestoreShortcut' class='action-link action-link-primary' href='../dashboard.html#backupRestoreTitle'>
-                            <i class='fa-solid fa-box-archive' aria-hidden='true'></i>
-                            <span><strong>Backup &amp; Restore</strong><small>Export a protected backup or restore a validated JSON file.</small></span>
-                            <i class='fa-solid fa-arrow-right' aria-hidden='true'></i>
-                        </a>
-                        <details class='storage-guidance'>
-                            <summary><i class='fa-solid fa-shield-halved' aria-hidden='true'></i> Local data guidance</summary>
-                            <p>Use Backup &amp; Restore before clearing browser data or changing devices. This page intentionally does not delete financial records, preventing accidental loss of business data.</p>
-                        </details>
-                    </div>
-                </section>
-
-                <section class='settings-card settings-card-wide' aria-labelledby='aboutTitle'>
-                    <div class='settings-card-heading'>
-                        <span class='settings-card-icon' aria-hidden='true'><i class='fa-solid fa-circle-info'></i></span>
-                        <div>
-                            <h2 id='aboutTitle'>About SFM PRO</h2>
-                            <p>Enterprise personal finance management for clear, informed decisions.</p>
-                        </div>
-                    </div>
-
-                    <dl class='about-list'>
-                        <div><dt>Product</dt><dd>SFM PRO Enterprise</dd></div>
-                        <div><dt>Release</dt><dd>SFM PRO Enterprise v4.0</dd></div>
-                        <div><dt>Backup format</dt><dd>v3.3–v3.5 compatible</dd></div>
-                        <div><dt>Preference storage</dt><dd>This browser only</dd></div>
-                    </dl>
-                </section>
+            <div class="settings-fields">
+              <div class="settings-field">
+                <label for="settingsCurrency">Currency</label>
+                <select id="settingsCurrency" name="currency" required>
+                  <option value="INR">Indian Rupee (INR)</option>
+                  <option value="USD">US Dollar (USD)</option>
+                  <option value="EUR">Euro (EUR)</option>
+                  <option value="GBP">British Pound (GBP)</option>
+                </select>
+              </div>
+              <div class="settings-field">
+                <label for="settingsDateFormat">Date Format</label>
+                <select id="settingsDateFormat" name="dateFormat" required>
+                  <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                  <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                  <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                </select>
+              </div>
+              <div class="settings-field">
+                <label for="settingsDecimalPlaces">Decimal Places</label>
+                <select id="settingsDecimalPlaces" name="decimalPlaces" required>
+                  <option value="0">0</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
             </div>
+            <fieldset class="theme-options">
+              <legend id="themeTitle">Theme</legend>
+              <label class="theme-option" for="settingsThemeLight">
+                <input id="settingsThemeLight" type="radio" name="theme" value="light" required>
+                <span><i class="fa-solid fa-sun" aria-hidden="true"></i> Light</span>
+              </label>
+              <label class="theme-option" for="settingsThemeDark">
+                <input id="settingsThemeDark" type="radio" name="theme" value="dark">
+                <span><i class="fa-solid fa-moon" aria-hidden="true"></i> Dark</span>
+              </label>
+            </fieldset>
+          </section>
 
-            <div class='settings-actions' aria-label='Settings actions'>
-                <button id='saveSettingsBtn' type='submit' class='settings-button settings-button-primary'>
-                    <i class='fa-solid fa-floppy-disk' aria-hidden='true'></i> Save Preferences
-                </button>
-                <button id='resetSettingsBtn' type='button' class='settings-button settings-button-secondary'>
-                    <i class='fa-solid fa-rotate-left' aria-hidden='true'></i> Restore Defaults
-                </button>
+          <section class="settings-card" aria-labelledby="notificationsTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-bell"></i></span>
+              <div>
+                <p class="eyebrow">Notifications</p>
+                <h2 id="notificationsTitle">Notification Center</h2>
+                <p>Local display preferences only.</p>
+              </div>
             </div>
-        </form>
+            <div class="toggle-list">
+              <label class="toggle-row" for="settingsNotificationsEnabled">
+                <span>
+                  <strong>Email Notifications</strong>
+                  <small>Show financial alerts in the application UI.</small>
+                </span>
+                <input id="settingsNotificationsEnabled" type="checkbox" role="switch">
+              </label>
+              <label class="toggle-row" for="settingsDueDateReminders">
+                <span>
+                  <strong>Reminder Preferences</strong>
+                  <small>Show upcoming payment reminders in the application UI.</small>
+                </span>
+                <input id="settingsDueDateReminders" type="checkbox" role="switch">
+              </label>
+            </div>
+            <p class="settings-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> SFM PRO does not send email, push, or background notifications from this setting.</p>
+          </section>
 
-        <footer class='settings-footer'>
-            <span id='settingsSavedAt'>Preferences load automatically when this page opens.</span>
-            <a href='../dashboard.html'>Return to dashboard</a>
-        </footer>
-    </main>
+          <section class="settings-card" aria-labelledby="securitySectionTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              <div>
+                <p class="eyebrow">Security</p>
+                <h2 id="securitySectionTitle">Security Controls</h2>
+                <p>Review account protection, session awareness, and privacy posture.</p>
+              </div>
+            </div>
+            <div class="security-stack">
+              <div class="security-item"><strong>Change Password</strong><span>Use a strong enterprise-compliant password policy.</span></div>
+              <div class="security-item"><strong>Two-Factor Authentication</strong><span>Recommended for administrative access.</span></div>
+              <div class="security-item"><strong>Login Sessions</strong><span>Monitor active browser sessions and device access.</span></div>
+              <div class="security-item"><strong>Privacy Settings</strong><span>Review visibility and retention preferences.</span></div>
+            </div>
+          </section>
 
-    <script src='../js/core/config.js'></script>
-    <script src='../js/modules/dashboard/settings.manager.js'></script>
-    <script src='../js/modules/dashboard/settings.controller.js'></script>
+          <section class="settings-card settings-card-wide" aria-labelledby="dataTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-database"></i></span>
+              <div>
+                <p class="eyebrow">Backup &amp; Restore</p>
+                <h2 id="dataTitle">Data Management</h2>
+                <p>Financial records remain in this browser until you deliberately export, restore, or clear them using supported workflows.</p>
+              </div>
+            </div>
+            <div class="data-actions">
+              <a id="backupRestoreShortcut" class="action-link action-link-primary" href='../dashboard.html#backupRestoreTitle'>
+                <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                <span><strong>Backup &amp; Restore</strong><small>Export a protected backup or restore a validated JSON file.</small></span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+              <div class="backup-utility-grid" aria-label="Backup utilities">
+                <div class="backup-utility"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><span>Manual Backup</span></div>
+                <div class="backup-utility"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>Automatic Backup</span></div>
+                <div class="backup-utility"><i class="fa-solid fa-file-export" aria-hidden="true"></i><span>Export Data</span></div>
+                <div class="backup-utility"><i class="fa-solid fa-file-import" aria-hidden="true"></i><span>Restore Data</span></div>
+              </div>
+              <details class="storage-guidance">
+                <summary><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Local data guidance</summary>
+                <p>Use Backup &amp; Restore before clearing browser data or changing devices. This page intentionally does not delete financial records, preventing accidental loss of business data.</p>
+              </details>
+            </div>
+          </section>
+
+          <section class="settings-card settings-card-wide" aria-labelledby="aboutTitle">
+            <div class="settings-card-heading">
+              <span class="settings-card-icon" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
+              <div>
+                <p class="eyebrow">System</p>
+                <h2 id="aboutTitle">About SFM PRO</h2>
+                <p>Enterprise personal finance management for clear, informed decisions.</p>
+              </div>
+            </div>
+            <dl class="about-list">
+              <div><dt>Product</dt><dd>SFM PRO Enterprise</dd></div>
+              <div><dt>Release</dt><dd>SFM PRO Enterprise v4.0</dd></div>
+              <div><dt>Backup format</dt><dd>v3.3–v3.5 compatible</dd></div>
+              <div><dt>Preference storage</dt><dd>This browser only</dd></div>
+              <div><dt>Storage usage</dt><dd>Lightweight local state</dd></div>
+              <div><dt>Cache status</dt><dd>Optimized for session reuse</dd></div>
+              <div><dt>Database status</dt><dd>Local module storage ready</dd></div>
+              <div><dt>System health</dt><dd>Operational</dd></div>
+            </dl>
+          </section>
+        </div>
+
+        <div class="settings-actions settings-quick-actions" aria-label="Settings actions">
+          <button id="saveSettingsBtn" type="submit" class="settings-button settings-button-primary">
+            <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Settings
+          </button>
+          <button id="resetSettingsBtn" type="button" class="settings-button settings-button-secondary">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset Settings
+          </button>
+          <button type="button" class="settings-button settings-button-secondary">
+            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Backup Data
+          </button>
+          <button type="button" class="settings-button settings-button-secondary">
+            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Restore Data
+          </button>
+          <button type="button" class="settings-button settings-button-secondary">
+            <i class="fa-solid fa-file-export" aria-hidden="true"></i> Export Settings
+          </button>
+        </div>
+      </form>
+
+      <footer class="settings-footer">
+        <span id="settingsSavedAt">Preferences load automatically when this page opens.</span>
+        <a href="../dashboard.html">Return to dashboard</a>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../js/core/config.js"></script>
+<script src="../js/modules/dashboard/settings.manager.js"></script>
+<script src="../js/modules/dashboard/settings.controller.js"></script>
 </body>
 </html>

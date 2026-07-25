@@ -1,0 +1,20 @@
+﻿{
+  "name": "sfm-pro-enterprise-qa-framework",
+  "version": "6.1.0",
+  "private": true,
+  "description": "Enterprise QA framework for SFM PRO Enterprise",
+  "type": "commonjs",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install chromium firefox msedge"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.1"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}

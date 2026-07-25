@@ -17,19 +17,71 @@ function initializeDashboard() {
         return;
     }
 
+    // Greeting & Date
     setGreeting();
     setCurrentDate();
-    initializeSidebar();
-    initializeDarkMode();
-    initializeProfileMenu();
-    initializeNotifications();
 
+    /*----------------------------------------------
+      Step 1 - Enterprise Layout Manager
+    ----------------------------------------------*/
+    if (window.LayoutManager?.refresh) {
+        LayoutManager.refresh();
+    } else {
+        initializeSidebar();
+    }
+
+    /*----------------------------------------------
+      Step 2 - Keep Existing Dark Mode
+      (ThemeManager integration will be done later)
+    ----------------------------------------------*/
+    initializeDarkMode();
+
+    /*----------------------------------------------
+      Step 3 - Profile Menu
+    ----------------------------------------------*/
+    initializeProfileMenu();
+
+    /*----------------------------------------------
+      Step 4 - Enterprise Notification Manager
+    ----------------------------------------------*/
+    if (window.NotificationManager?.init) {
+        NotificationManager.init();
+    } else {
+        initializeNotifications();
+    }
+
+    /*----------------------------------------------
+      Step 5 - Enterprise Loader
+    ----------------------------------------------*/
+    if (window.LoaderManager?.show) {
+        LoaderManager.show("Loading Dashboard...");
+    }
+
+    // Dashboard Data
     refreshFinance();
     refreshDashboard();
+
+    // Dashboard Events
     initializeDashboardEvents();
+
+    // Utilities
     initializeUtilities();
 
-    console.log("Dashboard Ready");
+    /*----------------------------------------------
+      Step 6 - Hide Loader
+    ----------------------------------------------*/
+    if (window.LoaderManager?.hide) {
+        LoaderManager.hide();
+    }
+
+    /*----------------------------------------------
+      Step 7 - Dashboard Ready Notification
+    ----------------------------------------------*/
+    if (window.NotificationManager?.info) {
+        NotificationManager.info("Dashboard Loaded Successfully");
+    }
+
+    console.log("✔ Dashboard Ready");
 }
 
 /*==================================================

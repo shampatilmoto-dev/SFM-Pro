@@ -1,0 +1,133 @@
+/* =========================================================
+   SFM PRO Enterprise v6.0
+   Header Component
+   File: css/components/header.css
+   ========================================================= */
+
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+
+    height: var(--header-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 var(--space-6);
+
+    background: var(--surface);
+
+    border-bottom: 1px solid var(--border-color);
+
+    box-shadow: var(--shadow-sm);
+
+    z-index: var(--z-sticky);
+}
+
+/* Left Section */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Right Section */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Title */
+.header-title {
+    font-size: var(--font-xl);
+    font-weight: var(--weight-bold);
+    color: var(--text-primary);
+}
+
+/* Subtitle */
+.header-subtitle {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+/* Search */
+.header-search {
+    width: 320px;
+    max-width: 100%;
+}
+
+.header-search input {
+    width: 100%;
+    padding: 10px 14px;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: var(--surface);
+}
+
+.header-search input:focus {
+    border-color: var(--primary);
+}
+
+/* Action Button */
+.header-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition: all var(--transition-normal);
+}
+
+.header-action:hover {
+    background: var(--primary-light);
+}
+
+/* Profile */
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.header-avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+    color: var(--text-white);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: var(--weight-bold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .header {
+        padding: 0 var(--space-3);
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    .header-title {
+        font-size: var(--font-lg);
+    }
+}
