@@ -1,8 +1,8 @@
-﻿"use strict";
+"use strict";
 
 /*==================================================
  SFM PRO Enterprise
- App Controller v5.0 Production Release
+ App Controller v1.0.0 Production
  Part 1 : Core Controller
 ==================================================*/
 
@@ -12,7 +12,7 @@
 
 const APP_ENGINE = {
 
-    version: "v5.0 Production Release",
+    version: "v1.0.0 Production",
 
     name: "SFM Application Controller"
 

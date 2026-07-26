@@ -15,6 +15,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel=stylesheet href=../css/income.css>
+    <link rel="icon" type="image/svg+xml" href="../assets/logo/logo-placeholder.svg">
 </head>
 
 <body data-page="income">
@@ -27,7 +28,7 @@
 
     <div class="page-header">
 
-        <h1>💰 Add Income</h1>
+        <h1><i class="fa-solid fa-arrow-trend-up"></i> Add Income</h1>
 
         <a href="../dashboard.html" class="back-btn">
 
@@ -46,7 +47,7 @@
     <section><div class=section-title><div><small>WORKSPACE</small><h2>Quick actions</h2></div></div><div class=quick-actions><a href=#incomeForm><i class=fa-solid></i><span><b>Add Income</b><small>Create a record</small></span></a><button type=button><i class=fa-solid></i><span><b>Import</b><small>Upload data</small></span></button><button type=button><i class=fa-solid></i><span><b>Export</b><small>Download records</small></span></button><a href=reports.html><i class=fa-solid></i><span><b>Reports</b><small>View reports</small></span></a><button type=button><i class=fa-solid></i><span><b>Print</b><small>Print current view</small></span></button></div></section>
     <!-- Income Form -->
 
-    <form id="incomeForm">
+    <form id="incomeForm" novalidate>
 
         <div class="form-card">
 
@@ -85,7 +86,6 @@
                     <option>Other</option>
 
                 </select>
-                <button class=filter-income type=button>Filter</button>
 
             </div>
 
@@ -223,7 +223,6 @@
 <script src="../js/modules/income/income.engine.js"></script>
 <script src="../js/services/income.service.js"></script>
 <script src="../js/modules/income/income.controller.js"></script>
-
 
 </body>
 </html>

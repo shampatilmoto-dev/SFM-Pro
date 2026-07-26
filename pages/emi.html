@@ -7,18 +7,15 @@
     <title>SFM PRO Enterprise | EMI Tracker</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/module.css">
+    <link rel="stylesheet" href="../css/emi.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/logo/logo-placeholder.svg">
 </head>
 
 <body data-page="emi">
     <div class="page-container">
-        <div class="page-header">
-            <h1><i class="fa-solid fa-calendar-check"></i> EMI Tracker</h1>
-            <button type="button" onclick="location.href='../dashboard.html'">&larr; Dashboard</button>
-        </div>
-
-        <section class="card">
-            <h2>Add EMI</h2>
+        <header class="emi-header"><div class="emi-header-copy"><nav aria-label="Breadcrumb"><a href="../dashboard.html">Dashboard</a><span>/</span><span>EMI Tracker</span></nav><h1>EMI Tracker</h1><p>Plan repayment schedules, monitor outstanding balances, and stay ahead of every due date.</p></div><div class="emi-header-actions"><label class="emi-search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" aria-label="Search EMI records" placeholder="Search EMI records..." autocomplete="off"></label><button type="button" aria-label="Notifications"><i class="fa-regular fa-bell"></i></button><button type="button" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button><a class="emi-profile" href="../dashboard.html"><span>SP</span><b>Sham Patil<small>Finance Manager</small></b></a></div></header><section class="emi-hero"><div><small>EMI COMMAND CENTER</small><h2>Repayment clarity at a glance.</h2><p>Keep every installment, payment and outstanding amount in one reliable workspace.</p></div><a href="#emiForm"><i class="fa-solid fa-plus"></i> Add EMI</a></section><section class="emi-kpis" aria-label="EMI summary"><article><i class="fa-solid fa-calendar-check"></i><span>Monthly EMI</span><strong id="monthlyEmiTotal">Rs 0.00</strong><small>Scheduled monthly</small></article><article><i class="fa-solid fa-circle-check"></i><span>Paid EMI</span><strong id="paidEmiTotal">Rs 0.00</strong><small>Payments recorded</small></article><article><i class="fa-solid fa-hourglass-half"></i><span>Pending EMI</span><strong id="pendingEmiTotal">Rs 0.00</strong><small>Due across plans</small></article><article><i class="fa-solid fa-wallet"></i><span>Total Outstanding</span><strong id="emiOutstandingTotal">Rs 0.00</strong><small>Remaining balance</small></article></section><section class="card">
+            <div class="section-heading"><small>NEW RECORD</small><h2>Add EMI schedule</h2><p>Capture repayment plan details and monitor outstanding balances.</p></div>
             <form id="emiForm" novalidate>
                 <div class="form-grid">
                     <div class="form-group">
@@ -42,21 +39,12 @@
                         <input id="emiDueDate" type="date">
                     </div>
                 </div>
-                <button id="saveEmiBtn" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save EMI</button>
+                <div class="emi-form-actions"><button id="saveEmiBtn" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save EMI</button><button type="reset" class="emi-reset">Reset</button></div>
             </form>
         </section>
 
-        <section class="summary-card">
-            <div class="summary-grid">
-                <div><span>Monthly EMI</span><strong id="monthlyEmiTotal">₹0.00</strong></div>
-                <div><span>Paid EMI</span><strong id="paidEmiTotal">₹0.00</strong></div>
-                <div><span>Pending EMI</span><strong id="pendingEmiTotal">₹0.00</strong></div>
-                <div><span>Total Outstanding</span><strong id="emiOutstandingTotal">₹0.00</strong></div>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>EMI Schedule</h2>
+        <section class="emi-analytics" aria-label="EMI analytics"><article class="card emi-chart-card"><div class="section-heading"><small>ANALYTICS</small><h2>Repayment trend</h2><p>Outstanding balance movement across the current schedule.</p></div><div class="emi-line-chart" aria-hidden="true"><svg viewBox="0 0 600 160" preserveAspectRatio="none"><path d="M0 132 C70 118 110 124 170 100 S280 112 340 76 S470 68 600 28"></path></svg></div></article><article class="card emi-chart-card"><div class="section-heading"><small>PORTFOLIO MIX</small><h2>Payment health</h2><p>Paid versus pending commitments.</p></div><div class="emi-donut" aria-hidden="true"><b>0<small>Active plans</small></b></div><div class="emi-legend"><span><i></i>Paid</span><span><i></i>Pending</span></div></article></section><section class="card">
+            <div class="section-heading"><small>HISTORY</small><h2>EMI Schedule</h2><p>Search, review, edit, or remove repayment records.</p></div>
             <input id="emiSearch" type="search" aria-label="Search EMI records" placeholder="Search EMI records..." autocomplete="off">
             <div class='table-responsive'>
             <table>
@@ -75,9 +63,7 @@
                 <tbody id="emiTableBody">
                     <tr><td colspan="8">No EMI records found.</td></tr>
                 </tbody>
-            </table>
-            </div>
-        </section>
+            </table></div><div class="emi-pagination"><span>Showing current EMI records</span><nav aria-label="EMI pagination"><button type="button" aria-label="Previous page">‹</button><button type="button" class="active">1</button><button type="button" aria-label="Next page">›</button></nav></div></section>
     </div>
 
     <script src="../js/modules/emi/emi.storage.js"></script>

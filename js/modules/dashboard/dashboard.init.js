@@ -96,19 +96,28 @@ function setGreeting() {
 
     const hour = new Date().getHours();
 
+    const userName = sessionStorage.getItem("sfmUser") || "Sham";
+
     let message = "Welcome";
 
     if (hour >= 5 && hour < 12) {
-        message = "🌅 Good Morning";
+        message = "Good Morning";
     } else if (hour >= 12 && hour < 17) {
-        message = "☀️ Good Afternoon";
+        message = "Good Afternoon";
     } else {
-        message = "🌙 Good Evening";
+        message = "Good Evening";
     }
 
-    greeting.textContent = `${message}, Sham`;
-}
+    greeting.textContent = `${message}, ${userName}`;
 
+    const welcomeUser = $("#userName");
+
+    if (welcomeUser) {
+
+        welcomeUser.textContent = userName;
+
+    }
+}
 /*==================================================
  Current Date
 ==================================================*/
@@ -234,6 +243,8 @@ function logout() {
     try {
         sessionStorage.removeItem("sfmLoggedIn");
         sessionStorage.removeItem("sfmUser");
+        sessionStorage.removeItem("sfmRememberMe");
+        sessionStorage.removeItem("sfmRememberedUsername");
     } catch (error) {
         // The redirect still gives the user a safe way to exit the dashboard.
     }

@@ -1,9 +1,9 @@
-﻿"use strict";
+"use strict";
 
 /*==================================================
  SFM PRO Enterprise
  File: config.js
- Version: v5.0 Production Release
+ Version: v1.0.0 Production
  Description:
  Central configuration for the entire application.
 ==================================================*/
@@ -14,7 +14,7 @@ const APP_CONFIG = Object.freeze({
     // Application Information
     // ==============================
     APP_NAME: "SFM PRO Enterprise",
-    VERSION: "v5.0 Production Release",
+    VERSION: "v1.0.0 Production",
     COMPANY: "Sham Patil",
     BUILD: "005",
 

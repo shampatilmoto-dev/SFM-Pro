@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --login-bg: #f8fafc;
     --login-surface: rgba(255, 255, 255, 0.84);
     --login-surface-strong: #ffffff;
@@ -732,6 +732,95 @@ body.login-page::after {
     }
 }
 
+.login-status {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 54px;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+    transition:
+        background-color var(--login-transition),
+        border-color var(--login-transition),
+        color var(--login-transition),
+        box-shadow var(--login-transition);
+}
+
+.login-status::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 999px;
+    background: var(--login-primary);
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.1);
+    flex: 0 0 auto;
+}
+
+.login-status--info {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: rgba(37, 99, 235, 0.18);
+    color: var(--login-text);
+}
+
+.login-status--success {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.18);
+    color: #065f46;
+}
+
+.login-status--success::before {
+    background: var(--login-success);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.1);
+}
+
+.login-status--error {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.18);
+    color: #991b1b;
+}
+
+.login-status--error::before {
+    background: var(--login-danger);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.1);
+}
+
+.field.is-invalid input {
+    border-color: rgba(239, 68, 68, 0.55);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12), var(--login-shadow-md);
+}
+
+.field.is-invalid label,
+.field.is-invalid .field__icon,
+.field.is-invalid .password-toggle {
+    color: var(--login-danger);
+}
+
+.field.is-valid input {
+    border-color: rgba(16, 185, 129, 0.45);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12), var(--login-shadow-md);
+}
+
+.field.is-valid label,
+.field.is-valid .field__icon,
+.field.is-valid .password-toggle {
+    color: var(--login-success);
+}
+
+.login-button.is-loading,
+.login-button[disabled] {
+    cursor: progress;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+.login-button[disabled]::before {
+    transform: translateX(120%);
+}
 @media (max-width: 1200px) {
     .login-shell {
         grid-template-columns: 1fr;
