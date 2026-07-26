@@ -1,4 +1,4 @@
-﻿:root{
+:root{
   --rep-bg:#F6F8FC;
   --rep-card:#fff;
   --rep-text:#0f172a;
@@ -148,3 +148,5 @@ body[data-page='reports'] button,body[data-page='reports'] input,body[data-page=
 .static-columns{grid-template-columns:repeat(6,minmax(0,1fr))}
 .budget-donut{background:conic-gradient(#3b82f6 0 30%,#0ea5e9 30% 58%,#14b8a6 58% 76%,#60a5fa 76% 100%)}
 .loan-ring{background:conic-gradient(#2563eb 0 28%,#0ea5e9 28% 48%,#14b8a6 48% 70%,#60a5fa 70% 86%,#cbd5e1 86% 100%)}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

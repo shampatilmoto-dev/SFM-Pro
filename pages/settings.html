@@ -273,10 +273,10 @@
                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
               <div class="backup-utility-grid" aria-label="Backup utilities">
-                <div class="backup-utility"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><span>Manual Backup</span></div>
-                <div class="backup-utility"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>Automatic Backup</span></div>
-                <div class="backup-utility"><i class="fa-solid fa-file-export" aria-hidden="true"></i><span>Export Data</span></div>
-                <div class="backup-utility"><i class="fa-solid fa-file-import" aria-hidden="true"></i><span>Restore Data</span></div>
+                <a class="backup-utility" href="../dashboard.html#backupRestoreTitle"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><span><strong>Manual Backup</strong><small>Open backup controls</small></span></a>
+                <div class="backup-utility" role="status" aria-live="polite"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span><strong>Automatic Backup</strong><small>Available through dashboard manager</small></span></div>
+                <a class="backup-utility" href="../dashboard.html#exportBackupBtn"><i class="fa-solid fa-file-export" aria-hidden="true"></i><span><strong>Export Data</strong><small>Export a protected JSON backup</small></span></a>
+                <a class="backup-utility" href="../dashboard.html#backupFileInput"><i class="fa-solid fa-file-import" aria-hidden="true"></i><span><strong>Restore Data</strong><small>Choose and validate a backup</small></span></a>
               </div>
               <details class="storage-guidance">
                 <summary><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Local data guidance</summary>

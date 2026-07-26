@@ -3,7 +3,7 @@
 /*==================================================
  SFM PRO Enterprise
  File: config.js
- Version: v1.0.0 Production
+ Version: v1.1.0
  Description:
  Central configuration for the entire application.
 ==================================================*/
@@ -14,7 +14,7 @@ const APP_CONFIG = Object.freeze({
     // Application Information
     // ==============================
     APP_NAME: "SFM PRO Enterprise",
-    VERSION: "v1.0.0 Production",
+    VERSION: "v1.1.0",
     COMPANY: "Sham Patil",
     BUILD: "005",
 

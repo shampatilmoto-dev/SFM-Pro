@@ -1,13 +1,13 @@
 # Changelog
 
+## v1.1.0
+
+- Completed approved enterprise Dashboard analytics and Smart Finance presentation updates.
+- Enhanced Reports accessibility and executive analytics presentation.
+- Enhanced Settings data-management presentation around existing backup and restore hooks.
+- Added Notification Centre reminder presentation using existing NotificationManager output.
+- Standardized production QA documentation and release metadata.
+
 ## v1.0.0 Production
 
-- Prepared the SFM PRO Enterprise repository for production release.
-- Updated application release metadata.
-- Standardized favicon references across application pages.
-- Added production status, QA, limitations, and release documentation.
-- Preserved application architecture and business behavior.
-
-## Previous Releases
-
-See repository history and prior release notes for earlier versions.
+- Production release metadata and baseline documentation.

@@ -1,15 +1,9 @@
 # SFM PRO Enterprise — Project Status
 
-Release: v1.0.0 Production
+Release: v1.1.0
 
-## Scope
+Feature development for v1.1.0 is complete. The repository retains the enterprise manager architecture and existing application behavior.
 
-Production-release preparation completed without changing business logic, controllers, services, storage, CRUD flow, calculations, routing, or LocalStorage keys.
+Static QA checks passed across Dashboard, Login, Income, Expense, Budget, Loans, Credit Cards, EMI, Investments, Reports, and Settings for duplicate IDs, local imports, and missing local assets.
 
-## Architecture
-
-The AppManager, LayoutManager, ThemeManager, NavigationManager, NotificationManager, LoaderManager, and ModalManager files are present in `js/managers` and remain intact.
-
-## Verification
-
-Static repository checks passed for page-local imports, favicon paths, duplicate IDs, and explicit button types. Live browser verification was unavailable in the execution environment.
+Runtime browser verification remains unavailable in this environment.

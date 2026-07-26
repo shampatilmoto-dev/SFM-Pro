@@ -1,17 +1,20 @@
-# QA Report — v1.0.0
+# QA Report — v1.1.0
 
-## Static Checks
+## Static QA
 
-| Check | Result |
+| Area | Result |
 | --- | --- |
 | Page inventory | Pass |
-| Local JS/CSS imports | Pass |
-| Local asset paths | Pass |
-| Favicon paths | Pass |
+| HTML page presence | Pass |
+| Local CSS/JS imports | Pass |
+| Missing local assets | Pass |
 | Duplicate IDs | Pass |
-| Explicit button types | Pass |
-| Git whitespace check | Pass |
+| Favicon paths | Pass |
+| Responsive markup/CSS presence | Pass |
+| Accessibility markup review | Pass with runtime caveat |
 
-## Runtime Checks
+## Runtime QA
 
-Live browser verification was not completed. Console errors, navigation behavior, CRUD interactions, theme switching, responsive breakpoints, and loader behavior therefore remain uncertified.
+Not executed. Browser initialization failed with `windows sandbox failed: helper_unknown_error: setup refresh had errors`.
+
+Console errors, live navigation, CRUD interactions, theme switching, responsive screenshots, and loader behavior remain uncertified.

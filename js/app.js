@@ -2,7 +2,7 @@
 
 /*==================================================
  SFM PRO Enterprise
- App Controller v1.0.0 Production
+ App Controller v1.1.0
  Part 1 : Core Controller
 ==================================================*/
 
@@ -12,7 +12,7 @@
 
 const APP_ENGINE = {
 
-    version: "v1.0.0 Production",
+    version: "v1.1.0",
 
     name: "SFM Application Controller"
 

@@ -353,7 +353,7 @@
           </div>
         </div>
         <div class="table-responsive reports-table-wrap" role="region" aria-label="Reports table">
-          <table class="reports-table transaction-table">
+          <table class="reports-table transaction-table"><caption class="sr-only">Executive report results</caption>
             <thead>
               <tr>
                 <th>Metric</th>
@@ -388,15 +388,15 @@
         <div id="reportsChartsGrid" class="reports-charts-grid">
           <div class="chart-card">
             <h4>Income vs Expense</h4>
-            <div class="chart-canvas-wrap"><canvas id="incomeExpenseChart"></canvas></div>
+            <div class="chart-canvas-wrap"><canvas id="incomeExpenseChart" role="img" aria-label="Income versus expense trend chart"></canvas></div>
           </div>
           <div class="chart-card">
             <h4>Cash Flow</h4>
-            <div class="chart-canvas-wrap"><canvas id="cashFlowChart"></canvas></div>
+            <div class="chart-canvas-wrap"><canvas id="cashFlowChart" role="img" aria-label="Monthly cash flow chart"></canvas></div>
           </div>
           <div class="chart-card">
             <h4>Savings Trend</h4>
-            <div class="chart-canvas-wrap"><canvas id="savingsTrendChart"></canvas></div>
+            <div class="chart-canvas-wrap"><canvas id="savingsTrendChart" role="img" aria-label="Budget versus actual performance chart"></canvas></div>
           </div>
         </div>
       </section>

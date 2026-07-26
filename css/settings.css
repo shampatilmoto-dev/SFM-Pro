@@ -1,4 +1,4 @@
-﻿:root{
+:root{
   --set-bg:#F6F8FC;
   --set-card:#fff;
   --set-text:#0f172a;
@@ -136,7 +136,7 @@ body[data-page='settings'] button,body[data-page='settings'] input,body[data-pag
 .action-link i:last-child{opacity:.75}
 .action-link:focus-visible,.settings-footer a:focus-visible,.settings-button:focus-visible,.theme-option input:focus-visible + span,.storage-guidance summary:focus-visible{outline:3px solid rgba(59,130,246,.35);outline-offset:3px}
 .backup-utility-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.backup-utility{justify-items:start;align-content:start}
+.backup-utility{justify-items:start;align-content:start;text-decoration:none;color:inherit;transition:.22s ease}.backup-utility:hover,.backup-utility:focus-visible{transform:translateY(-2px);border-color:#93c5fd;box-shadow:var(--set-shadow-hover)}
 .backup-utility i{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#3b82f6,#0ea5e9);box-shadow:0 12px 24px rgba(59,130,246,.18)}
 .storage-guidance{padding:0;border:0;display:grid;align-content:start}
 .storage-guidance summary{list-style:none;padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,#fff,#eff6ff);border:1px solid rgba(59,130,246,.12);box-shadow:var(--set-shadow);cursor:pointer;font-weight:800;color:var(--set-text)}

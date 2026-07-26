@@ -5,7 +5,7 @@
   "sampleObject": {
     "application": {
       "displayName": "SFM PRO Enterprise",
-      "releaseLabel": "v1.0.0 Production",
+      "releaseLabel": "v1.1.0",
       "runtimeBinding": "not-configured"
     }
   },
