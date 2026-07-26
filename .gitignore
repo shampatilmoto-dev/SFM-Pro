@@ -49,3 +49,4 @@ build/
 # Coverage
 # ==========================
 coverage/
+js/firebase/firebase.local.config.js

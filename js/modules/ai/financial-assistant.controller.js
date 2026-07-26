@@ -1,0 +1,4 @@
+"use strict";
+import { FinancialInsightService, money } from "./financial-insight.service.js";
+function render(){const s=FinancialInsightService.snapshot();document.querySelector("#aiIncome").textContent=money(s.totalIncome);document.querySelector("#aiExpense").textContent=money(s.totalExpense);document.querySelector("#aiSavings").textContent=money(s.savings);document.querySelector("#aiLiabilities").textContent=money(s.liabilities);document.querySelector("#insightList").innerHTML=FinancialInsightService.generate().map(item=>`<article class="insight"><h3 class="severity-${item.severity}">${item.title}</h3><p>${item.message}</p><small class="muted">Recommended next step: ${item.action}</small></article>`).join("");}
+document.querySelector("#refreshInsights").addEventListener("click",render);render();

@@ -1,0 +1,8 @@
+"use strict";
+import { FirebaseCloudBackup } from "../../firebase/firebase-cloud-backup.js";
+const select=document.getElementById("cloudBackupSelect"),message=document.getElementById("cloudBackupMessage");
+function show(text,error=false){if(!message)return;message.textContent=text;message.style.color=error?"#b42318":"#027a48";}
+async function refresh(){if(!select)return;try{const backups=await FirebaseCloudBackup.list();select.innerHTML='<option value="">Select cloud backup</option>'+backups.map(x=>`<option value="${x.id}">${new Date(x.data.createdAt).toLocaleString("en-IN")} · ${Math.ceil(x.data.sizeBytes/1024)} KB</option>`).join("");}catch(error){show(error.message,true);}}
+document.getElementById("createCloudBackupBtn")?.addEventListener("click",async()=>{try{if(!globalThis.BackupManager)throw new Error("Backup service is unavailable.");show("Creating cloud backup…");await FirebaseCloudBackup.create(BackupManager.createExportPayload());show("Cloud backup created successfully.");await refresh();}catch(error){show(error.message,true);}});
+document.getElementById("restoreCloudBackupBtn")?.addEventListener("click",async()=>{try{if(!select?.value)throw new Error("Select a cloud backup first.");if(!confirm("Restore this cloud backup? Current supported finance records will be replaced."))return;const payload=await FirebaseCloudBackup.get(select.value);const result=BackupManager.restore(payload);if(result.error)throw new Error(result.error);show("Cloud backup restored. Refreshing dashboard…");setTimeout(()=>location.reload(),500);}catch(error){show(error.message,true);}});
+await refresh();

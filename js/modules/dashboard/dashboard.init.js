@@ -96,7 +96,11 @@ function setGreeting() {
 
     const hour = new Date().getHours();
 
-    const userName = sessionStorage.getItem("sfmUser") || "Sham";
+    const authenticatedUser = window.AuthenticationManager?.getCurrentUser?.();
+    const userName =
+        authenticatedUser?.displayName?.trim() ||
+        authenticatedUser?.email?.split("@")[0] ||
+        "User";
 
     let message = "Welcome";
 
@@ -226,27 +230,32 @@ function initializeProfileMenu() {
 
 function hasActiveSession() {
 
-    try {
-        if (sessionStorage.getItem("sfmLoggedIn") === "true") {
-            return true;
-        }
-
-        window.location.href = "login.html";
-        return false;
-    } catch (error) {
+    if (window.AuthenticationManager?.isAuthenticated?.()) {
         return true;
     }
+
+    if (window.AuthenticationManager?.redirectToLogin) {
+        window.AuthenticationManager.redirectToLogin();
+    } else {
+        window.location.href = "login.html";
+    }
+
+    return false;
 }
 
-function logout() {
+async function logout() {
 
-    try {
-        sessionStorage.removeItem("sfmLoggedIn");
-        sessionStorage.removeItem("sfmUser");
-        sessionStorage.removeItem("sfmRememberMe");
-        sessionStorage.removeItem("sfmRememberedUsername");
-    } catch (error) {
-        // The redirect still gives the user a safe way to exit the dashboard.
+    if (window.AuthenticationManager?.logout) {
+        try {
+            await window.AuthenticationManager.logout();
+        } catch (error) {
+            if (window.NotificationManager?.error) {
+                window.NotificationManager.error(
+                    window.AuthenticationManager.normalizeError(error).message
+                );
+            }
+        }
+        return;
     }
 
     window.location.href = "login.html";

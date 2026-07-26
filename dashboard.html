@@ -32,6 +32,7 @@
           href="css/dashboard.css">
 
     <link rel="icon" type="image/svg+xml" href="assets/logo/logo-placeholder.svg">
+    <script type="module" src="js/managers/authentication.manager.js"></script>
 </head>
 
 <body data-page="dashboard">
@@ -130,6 +131,12 @@
             <span>Investments</span>
 
         </a>
+
+        <a href="pages/assets.html"><i class="fa-solid fa-building-shield"></i><span>Assets</span></a>
+
+        <a href="pages/ai-assistant.html"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Financial Assistant</span></a>
+
+        <a href="import/index.html"><i class="fa-solid fa-file-excel"></i><span>Bulk Import</span></a>
 
         <a href="pages/reports.html">
 
@@ -1109,9 +1116,16 @@
             <i class="fa-solid fa-file-import"></i> Import Backup
         </button>
 
+        <button id="createCloudBackupBtn" type="button" class="primary-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud Backup</button>
+
+        <select id="cloudBackupSelect" aria-label="Select cloud backup" style="max-width:280px;"><option value="">Select cloud backup</option></select>
+
+        <button id="restoreCloudBackupBtn" type="button" class="secondary-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Cloud Restore</button>
+
     </div>
 
     <div id="backupMessage" style="margin-top:0.75rem; font-weight:600;"></div>
+    <div id="cloudBackupMessage" role="status" style="margin-top:0.5rem; font-weight:600;"></div>
 
     <div id="backupSummary" class="kpi-grid" style="margin-top:1rem;"></div>
 
@@ -1299,6 +1313,27 @@
 
     </div>
 
+</section>
+
+<!-- Enterprise Integrations -->
+<section class="enterprise-integration-grid" aria-label="Enterprise services">
+    <article class="enterprise-integration-card">
+        <div><span class="integration-kicker">Cloud Foundation</span><h2><i class="fa-solid fa-cloud-arrow-up"></i> Firebase Sync</h2></div>
+        <dl><div><dt>Connection</dt><dd id="cloudConnectionStatus">Checking…</dd></div><div><dt>Configuration</dt><dd id="cloudConfigurationStatus">Checking…</dd></div><div><dt>Session</dt><dd id="cloudAuthStatus">Checking…</dd></div><div><dt>Queue</dt><dd id="cloudQueueStatus">Checking…</dd></div><div><dt>Last sync</dt><dd id="cloudLastSync">Not synced yet</dd></div></dl>
+        <button id="cloudSyncNow" type="button">Sync now</button>
+    </article>
+    <article class="enterprise-integration-card">
+        <div><span class="integration-kicker">Asset Management</span><h2><i class="fa-solid fa-building-shield"></i> Owned Assets</h2></div>
+        <strong id="dashboardAssetValue">₹0</strong><p id="dashboardAssetCount">0 registered</p><a href="pages/assets.html">Open asset register</a>
+    </article>
+    <article class="enterprise-integration-card">
+        <div><span class="integration-kicker">Decision Support</span><h2><i class="fa-solid fa-wand-magic-sparkles"></i> Financial Assistant</h2></div>
+        <p>Generate private, explainable cash-flow, savings, debt and investment insights.</p><a href="pages/ai-assistant.html">Review insights</a>
+    </article>
+    <article class="enterprise-integration-card">
+        <div><span class="integration-kicker">Data Operations</span><h2><i class="fa-solid fa-file-excel"></i> Bulk Import</h2></div>
+        <p>Validate and import enterprise workbooks through the isolated Import Center.</p><a href="import/index.html">Open Import Center</a>
+    </article>
 </section>
 
 <!-- Quick Actions -->
@@ -1586,6 +1621,8 @@
 <!-- ======================================= -->
 
 <script src="js/core/bootstrap.js"></script>
+<script type="module" src="js/modules/dashboard/enterprise-integrations.js"></script>
+<script type="module" src="js/modules/dashboard/cloud-backup.controller.js"></script>
 
 </body>
 </html>

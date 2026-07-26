@@ -1,9 +1,7 @@
 "use strict";
 
-const LOGIN_CREDENTIALS = {
-    username: "sham",
-    password: "1234"
-};
+import { AuthenticationManager } from "./managers/authentication.manager.js";
+import { firebaseConfigurationStatus } from "./firebase/firebase-config.js";
 
 document.addEventListener("DOMContentLoaded", initializeLoginShell);
 
@@ -12,14 +10,8 @@ function initializeLoginShell() {
     const form = document.getElementById("loginForm");
     const toggle = document.getElementById("togglePassword");
     const passwordField = document.getElementById("password");
-    const usernameField = document.getElementById("username");
-    const rememberMe = document.getElementById("rememberMe");
     const status = document.getElementById("loginStatus");
-
-    if (sessionStorage.getItem("sfmLoggedIn") === "true") {
-        window.location.replace("dashboard.html");
-        return;
-    }
+    const button = document.getElementById("loginButton");
 
     if (toggle && passwordField) {
         const syncPasswordVisibility = () => {
@@ -34,26 +26,28 @@ function initializeLoginShell() {
         form.addEventListener("submit", login);
     }
 
-    if (sessionStorage.getItem("sfmRememberMe") === "true") {
-        const rememberedUser = sessionStorage.getItem("sfmRememberedUsername");
-
-        if (rememberedUser && usernameField && !usernameField.value) {
-            usernameField.value = rememberedUser;
-        }
-
-        if (rememberMe) {
-            rememberMe.checked = true;
-        }
-    }
-
     if (status) {
         status.hidden = true;
         status.textContent = "";
     }
 
+    if (!firebaseConfigurationStatus.configured) {
+        if (button) {
+            button.disabled = true;
+            button.dataset.firebaseUnavailable = "true";
+            button.setAttribute("aria-disabled", "true");
+        }
+        updateLoginStatus(
+            status,
+            "⚠ Firebase is not configured. Please configure firebase.local.config.js",
+            "error",
+            false
+        );
+    }
+
 }
 
-function login(event) {
+async function login(event) {
 
     if (event && typeof event.preventDefault === "function") {
         event.preventDefault();
@@ -65,25 +59,29 @@ function login(event) {
     const status = document.getElementById("loginStatus");
     const button = document.getElementById("loginButton");
 
+    if (!firebaseConfigurationStatus.configured) {
+        updateLoginStatus(status, "⚠ Firebase is not configured. Please configure firebase.local.config.js", "error", false);
+        return false;
+    }
+
     if (!usernameField || !passwordField) {
         return false;
     }
 
-    const username = usernameField.value.trim();
+    const email = usernameField.value.trim();
     const password = passwordField.value;
-    const normalizedUsername = username.toLowerCase();
 
     clearFieldState(usernameField);
     clearFieldState(passwordField);
     updateLoginStatus(status, "", "info", true);
     setLoadingState(button, false);
 
-    if (!username || !password) {
-        markFieldState(usernameField, !username);
+    if (!email || !password) {
+        markFieldState(usernameField, !email);
         markFieldState(passwordField, !password);
         updateLoginStatus(status, "Please enter your username and password.", "error", false);
 
-        if (!username) {
+        if (!email) {
             usernameField.focus();
         } else {
             passwordField.focus();
@@ -92,39 +90,33 @@ function login(event) {
         return false;
     }
 
-    if (normalizedUsername === LOGIN_CREDENTIALS.username && password === LOGIN_CREDENTIALS.password) {
-        setLoadingState(button, true);
+    setLoadingState(button, true);
+    updateLoginStatus(status, "Signing you in to SFM PRO Enterprise...", "info", false);
+
+    try {
+        await AuthenticationManager.login(email, password, {
+            remember: rememberMe?.checked !== false
+        });
+
+        markFieldState(usernameField, false);
+        markFieldState(passwordField, false);
         updateLoginStatus(status, "Signing you in to SFM PRO Enterprise...", "success", false);
+        return true;
+    } catch (error) {
+        const normalizedError = AuthenticationManager.normalizeError(error);
 
-        sessionStorage.setItem("sfmLoggedIn", "true");
-        sessionStorage.setItem("sfmUser", "Sham");
+        markFieldState(usernameField, true);
+        markFieldState(passwordField, true);
+        setLoadingState(button, false);
+        updateLoginStatus(status, normalizedError.message, "error", false);
+        passwordField.focus();
 
-        if (rememberMe && rememberMe.checked) {
-            sessionStorage.setItem("sfmRememberMe", "true");
-            sessionStorage.setItem("sfmRememberedUsername", username);
-        } else {
-            sessionStorage.removeItem("sfmRememberMe");
-            sessionStorage.removeItem("sfmRememberedUsername");
+        if (typeof passwordField.select === "function") {
+            passwordField.select();
         }
 
-        window.setTimeout(() => {
-            window.location.href = "dashboard.html";
-        }, 500);
-
-        return true;
+        return false;
     }
-
-    markFieldState(usernameField, true);
-    markFieldState(passwordField, true);
-    setLoadingState(button, false);
-    updateLoginStatus(status, "Invalid username or password. Please try again.", "error", false);
-    passwordField.focus();
-
-    if (typeof passwordField.select === "function") {
-        passwordField.select();
-    }
-
-    return false;
 }
 
 function clearFieldState(field) {
@@ -191,7 +183,7 @@ function setLoadingState(button, isLoading) {
         return;
     }
 
-    button.disabled = false;
+    button.disabled = button.dataset.firebaseUnavailable === "true";
     button.removeAttribute("aria-busy");
     button.classList.remove("is-loading");
 

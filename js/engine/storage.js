@@ -13,6 +13,51 @@
 const DB_NAME = "SFM_DATABASE";
 const DB_VERSION = "3.0.0";
 
+const FIREBASE_SYNC_MODULES = Object.freeze({
+    income: "income",
+    expenses: "expense",
+    budgets: "budget",
+    loans: "loan",
+    investments: "investment",
+    creditcards: "creditcard",
+    emi: "emi",
+    reports: "reports"
+});
+
+const DASHBOARD_SYNC_MODULES = new Set([
+    "income", "expenses", "budgets", "loans", "investments",
+    "creditcards", "emi", "transactions", "reminders", "goals"
+]);
+
+/**
+ * Queue repository synchronization after a successful LocalStorage operation.
+ * @param {string} module LocalStorage module name.
+ * @param {"create"|"update"|"delete"|"replace"} operation Completed operation.
+ * @param {Record<string, unknown>|string|Array<unknown>} value Saved data or record ID.
+ * @returns {void}
+ */
+function queueFirebaseSynchronization(module, operation, value) {
+    const targetModule = FIREBASE_SYNC_MODULES[module];
+    const dashboardChanged = DASHBOARD_SYNC_MODULES.has(module);
+
+    if (!targetModule && !dashboardChanged) return;
+
+    void import("../firebase/firebase-sync-queue.js")
+        .then(async syncApi => {
+            const tasks = [];
+            if (targetModule) {
+                tasks.push(operation === "replace"
+                    ? syncApi.queueSyncModule(targetModule)
+                    : syncApi.queueSyncChange(targetModule, operation, value));
+            }
+            if (dashboardChanged) tasks.push(syncApi.queueSyncModule("dashboard"));
+            await Promise.all(tasks);
+        })
+        .catch(() => {
+            console.error("[FirebaseSync] Synchronization module could not be loaded.");
+        });
+}
+
 /*==================================================
  Storage Result Helpers
 ==================================================*/
@@ -371,11 +416,13 @@ function initializeStorage() {
 
 initializeStorage();
 
-window.addEventListener("storage", event => {
-    if (event && event.key === DB_NAME) {
-        isDatabaseLoaded = false;
-    }
-});
+if (typeof globalThis.window?.addEventListener === "function") {
+    globalThis.window.addEventListener("storage", event => {
+        if (event && event.key === DB_NAME) {
+            isDatabaseLoaded = false;
+        }
+    });
+}
 
 /*==================================================
  Part 2 : Generic CRUD Engine
@@ -673,6 +720,7 @@ function createRecord(module, record) {
         return null;
     }
 
+    queueFirebaseSynchronization(module, "create", result.data);
     return result.data;
 
 }
@@ -709,6 +757,10 @@ function updateRecord(module, id, updatedData) {
 
     const result = updateRecordResult(module, id, updatedData);
 
+    if (result.success) {
+        queueFirebaseSynchronization(module, "update", result.data);
+    }
+
     return result.success;
 
 }
@@ -721,6 +773,10 @@ function deleteRecord(module, id) {
 
     const result = deleteRecordResult(module, id);
 
+    if (result.success) {
+        queueFirebaseSynchronization(module, "delete", result.data?.id ?? id);
+    }
+
     return result.success;
 
 }
@@ -732,6 +788,10 @@ function deleteRecord(module, id) {
 function replaceModule(module, data) {
 
     const result = replaceModuleResult(module, data);
+
+    if (result.success) {
+        queueFirebaseSynchronization(module, "replace", result.data);
+    }
 
     return result.success;
 

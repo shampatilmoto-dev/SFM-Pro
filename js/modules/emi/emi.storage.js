@@ -1,5 +1,23 @@
 "use strict";
 
+function queueEMISynchronization(operation, value) {
+    if (typeof queueFirebaseSynchronization === "function") {
+        queueFirebaseSynchronization("emi", operation, value);
+        return;
+    }
+
+    void import("../../firebase/firebase-sync-queue.js")
+        .then(syncApi => Promise.all([
+            operation === "replace"
+                ? syncApi.queueSyncModule("emi")
+                : syncApi.queueSyncChange("emi", operation, value),
+            syncApi.queueSyncModule("dashboard")
+        ]))
+        .catch(() => {
+            globalThis.console?.error?.("[FirebaseSync] EMI synchronization could not be started.");
+        });
+}
+
 const EMIStorage = {
     storageKey: "sfm_emi_records",
 
@@ -59,13 +77,16 @@ const EMIStorage = {
         }
     },
 
-    save(records) {
+    save(records, synchronize = true) {
         if (!Array.isArray(records)) {
             return false;
         }
 
         try {
             localStorage.setItem(this.storageKey, JSON.stringify(records));
+            if (synchronize) {
+                queueEMISynchronization("replace", records);
+            }
             return true;
         } catch (error) {
             return false;
@@ -80,7 +101,12 @@ const EMIStorage = {
         const records = this.load();
         records.push(record);
 
-        return this.save(records) ? record : null;
+        if (!this.save(records, false)) {
+            return null;
+        }
+
+        queueEMISynchronization("create", record);
+        return record;
     },
 
     update(id, updatedRecord) {
@@ -92,7 +118,11 @@ const EMIStorage = {
         }
 
         records[index] = updatedRecord;
-        return this.save(records);
+        const saved = this.save(records, false);
+        if (saved) {
+            queueEMISynchronization("update", updatedRecord);
+        }
+        return saved;
     },
 
     remove(id) {
@@ -103,6 +133,10 @@ const EMIStorage = {
             return false;
         }
 
-        return this.save(filteredRecords);
+        const saved = this.save(filteredRecords, false);
+        if (saved) {
+            queueEMISynchronization("delete", id);
+        }
+        return saved;
     }
 };

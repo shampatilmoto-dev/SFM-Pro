@@ -104,7 +104,14 @@ const CreditCardStorage = {
         database[this.transactionModule] = [...transactions, savedTransaction];
 
         try {
-            saveDatabase();
+            const saved = saveDatabase();
+            if (!saved?.success) {
+                throw new Error("Credit card transaction storage failed.");
+            }
+            if (typeof queueFirebaseSynchronization === "function") {
+                queueFirebaseSynchronization(this.moduleName, "update", database[this.moduleName][cardIndex]);
+                queueFirebaseSynchronization(this.transactionModule, "create", savedTransaction);
+            }
             return savedTransaction;
         } catch (error) {
             database[this.moduleName] = previousCards;

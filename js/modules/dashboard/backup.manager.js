@@ -186,3 +186,5 @@ const BackupManager = {
         return { success: true, restoredVersion: payload.version };
     }
 };
+
+globalThis.BackupManager = BackupManager;

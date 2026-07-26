@@ -1,3 +1,11 @@
+function queueSettingsSynchronization() {
+    void import("../../firebase/firebase-sync-queue.js")
+        .then(syncApi => syncApi.queueSyncModule("settings"))
+        .catch(() => {
+            globalThis.console?.error?.("[FirebaseSync] Settings synchronization could not be started.");
+        });
+}
+
 class SettingsManager {
     constructor() {
         this.storageKey = typeof APP_CONFIG !== 'undefined'
@@ -153,6 +161,7 @@ class SettingsManager {
             }
 
             localStorage.setItem(this.storageKey, JSON.stringify(this.settings));
+            queueSettingsSynchronization();
             return true;
         } catch (error) {
             return false;
